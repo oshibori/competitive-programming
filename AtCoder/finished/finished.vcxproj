@@ -232,7 +232,6 @@
     <ClCompile Include="..\AtCoder\abc8b.cpp" />
     <ClCompile Include="..\AtCoder\abc8c.cpp" />
     <ClCompile Include="..\AtCoder\abc9b.cpp" />
-    <ClCompile Include="..\AtCoder\accumulate.cpp" />
     <ClCompile Include="..\AtCoder\agc10a.cpp" />
     <ClCompile Include="..\AtCoder\agc10b.cpp" />
     <ClCompile Include="..\AtCoder\agc11a.cpp" />
@@ -261,18 +260,14 @@
     <ClCompile Include="..\AtCoder\code_fes_2016_c_b.cpp" />
     <ClCompile Include="..\AtCoder\code_fes_2016_c_c.cpp" />
     <ClCompile Include="..\AtCoder\code_fes_2016_c_d.cpp" />
-    <ClCompile Include="..\AtCoder\DigitDP.cpp" />
     <ClCompile Include="..\AtCoder\minpro_a.cpp" />
     <ClCompile Include="..\AtCoder\minpro_b.cpp" />
     <ClCompile Include="..\AtCoder\minpro_c.cpp" />
     <ClCompile Include="..\AtCoder\minpro_d.cpp" />
     <ClCompile Include="..\AtCoder\Mujin_Programming_Challenge_2017b.cpp" />
-    <ClCompile Include="..\AtCoder\next.cpp" />
     <ClCompile Include="..\AtCoder\RCOa.cpp" />
     <ClCompile Include="..\AtCoder\RCOb.cpp" />
     <ClCompile Include="..\AtCoder\template.cpp" />
-    <ClCompile Include="MOD.cpp" />
-    <ClCompile Include="繰り返し自乗法と逆元.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

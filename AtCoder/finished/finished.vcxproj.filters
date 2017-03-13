@@ -336,12 +336,6 @@
     <ClCompile Include="..\AtCoder\abc32c.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="..\AtCoder\accumulate.cpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="..\AtCoder\DigitDP.cpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="..\AtCoder\abc7d.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
@@ -353,9 +347,6 @@
     </ClCompile>
     <ClCompile Include="..\AtCoder\abc28c.cpp">
       <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="..\AtCoder\next.cpp">
-      <Filter>ヘッダー ファイル</Filter>
     </ClCompile>
     <ClCompile Include="..\AtCoder\abc8c.cpp">
       <Filter>ソース ファイル</Filter>
@@ -386,12 +377,6 @@
     </ClCompile>
     <ClCompile Include="..\AtCoder\abc24c.cpp">
       <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="繰り返し自乗法と逆元.cpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="MOD.cpp">
-      <Filter>ヘッダー ファイル</Filter>
     </ClCompile>
     <ClCompile Include="..\AtCoder\abc24d.cpp">
       <Filter>ソース ファイル</Filter>
