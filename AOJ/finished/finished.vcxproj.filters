@@ -327,47 +327,14 @@
     <ClCompile Include="..\working\ALDS1_12_C.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="..\working\dijkstra_priority_queue.cpp">
-      <Filter>リソース ファイル\Graph_Algorithms</Filter>
-    </ClCompile>
-    <ClCompile Include="..\working\dijkstra1.cpp">
-      <Filter>リソース ファイル\Graph_Algorithms</Filter>
-    </ClCompile>
-    <ClCompile Include="..\working\prim.cpp">
-      <Filter>リソース ファイル\Graph_Algorithms</Filter>
-    </ClCompile>
-    <ClCompile Include="bfs.cpp">
-      <Filter>リソース ファイル\Graph_Algorithms</Filter>
-    </ClCompile>
-    <ClCompile Include="Connected_Components.cpp">
-      <Filter>リソース ファイル\Graph_Algorithms</Filter>
-    </ClCompile>
-    <ClCompile Include="dfs.cpp">
-      <Filter>リソース ファイル\Graph_Algorithms</Filter>
-    </ClCompile>
     <ClCompile Include="..\working\calc.cpp">
       <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="..\working\union-find.cpp">
-      <Filter>リソース ファイル\Data_Sets_and_Queries</Filter>
-    </ClCompile>
-    <ClCompile Include="warshallFloyd.cpp">
-      <Filter>リソース ファイル\Graph_Algorithms</Filter>
     </ClCompile>
     <ClCompile Include="..\working\0189.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="..\working\0200.cpp">
       <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="..\working\Single_Source_Shortest_Path.cpp">
-      <Filter>リソース ファイル\Graph_Algorithms</Filter>
-    </ClCompile>
-    <ClCompile Include="..\working\Coin_Changing_Problem.cpp">
-      <Filter>リソース ファイル\Discrete_Optimazation</Filter>
-    </ClCompile>
-    <ClCompile Include="..\working\prim_priority_queue.cpp">
-      <Filter>リソース ファイル\Graph_Algorithms</Filter>
     </ClCompile>
     <ClCompile Include="..\working\0086.cpp">
       <Filter>ソース ファイル</Filter>
@@ -410,12 +377,6 @@
     </ClCompile>
     <ClCompile Include="..\working\0030.cpp">
       <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="..\working\Topological_Sort_by_bfs.cpp">
-      <Filter>リソース ファイル\Graph_Algorithms</Filter>
-    </ClCompile>
-    <ClCompile Include="..\working\Topological_Sort_by_dfs.cpp">
-      <Filter>リソース ファイル\Graph_Algorithms</Filter>
     </ClCompile>
     <ClCompile Include="..\working\2583.cpp">
       <Filter>ソース ファイル</Filter>
@@ -749,21 +710,6 @@
     </ClCompile>
     <ClCompile Include="..\working\0569.cpp">
       <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="..\working\0-1_Knapsack_Problem.cpp">
-      <Filter>リソース ファイル\Discrete_Optimazation</Filter>
-    </ClCompile>
-    <ClCompile Include="..\working\Longest_Increasing_Subsequence.cpp">
-      <Filter>リソース ファイル\Discrete_Optimazation</Filter>
-    </ClCompile>
-    <ClCompile Include="..\working\Knapsack_Problem.cpp">
-      <Filter>リソース ファイル\Discrete_Optimazation</Filter>
-    </ClCompile>
-    <ClCompile Include="..\working\0-1_Knapsack_Problem_II.cpp">
-      <Filter>リソース ファイル\Discrete_Optimazation</Filter>
-    </ClCompile>
-    <ClCompile Include="..\working\Knapsack_Problem_with_Limitations.cpp">
-      <Filter>リソース ファイル\Discrete_Optimazation</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

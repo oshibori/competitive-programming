@@ -74,6 +74,8 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>C:\Users\Tomoki\Documents\GitHub\competitive-programming\library\library</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>template.cpp</ForcedIncludeFiles>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -110,10 +112,39 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Digit_DP.cpp" />
+    <ClCompile Include="..\..\AOJ\finished\bfs.cpp" />
+    <ClCompile Include="..\..\AOJ\finished\Connected_Components.cpp" />
+    <ClCompile Include="..\..\AOJ\finished\dfs.cpp" />
+    <ClCompile Include="..\..\AOJ\finished\warshallFloyd.cpp" />
+    <ClCompile Include="..\..\AOJ\working\0-1_Knapsack_Problem.cpp" />
+    <ClCompile Include="..\..\AOJ\working\0-1_Knapsack_Problem_II.cpp" />
+    <ClCompile Include="..\..\AOJ\working\Coin_Changing_Problem.cpp" />
+    <ClCompile Include="..\..\AOJ\working\dijkstra1.cpp" />
+    <ClCompile Include="..\..\AOJ\working\dijkstra_priority_queue.cpp" />
+    <ClCompile Include="..\..\AOJ\working\Knapsack_Problem.cpp" />
+    <ClCompile Include="..\..\AOJ\working\Knapsack_Problem_with_Limitations.cpp" />
+    <ClCompile Include="..\..\AOJ\working\Longest_Increasing_Subsequence.cpp" />
+    <ClCompile Include="..\..\AOJ\working\prim.cpp" />
+    <ClCompile Include="..\..\AOJ\working\prim_priority_queue.cpp" />
+    <ClCompile Include="..\..\AOJ\working\Single_Source_Shortest_Path.cpp" />
+    <ClCompile Include="..\..\AOJ\working\Topological_Sort_by_bfs.cpp" />
+    <ClCompile Include="..\..\AOJ\working\Topological_Sort_by_dfs.cpp" />
+    <ClCompile Include="..\..\AOJ\working\union-find.cpp" />
+    <ClCompile Include="Digit_DP.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">template.cpp</ForcedIncludeFiles>
+    </ClCompile>
     <ClCompile Include="Longest_Increasing_Subsequence.cpp" />
     <ClCompile Include="ModInt.cpp" />
-    <ClCompile Include="Number_Theory.cpp" />
+    <ClCompile Include="Number_Theory.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">template.cpp</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="template.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">template.cpp</ForcedIncludeFiles>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="bits\stdc++.h" />
+    <ClInclude Include="dump.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

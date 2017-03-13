@@ -148,7 +148,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\..\Desktop\2013.cpp" />
-    <ClCompile Include="..\working\0-1_Knapsack_Problem_II.cpp" />
     <ClCompile Include="..\working\0009.cpp" />
     <ClCompile Include="..\working\0010.cpp" />
     <ClCompile Include="..\working\0011.cpp" />
@@ -364,9 +363,6 @@
     <ClCompile Include="..\working\ALDS1_12_B.cpp" />
     <ClCompile Include="..\working\ALDS1_12_C.cpp" />
     <ClCompile Include="..\working\calc.cpp" />
-    <ClCompile Include="..\working\Coin_Changing_Problem.cpp" />
-    <ClCompile Include="..\working\dijkstra1.cpp" />
-    <ClCompile Include="..\working\dijkstra_priority_queue.cpp" />
     <ClCompile Include="..\working\ITP1_10-D.cpp" />
     <ClCompile Include="..\working\ITP1_10-A.cpp" />
     <ClCompile Include="..\working\ITP1_10-C.cpp" />
@@ -377,23 +373,9 @@
     <ClCompile Include="..\working\ITP1_11-B.cpp" />
     <ClCompile Include="..\working\ITP1_11-C.cpp" />
     <ClCompile Include="..\working\ITP1_11-D.cpp" />
-    <ClCompile Include="..\working\0-1_Knapsack_Problem.cpp" />
-    <ClCompile Include="..\working\Knapsack_Problem.cpp" />
-    <ClCompile Include="..\working\Knapsack_Problem_with_Limitations.cpp" />
-    <ClCompile Include="..\working\Longest_Increasing_Subsequence.cpp" />
-    <ClCompile Include="..\working\prim.cpp" />
-    <ClCompile Include="..\working\prim_priority_queue.cpp" />
-    <ClCompile Include="..\working\Single_Source_Shortest_Path.cpp" />
-    <ClCompile Include="..\working\Topological_Sort_by_bfs.cpp" />
-    <ClCompile Include="..\working\Topological_Sort_by_dfs.cpp" />
-    <ClCompile Include="..\working\union-find.cpp" />
     <ClCompile Include="..\working\分数を小数に.cpp" />
     <ClCompile Include="0149.cpp" />
-    <ClCompile Include="bfs.cpp" />
-    <ClCompile Include="Connected_Components.cpp" />
-    <ClCompile Include="dfs.cpp" />
     <ClCompile Include="template.cpp" />
-    <ClCompile Include="warshallFloyd.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
