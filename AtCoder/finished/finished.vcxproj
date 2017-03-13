@@ -1,0 +1,280 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{3698B11F-AABC-4384-BC74-8EDEAA2B8E98}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>finished</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\AtCoder\abc10b.cpp" />
+    <ClCompile Include="..\AtCoder\abc11b.cpp" />
+    <ClCompile Include="..\AtCoder\abc11d.cpp" />
+    <ClCompile Include="..\AtCoder\abc12b.cpp" />
+    <ClCompile Include="..\AtCoder\abc12d.cpp" />
+    <ClCompile Include="..\AtCoder\abc13b.cpp" />
+    <ClCompile Include="..\AtCoder\abc14b.cpp" />
+    <ClCompile Include="..\AtCoder\abc14c.cpp" />
+    <ClCompile Include="..\AtCoder\abc15b.cpp" />
+    <ClCompile Include="..\AtCoder\abc16b.cpp" />
+    <ClCompile Include="..\AtCoder\abc17b.cpp" />
+    <ClCompile Include="..\AtCoder\abc18b.cpp" />
+    <ClCompile Include="..\AtCoder\abc19a.cpp" />
+    <ClCompile Include="..\AtCoder\abc19b.cpp" />
+    <ClCompile Include="..\AtCoder\abc19c.cpp" />
+    <ClCompile Include="..\AtCoder\abc19d.cpp" />
+    <ClCompile Include="..\AtCoder\abc1b.cpp" />
+    <ClCompile Include="..\AtCoder\abc20b.cpp" />
+    <ClCompile Include="..\AtCoder\abc21b.cpp" />
+    <ClCompile Include="..\AtCoder\abc22b.cpp" />
+    <ClCompile Include="..\AtCoder\abc24c.cpp" />
+    <ClCompile Include="..\AtCoder\abc24d.cpp" />
+    <ClCompile Include="..\AtCoder\abc25c.cpp" />
+    <ClCompile Include="..\AtCoder\abc26c.cpp" />
+    <ClCompile Include="..\AtCoder\abc27c.cpp" />
+    <ClCompile Include="..\AtCoder\abc28c.cpp" />
+    <ClCompile Include="..\AtCoder\abc29c.cpp" />
+    <ClCompile Include="..\AtCoder\abc29d.cpp" />
+    <ClCompile Include="..\AtCoder\abc2b.cpp" />
+    <ClCompile Include="..\AtCoder\abc30c.cpp" />
+    <ClCompile Include="..\AtCoder\abc31c.cpp" />
+    <ClCompile Include="..\AtCoder\abc32c.cpp" />
+    <ClCompile Include="..\AtCoder\abc32d.cpp" />
+    <ClCompile Include="..\AtCoder\abc33c.cpp" />
+    <ClCompile Include="..\AtCoder\abc34c.cpp" />
+    <ClCompile Include="..\AtCoder\abc35c.cpp" />
+    <ClCompile Include="..\AtCoder\abc36a.cpp" />
+    <ClCompile Include="..\AtCoder\abc36b.cpp" />
+    <ClCompile Include="..\AtCoder\abc36c.cpp" />
+    <ClCompile Include="..\AtCoder\abc37c.cpp" />
+    <ClCompile Include="..\AtCoder\abc3b.cpp" />
+    <ClCompile Include="..\AtCoder\abc40a.cpp" />
+    <ClCompile Include="..\AtCoder\abc40b.cpp" />
+    <ClCompile Include="..\AtCoder\abc40c.cpp" />
+    <ClCompile Include="..\AtCoder\abc40d.cpp" />
+    <ClCompile Include="..\AtCoder\abc41a.cpp" />
+    <ClCompile Include="..\AtCoder\abc41b.cpp" />
+    <ClCompile Include="..\AtCoder\abc41c.cpp" />
+    <ClCompile Include="..\AtCoder\abc41d.cpp" />
+    <ClCompile Include="..\AtCoder\abc42a.cpp" />
+    <ClCompile Include="..\AtCoder\abc42b.cpp" />
+    <ClCompile Include="..\AtCoder\abc42c.cpp" />
+    <ClCompile Include="..\AtCoder\abc42d.cpp" />
+    <ClCompile Include="..\AtCoder\abc43c.cpp" />
+    <ClCompile Include="..\AtCoder\abc44c.cpp" />
+    <ClCompile Include="..\AtCoder\abc45a.cpp" />
+    <ClCompile Include="..\AtCoder\abc45b.cpp" />
+    <ClCompile Include="..\AtCoder\abc45c.cpp" />
+    <ClCompile Include="..\AtCoder\abc46a.cpp" />
+    <ClCompile Include="..\AtCoder\abc46b.cpp" />
+    <ClCompile Include="..\AtCoder\abc46c.cpp" />
+    <ClCompile Include="..\AtCoder\abc46d.cpp" />
+    <ClCompile Include="..\AtCoder\abc48c.cpp" />
+    <ClCompile Include="..\AtCoder\abc49c.cpp" />
+    <ClCompile Include="..\AtCoder\abc4b.cpp" />
+    <ClCompile Include="..\AtCoder\abc51c.cpp" />
+    <ClCompile Include="..\AtCoder\abc51d.cpp" />
+    <ClCompile Include="..\AtCoder\abc52c.cpp" />
+    <ClCompile Include="..\AtCoder\abc52d.cpp" />
+    <ClCompile Include="..\AtCoder\abc53a.cpp" />
+    <ClCompile Include="..\AtCoder\abc53b.cpp" />
+    <ClCompile Include="..\AtCoder\abc53c.cpp" />
+    <ClCompile Include="..\AtCoder\abc53d.cpp" />
+    <ClCompile Include="..\AtCoder\abc54a.cpp" />
+    <ClCompile Include="..\AtCoder\abc54b.cpp" />
+    <ClCompile Include="..\AtCoder\abc54c.cpp" />
+    <ClCompile Include="..\AtCoder\abc54d.cpp" />
+    <ClCompile Include="..\AtCoder\abc55a.cpp" />
+    <ClCompile Include="..\AtCoder\abc55b.cpp" />
+    <ClCompile Include="..\AtCoder\abc5b.cpp" />
+    <ClCompile Include="..\AtCoder\abc6b.cpp" />
+    <ClCompile Include="..\AtCoder\abc7b.cpp" />
+    <ClCompile Include="..\AtCoder\abc7d.cpp" />
+    <ClCompile Include="..\AtCoder\abc8b.cpp" />
+    <ClCompile Include="..\AtCoder\abc8c.cpp" />
+    <ClCompile Include="..\AtCoder\abc9b.cpp" />
+    <ClCompile Include="..\AtCoder\accumulate.cpp" />
+    <ClCompile Include="..\AtCoder\agc10a.cpp" />
+    <ClCompile Include="..\AtCoder\agc10b.cpp" />
+    <ClCompile Include="..\AtCoder\agc11a.cpp" />
+    <ClCompile Include="..\AtCoder\agc11b.cpp" />
+    <ClCompile Include="..\AtCoder\agc11c.cpp" />
+    <ClCompile Include="..\AtCoder\agc3a.cpp" />
+    <ClCompile Include="..\AtCoder\agc9a.cpp" />
+    <ClCompile Include="..\AtCoder\agc9b.cpp" />
+    <ClCompile Include="..\AtCoder\arc69c.cpp" />
+    <ClCompile Include="..\AtCoder\arc69d.cpp" />
+    <ClCompile Include="..\AtCoder\Chokudai_Contest3.cpp" />
+    <ClCompile Include="..\AtCoder\code_fes_2015_b_a.cpp" />
+    <ClCompile Include="..\AtCoder\code_fes_2015_b_b.cpp" />
+    <ClCompile Include="..\AtCoder\code_fes_2015_b_c.cpp" />
+    <ClCompile Include="..\AtCoder\code_fes_2015_b_d.cpp" />
+    <ClCompile Include="..\AtCoder\code_fes_2016_a_a.cpp" />
+    <ClCompile Include="..\AtCoder\code_fes_2016_a_b.cpp" />
+    <ClCompile Include="..\AtCoder\code_fes_2016_a_c.cpp" />
+    <ClCompile Include="..\AtCoder\code_fes_2016_a_d.cpp" />
+    <ClCompile Include="..\AtCoder\code_fes_2016_b_a.cpp" />
+    <ClCompile Include="..\AtCoder\code_fes_2016_b_b.cpp" />
+    <ClCompile Include="..\AtCoder\code_fes_2016_b_c.cpp" />
+    <ClCompile Include="..\AtCoder\code_fes_2016_b_d.cpp" />
+    <ClCompile Include="..\AtCoder\code_fes_2016_b_e.cpp" />
+    <ClCompile Include="..\AtCoder\code_fes_2016_c_a.cpp" />
+    <ClCompile Include="..\AtCoder\code_fes_2016_c_b.cpp" />
+    <ClCompile Include="..\AtCoder\code_fes_2016_c_c.cpp" />
+    <ClCompile Include="..\AtCoder\code_fes_2016_c_d.cpp" />
+    <ClCompile Include="..\AtCoder\DigitDP.cpp" />
+    <ClCompile Include="..\AtCoder\minpro_a.cpp" />
+    <ClCompile Include="..\AtCoder\minpro_b.cpp" />
+    <ClCompile Include="..\AtCoder\minpro_c.cpp" />
+    <ClCompile Include="..\AtCoder\minpro_d.cpp" />
+    <ClCompile Include="..\AtCoder\Mujin_Programming_Challenge_2017b.cpp" />
+    <ClCompile Include="..\AtCoder\next.cpp" />
+    <ClCompile Include="..\AtCoder\RCOa.cpp" />
+    <ClCompile Include="..\AtCoder\RCOb.cpp" />
+    <ClCompile Include="..\AtCoder\template.cpp" />
+    <ClCompile Include="MOD.cpp" />
+    <ClCompile Include="繰り返し自乗法と逆元.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
