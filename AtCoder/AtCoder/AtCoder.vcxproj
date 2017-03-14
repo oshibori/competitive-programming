@@ -90,7 +90,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Users\Tomoki\Documents\Visual Studio 2015\Projects\AtCoder\AtCoder</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Tomoki\Documents\GitHub\competitive-programming\AtCoder\AtCoder</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
