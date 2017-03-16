@@ -1,36 +1,69 @@
-#define _USE_MATH_DEFINES
 #include "bits/stdc++.h"
 using namespace std;
+#ifdef _DEBUG
+#include "dump.hpp"
+#else
+#define dump(...)
+#endif
 
 //#define int long long
-#define DBG 1
-#define dump(o) if(DBG){cerr<<#o<<" "<<o<<endl;}
-#define dumpc(o) if(DBG){cerr<<#o; for(auto &e:(o))cerr<<" "<<e;cerr<<endl;}
 #define rep(i,a,b) for(int i=(a);i<(b);i++)
 #define rrep(i,a,b) for(int i=(b)-1;i>=(a);i--)
-#define each(it,c) for(auto it=(c).begin();it!=(c).end();it++)
-#define all(c) c.begin(),c.end()
+#define all(c) begin(c),end(c)
 const int INF = sizeof(int) == sizeof(long long) ? 0x3f3f3f3f3f3f3f3fLL : 0x3f3f3f3f;
-const int MOD = (int)(1e9 + 7);
-const double EPS = 1e-10;
+const int MOD = (int)(1e9) + 7;
+template<class T> bool chmax(T &a, const T &b) { if (a < b) { a = b; return true; } return false; }
+template<class T> bool chmin(T &a, const T &b) { if (a > b) { a = b; return true; } return false; }
+
 
 signed main() {
-	int b[3][3], c[3][3]; memset(b, 0, sizeof(b)); memset(c, 0, sizeof(c));
+	int sum(0);
+	int b[3][3], c[3][3];
+	memset(b, 0, sizeof(b)); memset(c, 0, sizeof(c));
 	rep(i, 0, 2)rep(j, 0, 3)cin >> b[i][j];
 	rep(i, 0, 3)rep(j, 0, 2)cin >> c[i][j];
+	rep(i, 0, 3)rep(j, 0, 3)sum += b[i][j] + c[i][j];
 
-	int a[3][3]; memset(a, 0, sizeof(a));
-	a[1][1] = 1;
+	map < vector<vector<int>>, int>mp;
+	function<int(int, vector<vector<int>>)> dfs = [&](int cnt, vector<vector<int>> v) {
+		if (mp.find(v) != mp.end())return mp[v];
 
-	rep(i, 0, 8) {
 
-		int p = i & 1 ? 1 : -1;
-		vector<vector<int>>v;
-		rep(j, 0, 1)rep(k, 0, 2) {
-			if ((a[j][k] == p&&a[j + 1][k] == 0) || (a[j][k] == 0 && a[j + 1][k] == p))
-
+		if (cnt == 9) {
+			int ret = 0;
+			rep(i, 0, 2)rep(j, 0, 3)if (v[i][j] == v[i + 1][j])ret += b[i][j];
+			rep(i, 0, 3)rep(j, 0, 2)if (v[i][j] == v[i][j + 1])ret += c[i][j];
+			return mp[v] = ret;
 		}
+		else {
+			if (cnt & 1) {
+				int ret = INF;
+				rep(i, 0, 3)rep(j, 0, 3) {
+					if (v[i][j] != 0)continue;
+					v[i][j] = 2;
+					chmin(ret, dfs(cnt + 1, v));
+					v[i][j] = 0;
+				}
+				return mp[v] = ret;
+			}
+			else {
+				// chokudai
+				int ret = 0;
+				rep(i, 0, 3)rep(j, 0, 3) {
+					if (v[i][j] != 0)continue;
+					v[i][j] = 1;
+					chmax(ret, dfs(cnt + 1, v));
+					v[i][j] = 0;
+				}
+				return mp[v] = ret;
+			}
+		}
+	};
 
-	}
+
+	int ans = dfs(0, vector<vector<int>>(3, vector<int>(3, 0)));
+	cout << ans << endl << sum - ans << endl;
+
+
 	return 0;
 }

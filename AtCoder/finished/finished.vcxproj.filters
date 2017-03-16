@@ -372,9 +372,6 @@
     <ClCompile Include="..\AtCoder\abc26c.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="..\AtCoder\abc25c.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="..\AtCoder\abc24c.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
@@ -433,6 +430,9 @@
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="..\AtCoder\abc1c.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="..\AtCoder\abc25c.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
