@@ -170,6 +170,7 @@
     <ClCompile Include="..\AtCoder\abc19c.cpp" />
     <ClCompile Include="..\AtCoder\abc19d.cpp" />
     <ClCompile Include="..\AtCoder\abc1b.cpp" />
+    <ClCompile Include="..\AtCoder\abc1c.cpp" />
     <ClCompile Include="..\AtCoder\abc20b.cpp" />
     <ClCompile Include="..\AtCoder\abc20c.cpp" />
     <ClCompile Include="..\AtCoder\abc21b.cpp" />
@@ -185,6 +186,7 @@
     <ClCompile Include="..\AtCoder\abc29c.cpp" />
     <ClCompile Include="..\AtCoder\abc29d.cpp" />
     <ClCompile Include="..\AtCoder\abc2b.cpp" />
+    <ClCompile Include="..\AtCoder\abc2c.cpp" />
     <ClCompile Include="..\AtCoder\abc30c.cpp" />
     <ClCompile Include="..\AtCoder\abc31c.cpp" />
     <ClCompile Include="..\AtCoder\abc32c.cpp" />
@@ -197,6 +199,7 @@
     <ClCompile Include="..\AtCoder\abc36c.cpp" />
     <ClCompile Include="..\AtCoder\abc37c.cpp" />
     <ClCompile Include="..\AtCoder\abc3b.cpp" />
+    <ClCompile Include="..\AtCoder\abc3c.cpp" />
     <ClCompile Include="..\AtCoder\abc40a.cpp" />
     <ClCompile Include="..\AtCoder\abc40b.cpp" />
     <ClCompile Include="..\AtCoder\abc40c.cpp" />
@@ -221,6 +224,7 @@
     <ClCompile Include="..\AtCoder\abc48c.cpp" />
     <ClCompile Include="..\AtCoder\abc49c.cpp" />
     <ClCompile Include="..\AtCoder\abc4b.cpp" />
+    <ClCompile Include="..\AtCoder\abc4c.cpp" />
     <ClCompile Include="..\AtCoder\abc51c.cpp" />
     <ClCompile Include="..\AtCoder\abc51d.cpp" />
     <ClCompile Include="..\AtCoder\abc52c.cpp" />
@@ -236,8 +240,11 @@
     <ClCompile Include="..\AtCoder\abc55a.cpp" />
     <ClCompile Include="..\AtCoder\abc55b.cpp" />
     <ClCompile Include="..\AtCoder\abc5b.cpp" />
+    <ClCompile Include="..\AtCoder\abc5c.cpp" />
     <ClCompile Include="..\AtCoder\abc6b.cpp" />
+    <ClCompile Include="..\AtCoder\abc6c.cpp" />
     <ClCompile Include="..\AtCoder\abc7b.cpp" />
+    <ClCompile Include="..\AtCoder\abc7c.cpp" />
     <ClCompile Include="..\AtCoder\abc7d.cpp" />
     <ClCompile Include="..\AtCoder\abc8b.cpp" />
     <ClCompile Include="..\AtCoder\abc8c.cpp" />
