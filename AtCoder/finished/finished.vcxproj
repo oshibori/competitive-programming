@@ -147,16 +147,23 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\AtCoder\abc10b.cpp" />
+    <ClCompile Include="..\AtCoder\abc10c.cpp" />
     <ClCompile Include="..\AtCoder\abc11b.cpp" />
+    <ClCompile Include="..\AtCoder\abc11c.cpp" />
     <ClCompile Include="..\AtCoder\abc11d.cpp" />
     <ClCompile Include="..\AtCoder\abc12b.cpp" />
+    <ClCompile Include="..\AtCoder\abc12c.cpp" />
     <ClCompile Include="..\AtCoder\abc12d.cpp" />
     <ClCompile Include="..\AtCoder\abc13b.cpp" />
+    <ClCompile Include="..\AtCoder\abc13c.cpp" />
     <ClCompile Include="..\AtCoder\abc14b.cpp" />
     <ClCompile Include="..\AtCoder\abc14c.cpp" />
     <ClCompile Include="..\AtCoder\abc15b.cpp" />
+    <ClCompile Include="..\AtCoder\abc15c.cpp" />
     <ClCompile Include="..\AtCoder\abc16b.cpp" />
+    <ClCompile Include="..\AtCoder\abc16c.cpp" />
     <ClCompile Include="..\AtCoder\abc17b.cpp" />
+    <ClCompile Include="..\AtCoder\abc17c.cpp" />
     <ClCompile Include="..\AtCoder\abc18b.cpp" />
     <ClCompile Include="..\AtCoder\abc19a.cpp" />
     <ClCompile Include="..\AtCoder\abc19b.cpp" />
@@ -235,6 +242,7 @@
     <ClCompile Include="..\AtCoder\abc8b.cpp" />
     <ClCompile Include="..\AtCoder\abc8c.cpp" />
     <ClCompile Include="..\AtCoder\abc9b.cpp" />
+    <ClCompile Include="..\AtCoder\abc9c.cpp" />
     <ClCompile Include="..\AtCoder\agc10a.cpp" />
     <ClCompile Include="..\AtCoder\agc10b.cpp" />
     <ClCompile Include="..\AtCoder\agc11a.cpp" />
