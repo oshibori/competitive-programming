@@ -29,6 +29,7 @@ void bsf(int s, int c) {
 	}
 }
 void assignColor() {
+	// O(|V|+|E|)
 	rep(i, 0, n) {
 		if (color[i] == -1)bsf(i, i);
 	}
