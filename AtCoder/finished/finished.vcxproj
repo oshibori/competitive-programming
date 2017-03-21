@@ -241,6 +241,8 @@
     <ClCompile Include="..\AtCoder\abc54d.cpp" />
     <ClCompile Include="..\AtCoder\abc55a.cpp" />
     <ClCompile Include="..\AtCoder\abc55b.cpp" />
+    <ClCompile Include="..\AtCoder\abc56a.cpp" />
+    <ClCompile Include="..\AtCoder\abc56b.cpp" />
     <ClCompile Include="..\AtCoder\abc5b.cpp" />
     <ClCompile Include="..\AtCoder\abc5c.cpp" />
     <ClCompile Include="..\AtCoder\abc6b.cpp" />
@@ -263,6 +265,8 @@
     <ClCompile Include="..\AtCoder\arc65d.cpp" />
     <ClCompile Include="..\AtCoder\arc69c.cpp" />
     <ClCompile Include="..\AtCoder\arc69d.cpp" />
+    <ClCompile Include="..\AtCoder\arc70c.cpp" />
+    <ClCompile Include="..\AtCoder\arc70d.cpp" />
     <ClCompile Include="..\AtCoder\Chokudai_Contest3.cpp" />
     <ClCompile Include="..\AtCoder\code_fes_2015_b_a.cpp" />
     <ClCompile Include="..\AtCoder\code_fes_2015_b_b.cpp" />
