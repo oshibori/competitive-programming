@@ -18,6 +18,9 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="dump.hpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{51253551-6BDC-4AEB-BFFD-B9C4A9876C3A}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
@@ -96,7 +99,7 @@
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <BufferSecurityCheck>false</BufferSecurityCheck>
-      <AdditionalIncludeDirectories>C:\Users\Tomoki\Documents\Visual Studio 2015\Projects\AOJ\working</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Tomoki\Documents\GitHub\competitive-programming\AOJ\working</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

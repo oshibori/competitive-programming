@@ -375,6 +375,7 @@
     <ClCompile Include="..\working\ITP1_11-D.cpp" />
     <ClCompile Include="..\working\分数を小数に.cpp" />
     <ClCompile Include="0149.cpp" />
+    <ClCompile Include="RUPC2017day1a.cpp" />
     <ClCompile Include="template.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -12,12 +12,15 @@ using namespace std;
 #define all(c) c.begin(),c.end()
 const int INF = sizeof(int) == sizeof(long long) ? 0x3f3f3f3f3f3f3f3fLL : 0x3f3f3f3f;
 const int MOD = (int)(1e9 + 7);
+
 template<typename T>
 class DisjointSet {
 public:
-	vector<T>rank, p;
+	// ２つのグループを１つにまとめる　と　2つの要素が同じグループに所属しているかどうかを判定する
+	vector<T>rank, p, S; // p->parent  S[findSet(v)] ->連結成分の大きさ
 	DisjointSet() {}
 	DisjointSet(int size) {
+		S.resize(size, 1);
 		rank.resize(size, 0);
 		p.resize(size, 0);
 		rep(i, 0, size)makeSet(i);
@@ -26,10 +29,11 @@ public:
 		p[x] = x;
 		rank[x] = 0;
 	}
-	bool same(int x, int y) {
+	bool same(int x, int y) {   // 判定する
 		return findSet(x) == findSet(y);
 	}
-	void unite(int x, int y) {
+	void unite(int x, int y) { // 連結するときにはこれを使う
+		if (same(x, y))return;
 		link(findSet(x), findSet(y));
 	}
 	void link(int x, int y) {
@@ -42,12 +46,17 @@ public:
 				rank[y]++;
 			}
 		}
+
+		S[x] = S[y] = S[x] + S[y];
 	}
 	int findSet(int x) {
 		if (x != p[x]) {
 			p[x] = findSet(p[x]);// path compression
 		}
 		return p[x];
+	}
+	int connectedComponentSize(int x) {
+		return S[findSet(x)];
 	}
 };
 signed main() {
