@@ -99,6 +99,9 @@
     <ClCompile Include="..\..\AtCoder\finished\繰り返し自乗法と逆元.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\AOJ\working\Kruskal.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bits\stdc++.h">

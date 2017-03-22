@@ -123,6 +123,7 @@
     <ClCompile Include="..\..\AOJ\working\dijkstra_priority_queue.cpp" />
     <ClCompile Include="..\..\AOJ\working\Knapsack_Problem.cpp" />
     <ClCompile Include="..\..\AOJ\working\Knapsack_Problem_with_Limitations.cpp" />
+    <ClCompile Include="..\..\AOJ\working\Kruskal.cpp" />
     <ClCompile Include="..\..\AOJ\working\Longest_Increasing_Subsequence.cpp" />
     <ClCompile Include="..\..\AOJ\working\prim.cpp" />
     <ClCompile Include="..\..\AOJ\working\prim_priority_queue.cpp" />
