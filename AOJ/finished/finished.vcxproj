@@ -373,6 +373,8 @@
     <ClCompile Include="..\working\ITP1_11-B.cpp" />
     <ClCompile Include="..\working\ITP1_11-C.cpp" />
     <ClCompile Include="..\working\ITP1_11-D.cpp" />
+    <ClCompile Include="..\working\RUPC2017day2a.cpp" />
+    <ClCompile Include="..\working\RUPC2017day2b.cpp" />
     <ClCompile Include="..\working\分数を小数に.cpp" />
     <ClCompile Include="0149.cpp" />
     <ClCompile Include="RUPC2017day1a.cpp" />
