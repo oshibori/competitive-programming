@@ -21,9 +21,6 @@
   <ItemGroup>
     <ClInclude Include="dump.hpp" />
   </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="RUPC2017day2h.cpp" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{51253551-6BDC-4AEB-BFFD-B9C4A9876C3A}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
