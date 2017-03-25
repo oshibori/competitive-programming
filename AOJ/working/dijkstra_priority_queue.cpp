@@ -12,14 +12,15 @@ using namespace std;
 #define all(c) c.begin(),c.end()
 const int INF = sizeof(int) == sizeof(long long) ? 0x3f3f3f3f3f3f3f3fLL : 0x3f3f3f3f;
 const int MOD = (int)(1e9 + 7);
+
 const int W = 0, B = 1;
-vector<vector<pair<int, int>>>adj; //重み付き有効グラフの隣接リスト表現
-int n;
-void dijkstra() {
-	priority_queue<pair<int, int>>pq;
+//重み付き有効グラフの隣接リスト表現
+vector<int> dijkstra(const vector<vector<pair<int, int>>> &g, int s) {
+	int n = g.size();
+	priority_queue<pair<int, int>>pq;// cost, node
 	vector<int>color(n, W), d(n, INF);
-	d[0] = 0;
-	pq.push(make_pair(0, 0));
+	d[s] = 0;
+	pq.push(make_pair(0, s));
 
 	while (!pq.empty()) {
 		pair<int, int>f(pq.top()); pq.pop();// d[v], v
@@ -27,20 +28,20 @@ void dijkstra() {
 
 		if (d[f.second] < (-1)*f.first)continue; // 最小値を取り出し、それが最短でなければ無視
 
-		rep(i, 0, adj[f.second].size()) {
-			pair<int, int>v(adj[f.second][i]);
+		rep(i, 0, g[f.second].size()) {
+			pair<int, int>v(g[f.second][i]);
 			if (color[v.first] != B&&d[f.second] + v.second < d[v.first]) {
 				d[v.first] = d[f.second] + v.second;
 				pq.push(make_pair(d[v.first] * (-1), v.first)); // priority_queueはデフォルトで大きい値を優先するため-1を掛ける
 			}
 		}
 	}
-	rep(i, 0, n) {
-		cout << i << " " << d[i] << endl;
-	}
+	return d;
 }
 signed main() {
-	cin >> n; adj = vector<vector<pair<int, int>>>(n, vector<pair<int, int>>());
+	int n;
+	cin >> n;
+	vector<vector<pair<int, int>>> adj(n, vector<pair<int, int>>());
 	rep(i, 0, n) {
 		int u, k; cin >> u >> k;
 		rep(j, 0, k) {
@@ -50,6 +51,6 @@ signed main() {
 
 		}
 	}
-	dijkstra();
+	auto dijkstra(adj);
 	return 0;
 }

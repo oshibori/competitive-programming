@@ -195,10 +195,13 @@
     <ClCompile Include="..\AtCoder\abc32d.cpp" />
     <ClCompile Include="..\AtCoder\abc33c.cpp" />
     <ClCompile Include="..\AtCoder\abc34c.cpp" />
+    <ClCompile Include="..\AtCoder\abc34d.cpp" />
     <ClCompile Include="..\AtCoder\abc35c.cpp" />
+    <ClCompile Include="..\AtCoder\abc35d.cpp" />
     <ClCompile Include="..\AtCoder\abc36a.cpp" />
     <ClCompile Include="..\AtCoder\abc36b.cpp" />
     <ClCompile Include="..\AtCoder\abc36c.cpp" />
+    <ClCompile Include="..\AtCoder\abc36d.cpp" />
     <ClCompile Include="..\AtCoder\abc37c.cpp" />
     <ClCompile Include="..\AtCoder\abc37d.cpp" />
     <ClCompile Include="..\AtCoder\abc38d.cpp" />

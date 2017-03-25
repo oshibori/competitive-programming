@@ -140,6 +140,7 @@
     <ClCompile Include="Digit_DP.cpp">
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">template.cpp</ForcedIncludeFiles>
     </ClCompile>
+    <ClCompile Include="GraphTheory.cpp" />
     <ClCompile Include="Longest_Increasing_Subsequence.cpp" />
     <ClCompile Include="ModInt.cpp" />
     <ClCompile Include="Number_Theory.cpp">
@@ -148,6 +149,7 @@
     <ClCompile Include="template.cpp">
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">template.cpp</ForcedIncludeFiles>
     </ClCompile>
+    <ClCompile Include="UnionFind.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bits\stdc++.h" />
