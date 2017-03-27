@@ -184,7 +184,9 @@
     <ClCompile Include="..\AtCoder\abc25c.cpp" />
     <ClCompile Include="..\AtCoder\abc26c.cpp" />
     <ClCompile Include="..\AtCoder\abc27c.cpp" />
+    <ClCompile Include="..\AtCoder\abc27d.cpp" />
     <ClCompile Include="..\AtCoder\abc28c.cpp" />
+    <ClCompile Include="..\AtCoder\abc28d.cpp" />
     <ClCompile Include="..\AtCoder\abc29c.cpp" />
     <ClCompile Include="..\AtCoder\abc29d.cpp" />
     <ClCompile Include="..\AtCoder\abc2b.cpp" />
@@ -249,6 +251,10 @@
     <ClCompile Include="..\AtCoder\abc55b.cpp" />
     <ClCompile Include="..\AtCoder\abc56a.cpp" />
     <ClCompile Include="..\AtCoder\abc56b.cpp" />
+    <ClCompile Include="..\AtCoder\abc57a.cpp" />
+    <ClCompile Include="..\AtCoder\abc57b.cpp" />
+    <ClCompile Include="..\AtCoder\abc57c.cpp" />
+    <ClCompile Include="..\AtCoder\abc57d.cpp" />
     <ClCompile Include="..\AtCoder\abc5b.cpp" />
     <ClCompile Include="..\AtCoder\abc5c.cpp" />
     <ClCompile Include="..\AtCoder\abc6b.cpp" />
@@ -268,6 +274,8 @@
     <ClCompile Include="..\AtCoder\agc3a.cpp" />
     <ClCompile Include="..\AtCoder\agc9a.cpp" />
     <ClCompile Include="..\AtCoder\agc9b.cpp" />
+    <ClCompile Include="..\AtCoder\arc51a.cpp" />
+    <ClCompile Include="..\AtCoder\arc52a.cpp" />
     <ClCompile Include="..\AtCoder\arc65d.cpp" />
     <ClCompile Include="..\AtCoder\arc69c.cpp" />
     <ClCompile Include="..\AtCoder\arc69d.cpp" />

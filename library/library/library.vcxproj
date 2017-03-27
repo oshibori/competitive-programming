@@ -146,6 +146,7 @@
     <ClCompile Include="Number_Theory.cpp">
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">template.cpp</ForcedIncludeFiles>
     </ClCompile>
+    <ClCompile Include="Search.cpp" />
     <ClCompile Include="template.cpp">
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">template.cpp</ForcedIncludeFiles>
     </ClCompile>
@@ -154,6 +155,40 @@
   <ItemGroup>
     <ClInclude Include="bits\stdc++.h" />
     <ClInclude Include="dump.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\..\..\Downloads\competitive-programming-master\competitive-programming-master\library\library\snippet\all.snippet" />
+    <None Include="..\..\..\..\..\Downloads\competitive-programming-master\competitive-programming-master\library\library\snippet\i.snippet" />
+    <None Include="..\..\..\..\..\Downloads\competitive-programming-master\competitive-programming-master\library\library\snippet\ii.snippet" />
+    <None Include="..\..\..\..\..\Downloads\competitive-programming-master\competitive-programming-master\library\library\snippet\iii.snippet" />
+    <None Include="..\..\..\..\..\Downloads\competitive-programming-master\competitive-programming-master\library\library\snippet\iiii.snippet" />
+    <None Include="..\..\..\..\..\Downloads\competitive-programming-master\competitive-programming-master\library\library\snippet\iiiii.snippet" />
+    <None Include="..\..\..\..\..\Downloads\competitive-programming-master\competitive-programming-master\library\library\snippet\iiiiiv.snippet" />
+    <None Include="..\..\..\..\..\Downloads\competitive-programming-master\competitive-programming-master\library\library\snippet\iiiiv.snippet" />
+    <None Include="..\..\..\..\..\Downloads\competitive-programming-master\competitive-programming-master\library\library\snippet\iiiv.snippet" />
+    <None Include="..\..\..\..\..\Downloads\competitive-programming-master\competitive-programming-master\library\library\snippet\iiv.snippet" />
+    <None Include="..\..\..\..\..\Downloads\competitive-programming-master\competitive-programming-master\library\library\snippet\inrange.snippet" />
+    <None Include="..\..\..\..\..\Downloads\competitive-programming-master\competitive-programming-master\library\library\snippet\iv.snippet" />
+    <None Include="..\..\..\..\..\Downloads\competitive-programming-master\competitive-programming-master\library\library\snippet\ivv.snippet" />
+    <None Include="..\..\..\..\..\Downloads\competitive-programming-master\competitive-programming-master\library\library\snippet\ll.snippet" />
+    <None Include="..\..\..\..\..\Downloads\competitive-programming-master\competitive-programming-master\library\library\snippet\memset.snippet" />
+    <None Include="..\..\..\..\..\Downloads\competitive-programming-master\competitive-programming-master\library\library\snippet\modint.snippet" />
+    <None Include="..\..\..\..\..\Downloads\competitive-programming-master\competitive-programming-master\library\library\snippet\o.snippet" />
+    <None Include="..\..\..\..\..\Downloads\competitive-programming-master\competitive-programming-master\library\library\snippet\oa.snippet" />
+    <None Include="..\..\..\..\..\Downloads\competitive-programming-master\competitive-programming-master\library\library\snippet\oaa.snippet" />
+    <None Include="..\..\..\..\..\Downloads\competitive-programming-master\competitive-programming-master\library\library\snippet\oo.snippet" />
+    <None Include="..\..\..\..\..\Downloads\competitive-programming-master\competitive-programming-master\library\library\snippet\ooo.snippet" />
+    <None Include="..\..\..\..\..\Downloads\competitive-programming-master\competitive-programming-master\library\library\snippet\ov.snippet" />
+    <None Include="..\..\..\..\..\Downloads\competitive-programming-master\competitive-programming-master\library\library\snippet\ovv.snippet" />
+    <None Include="..\..\..\..\..\Downloads\competitive-programming-master\competitive-programming-master\library\library\snippet\pii.snippet" />
+    <None Include="..\..\..\..\..\Downloads\competitive-programming-master\competitive-programming-master\library\library\snippet\tmp.snippet" />
+    <None Include="..\..\..\..\..\Downloads\competitive-programming-master\competitive-programming-master\library\library\snippet\vb.snippet" />
+    <None Include="..\..\..\..\..\Downloads\competitive-programming-master\competitive-programming-master\library\library\snippet\vc.snippet" />
+    <None Include="..\..\..\..\..\Downloads\competitive-programming-master\competitive-programming-master\library\library\snippet\vi.snippet" />
+    <None Include="..\..\..\..\..\Downloads\competitive-programming-master\competitive-programming-master\library\library\snippet\vpii.snippet" />
+    <None Include="..\..\..\..\..\Downloads\competitive-programming-master\competitive-programming-master\library\library\snippet\vs.snippet" />
+    <None Include="..\..\..\..\..\Downloads\competitive-programming-master\competitive-programming-master\library\library\snippet\vvc.snippet" />
+    <None Include="..\..\..\..\..\Downloads\competitive-programming-master\competitive-programming-master\library\library\snippet\vvi.snippet" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

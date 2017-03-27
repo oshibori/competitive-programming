@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="snippet">
+      <UniqueIdentifier>{e9201c27-a70a-42d4-b1de-af39ffb36328}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModInt.cpp">
@@ -111,6 +114,9 @@
     <ClCompile Include="UnionFind.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="Search.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bits\stdc++.h">
@@ -119,5 +125,103 @@
     <ClInclude Include="dump.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\..\..\Downloads\competitive-programming-master\competitive-programming-master\library\library\snippet\all.snippet">
+      <Filter>snippet</Filter>
+    </None>
+    <None Include="..\..\..\..\..\Downloads\competitive-programming-master\competitive-programming-master\library\library\snippet\i.snippet">
+      <Filter>snippet</Filter>
+    </None>
+    <None Include="..\..\..\..\..\Downloads\competitive-programming-master\competitive-programming-master\library\library\snippet\ii.snippet">
+      <Filter>snippet</Filter>
+    </None>
+    <None Include="..\..\..\..\..\Downloads\competitive-programming-master\competitive-programming-master\library\library\snippet\iii.snippet">
+      <Filter>snippet</Filter>
+    </None>
+    <None Include="..\..\..\..\..\Downloads\competitive-programming-master\competitive-programming-master\library\library\snippet\iiii.snippet">
+      <Filter>snippet</Filter>
+    </None>
+    <None Include="..\..\..\..\..\Downloads\competitive-programming-master\competitive-programming-master\library\library\snippet\iiiii.snippet">
+      <Filter>snippet</Filter>
+    </None>
+    <None Include="..\..\..\..\..\Downloads\competitive-programming-master\competitive-programming-master\library\library\snippet\iiiiiv.snippet">
+      <Filter>snippet</Filter>
+    </None>
+    <None Include="..\..\..\..\..\Downloads\competitive-programming-master\competitive-programming-master\library\library\snippet\iiiiv.snippet">
+      <Filter>snippet</Filter>
+    </None>
+    <None Include="..\..\..\..\..\Downloads\competitive-programming-master\competitive-programming-master\library\library\snippet\iiiv.snippet">
+      <Filter>snippet</Filter>
+    </None>
+    <None Include="..\..\..\..\..\Downloads\competitive-programming-master\competitive-programming-master\library\library\snippet\iiv.snippet">
+      <Filter>snippet</Filter>
+    </None>
+    <None Include="..\..\..\..\..\Downloads\competitive-programming-master\competitive-programming-master\library\library\snippet\inrange.snippet">
+      <Filter>snippet</Filter>
+    </None>
+    <None Include="..\..\..\..\..\Downloads\competitive-programming-master\competitive-programming-master\library\library\snippet\iv.snippet">
+      <Filter>snippet</Filter>
+    </None>
+    <None Include="..\..\..\..\..\Downloads\competitive-programming-master\competitive-programming-master\library\library\snippet\ivv.snippet">
+      <Filter>snippet</Filter>
+    </None>
+    <None Include="..\..\..\..\..\Downloads\competitive-programming-master\competitive-programming-master\library\library\snippet\ll.snippet">
+      <Filter>snippet</Filter>
+    </None>
+    <None Include="..\..\..\..\..\Downloads\competitive-programming-master\competitive-programming-master\library\library\snippet\memset.snippet">
+      <Filter>snippet</Filter>
+    </None>
+    <None Include="..\..\..\..\..\Downloads\competitive-programming-master\competitive-programming-master\library\library\snippet\modint.snippet">
+      <Filter>snippet</Filter>
+    </None>
+    <None Include="..\..\..\..\..\Downloads\competitive-programming-master\competitive-programming-master\library\library\snippet\o.snippet">
+      <Filter>snippet</Filter>
+    </None>
+    <None Include="..\..\..\..\..\Downloads\competitive-programming-master\competitive-programming-master\library\library\snippet\oa.snippet">
+      <Filter>snippet</Filter>
+    </None>
+    <None Include="..\..\..\..\..\Downloads\competitive-programming-master\competitive-programming-master\library\library\snippet\oaa.snippet">
+      <Filter>snippet</Filter>
+    </None>
+    <None Include="..\..\..\..\..\Downloads\competitive-programming-master\competitive-programming-master\library\library\snippet\oo.snippet">
+      <Filter>snippet</Filter>
+    </None>
+    <None Include="..\..\..\..\..\Downloads\competitive-programming-master\competitive-programming-master\library\library\snippet\ooo.snippet">
+      <Filter>snippet</Filter>
+    </None>
+    <None Include="..\..\..\..\..\Downloads\competitive-programming-master\competitive-programming-master\library\library\snippet\ov.snippet">
+      <Filter>snippet</Filter>
+    </None>
+    <None Include="..\..\..\..\..\Downloads\competitive-programming-master\competitive-programming-master\library\library\snippet\ovv.snippet">
+      <Filter>snippet</Filter>
+    </None>
+    <None Include="..\..\..\..\..\Downloads\competitive-programming-master\competitive-programming-master\library\library\snippet\pii.snippet">
+      <Filter>snippet</Filter>
+    </None>
+    <None Include="..\..\..\..\..\Downloads\competitive-programming-master\competitive-programming-master\library\library\snippet\tmp.snippet">
+      <Filter>snippet</Filter>
+    </None>
+    <None Include="..\..\..\..\..\Downloads\competitive-programming-master\competitive-programming-master\library\library\snippet\vb.snippet">
+      <Filter>snippet</Filter>
+    </None>
+    <None Include="..\..\..\..\..\Downloads\competitive-programming-master\competitive-programming-master\library\library\snippet\vc.snippet">
+      <Filter>snippet</Filter>
+    </None>
+    <None Include="..\..\..\..\..\Downloads\competitive-programming-master\competitive-programming-master\library\library\snippet\vi.snippet">
+      <Filter>snippet</Filter>
+    </None>
+    <None Include="..\..\..\..\..\Downloads\competitive-programming-master\competitive-programming-master\library\library\snippet\vpii.snippet">
+      <Filter>snippet</Filter>
+    </None>
+    <None Include="..\..\..\..\..\Downloads\competitive-programming-master\competitive-programming-master\library\library\snippet\vs.snippet">
+      <Filter>snippet</Filter>
+    </None>
+    <None Include="..\..\..\..\..\Downloads\competitive-programming-master\competitive-programming-master\library\library\snippet\vvc.snippet">
+      <Filter>snippet</Filter>
+    </None>
+    <None Include="..\..\..\..\..\Downloads\competitive-programming-master\competitive-programming-master\library\library\snippet\vvi.snippet">
+      <Filter>snippet</Filter>
+    </None>
   </ItemGroup>
 </Project>
