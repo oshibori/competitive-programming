@@ -166,6 +166,7 @@
     <ClCompile Include="..\AtCoder\abc17c.cpp" />
     <ClCompile Include="..\AtCoder\abc18b.cpp" />
     <ClCompile Include="..\AtCoder\abc18c.cpp" />
+    <ClCompile Include="..\AtCoder\abc18d.cpp" />
     <ClCompile Include="..\AtCoder\abc19a.cpp" />
     <ClCompile Include="..\AtCoder\abc19b.cpp" />
     <ClCompile Include="..\AtCoder\abc19c.cpp" />
@@ -176,13 +177,17 @@
     <ClCompile Include="..\AtCoder\abc20c.cpp" />
     <ClCompile Include="..\AtCoder\abc21b.cpp" />
     <ClCompile Include="..\AtCoder\abc21c.cpp" />
+    <ClCompile Include="..\AtCoder\abc21d.cpp" />
     <ClCompile Include="..\AtCoder\abc22b.cpp" />
     <ClCompile Include="..\AtCoder\abc22c.cpp" />
+    <ClCompile Include="..\AtCoder\abc22d.cpp" />
     <ClCompile Include="..\AtCoder\abc23c.cpp" />
+    <ClCompile Include="..\AtCoder\abc23d.cpp" />
     <ClCompile Include="..\AtCoder\abc24c.cpp" />
     <ClCompile Include="..\AtCoder\abc24d.cpp" />
     <ClCompile Include="..\AtCoder\abc25c.cpp" />
     <ClCompile Include="..\AtCoder\abc26c.cpp" />
+    <ClCompile Include="..\AtCoder\abc26d.cpp" />
     <ClCompile Include="..\AtCoder\abc27c.cpp" />
     <ClCompile Include="..\AtCoder\abc27d.cpp" />
     <ClCompile Include="..\AtCoder\abc28c.cpp" />
