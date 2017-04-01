@@ -13,6 +13,7 @@ using namespace std;
 const int INF = sizeof(int) == sizeof(long long) ? 0x3f3f3f3f3f3f3f3fLL : 0x3f3f3f3f;
 const int MOD = (int)(1e9 + 7);
 
+// O( ( |V| + |E| ) * log|V| )
 const int W = 0, B = 1;
 //重み付き有効グラフの隣接リスト表現
 vector<int> dijkstra(const vector<vector<pair<int, int>>> &g, int s) {
