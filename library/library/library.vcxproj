@@ -132,6 +132,7 @@
     <ClCompile Include="..\..\AOJ\working\Topological_Sort_by_bfs.cpp" />
     <ClCompile Include="..\..\AOJ\working\Topological_Sort_by_dfs.cpp" />
     <ClCompile Include="..\..\AOJ\working\union-find.cpp" />
+    <ClCompile Include="..\..\AtCoder\AtCoder\abc6d.cpp" />
     <ClCompile Include="..\..\AtCoder\AtCoder\accumulate.cpp" />
     <ClCompile Include="..\..\AtCoder\AtCoder\DigitDP.cpp" />
     <ClCompile Include="..\..\AtCoder\AtCoder\next.cpp" />

@@ -266,6 +266,7 @@
     <ClCompile Include="..\AtCoder\abc57d.cpp" />
     <ClCompile Include="..\AtCoder\abc5b.cpp" />
     <ClCompile Include="..\AtCoder\abc5c.cpp" />
+    <ClCompile Include="..\AtCoder\abc5d.cpp" />
     <ClCompile Include="..\AtCoder\abc6b.cpp" />
     <ClCompile Include="..\AtCoder\abc6c.cpp" />
     <ClCompile Include="..\AtCoder\abc7b.cpp" />
