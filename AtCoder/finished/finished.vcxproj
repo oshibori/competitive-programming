@@ -200,6 +200,7 @@
     <ClCompile Include="..\AtCoder\abc29d.cpp" />
     <ClCompile Include="..\AtCoder\abc2b.cpp" />
     <ClCompile Include="..\AtCoder\abc2c.cpp" />
+    <ClCompile Include="..\AtCoder\abc2d.cpp" />
     <ClCompile Include="..\AtCoder\abc30c.cpp" />
     <ClCompile Include="..\AtCoder\abc31c.cpp" />
     <ClCompile Include="..\AtCoder\abc32c.cpp" />
