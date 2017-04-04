@@ -177,6 +177,7 @@
     <ClCompile Include="..\AtCoder\abc19d.cpp" />
     <ClCompile Include="..\AtCoder\abc1b.cpp" />
     <ClCompile Include="..\AtCoder\abc1c.cpp" />
+    <ClCompile Include="..\AtCoder\abc1d.cpp" />
     <ClCompile Include="..\AtCoder\abc20b.cpp" />
     <ClCompile Include="..\AtCoder\abc20c.cpp" />
     <ClCompile Include="..\AtCoder\abc21b.cpp" />
