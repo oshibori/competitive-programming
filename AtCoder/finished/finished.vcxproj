@@ -266,6 +266,8 @@
     <ClCompile Include="..\AtCoder\abc57b.cpp" />
     <ClCompile Include="..\AtCoder\abc57c.cpp" />
     <ClCompile Include="..\AtCoder\abc57d.cpp" />
+    <ClCompile Include="..\AtCoder\abc58a.cpp" />
+    <ClCompile Include="..\AtCoder\abc58b.cpp" />
     <ClCompile Include="..\AtCoder\abc5b.cpp" />
     <ClCompile Include="..\AtCoder\abc5c.cpp" />
     <ClCompile Include="..\AtCoder\abc5d.cpp" />
@@ -288,6 +290,11 @@
     <ClCompile Include="..\AtCoder\agc3a.cpp" />
     <ClCompile Include="..\AtCoder\agc9a.cpp" />
     <ClCompile Include="..\AtCoder\agc9b.cpp" />
+    <ClCompile Include="..\AtCoder\arc34a.cpp" />
+    <ClCompile Include="..\AtCoder\arc35a.cpp" />
+    <ClCompile Include="..\AtCoder\arc36a.cpp" />
+    <ClCompile Include="..\AtCoder\arc37a.cpp" />
+    <ClCompile Include="..\AtCoder\arc38a.cpp" />
     <ClCompile Include="..\AtCoder\arc39a.cpp" />
     <ClCompile Include="..\AtCoder\arc40a.cpp" />
     <ClCompile Include="..\AtCoder\arc41a.cpp" />
@@ -307,6 +314,8 @@
     <ClCompile Include="..\AtCoder\arc69d.cpp" />
     <ClCompile Include="..\AtCoder\arc70c.cpp" />
     <ClCompile Include="..\AtCoder\arc70d.cpp" />
+    <ClCompile Include="..\AtCoder\arc71.cpp" />
+    <ClCompile Include="..\AtCoder\arc71d.cpp" />
     <ClCompile Include="..\AtCoder\Chokudai_Contest3.cpp" />
     <ClCompile Include="..\AtCoder\code_fes_2015_b_a.cpp" />
     <ClCompile Include="..\AtCoder\code_fes_2015_b_b.cpp" />
@@ -325,6 +334,9 @@
     <ClCompile Include="..\AtCoder\code_fes_2016_c_b.cpp" />
     <ClCompile Include="..\AtCoder\code_fes_2016_c_c.cpp" />
     <ClCompile Include="..\AtCoder\code_fes_2016_c_d.cpp" />
+    <ClCompile Include="..\AtCoder\GCJ_Qualification_Round2017a.cpp" />
+    <ClCompile Include="..\AtCoder\GCJ_Qualification_Round2017b.cpp" />
+    <ClCompile Include="..\AtCoder\GCJ_Qualification_Round2017c.cpp" />
     <ClCompile Include="..\AtCoder\minpro_a.cpp" />
     <ClCompile Include="..\AtCoder\minpro_b.cpp" />
     <ClCompile Include="..\AtCoder\minpro_c.cpp" />
@@ -332,6 +344,8 @@
     <ClCompile Include="..\AtCoder\Mujin_Programming_Challenge_2017b.cpp" />
     <ClCompile Include="..\AtCoder\RCOa.cpp" />
     <ClCompile Include="..\AtCoder\RCOb.cpp" />
+    <ClCompile Include="..\AtCoder\s8pc4a.cpp" />
+    <ClCompile Include="..\AtCoder\TCO2017_Q_a.cpp" />
     <ClCompile Include="..\AtCoder\template.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
