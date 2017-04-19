@@ -138,6 +138,7 @@
     <ClCompile Include="..\..\AtCoder\AtCoder\next.cpp" />
     <ClCompile Include="..\..\AtCoder\finished\MOD.cpp" />
     <ClCompile Include="..\..\AtCoder\finished\繰り返し自乗法と逆元.cpp" />
+    <ClCompile Include="calendar.cpp" />
     <ClCompile Include="Digit_DP.cpp">
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">template.cpp</ForcedIncludeFiles>
     </ClCompile>
