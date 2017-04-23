@@ -6,7 +6,7 @@ using namespace std;
 #define dump(...)
 #endif
 
-#define int long long
+//#define int long long
 #define rep(i,a,b) for(int i=(a);i<(b);i++)
 #define rrep(i,a,b) for(int i=(b)-1;i>=(a);i--)
 #define all(c) begin(c),end(c)
@@ -20,34 +20,16 @@ template<class T> bool chmin(T &a, const T &b) { if (a > b) { a = b; return true
 signed main() {
 	cin.tie(0);
 	ios::sync_with_stdio(false);
-	int N; cin >> N;
+	int N, L; cin >> N >> L;
 	vector<int>a(N); rep(i, 0, N)cin >> a[i];
-
-	int x(0), sum(0),y(0);
-	rep(i, 0, N) {
-		sum += a[i];
-		if (i & 1 && sum >= 0) {
-			x += abs(sum) + 1;
-			sum = -1;
-		}
-		else if (!(i & 1) && sum <= 0) {
-			x += abs(sum) + 1;
-			sum = 1;
-		}
+	multiset<int>ms;
+	rep(i, 0, L)ms.insert(a[i]);
+	cout << *prev(ms.end()) << endl;
+	int b(0);
+	rep(f, L, N) {
+		ms.erase(ms.find(a[b++]));
+		ms.insert(a[f]);
+		cout << *prev(ms.end()) << endl;
 	}
-	sum = 0;
-	rep(i, 0, N) {
-		sum += a[i];
-		if (i & 1 && sum <= 0) {
-			y += abs(sum) + 1;
-			sum = 1;
-		}
-		else if (!(i & 1) && sum >= 0) {
-			y += abs(sum)+ 1;
-			sum = -1;
-		}
-	}
-	dump(x, y);
-	cout << min(x, y) << endl;
 	return 0;
 }

@@ -21,10 +21,31 @@ signed main() {
 	cin.tie(0);
 	ios::sync_with_stdio(false);
 	int N; cin >> N;
-	auto F = [&](int x, int y) {return max(to_string(x).length(), to_string(y).length()); };
-	for (int i = sqrt(N); i >= 1; i--)if (N%i == 0) {
-		cout << F(i, N / i) << endl;
-		break;
+	vector<int> v(N); rep(i, 0, N) { cin >> v[i]; }
+	int x(0), y(0), sum(0);
+	rep(i, 0, N) {
+		sum += v[i];
+		if (i & 1 && sum >= 0) {
+			x += abs(sum) + 1;
+			sum = -1;
+		}
+		else if (!(i & 1) && sum <= 0) {
+			x += abs(sum) + 1;
+			sum = 1;
+		}
 	}
+	sum = 0;
+	rep(i, 0, N) {
+		sum += v[i];
+		if (i & 1 && sum <= 0) {
+			y += abs(sum) + 1;
+			sum = 1;
+		}
+		else if (!(i & 1) && sum >= 0) {
+			y += abs(sum) + 1;
+			sum = -1;
+		}
+	}
+	cout << min(x, y) << endl;
 	return 0;
 }

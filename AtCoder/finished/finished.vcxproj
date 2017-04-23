@@ -348,7 +348,7 @@
     <ClCompile Include="..\AtCoder\arc70d.cpp" />
     <ClCompile Include="..\AtCoder\arc71.cpp" />
     <ClCompile Include="..\AtCoder\arc71d.cpp" />
-    <ClCompile Include="..\AtCoder\arc72a.cpp" />
+    <ClCompile Include="..\AtCoder\arc72c.cpp" />
     <ClCompile Include="..\AtCoder\arc7a.cpp" />
     <ClCompile Include="..\AtCoder\arc8a.cpp" />
     <ClCompile Include="..\AtCoder\arc9a.cpp" />
@@ -370,9 +370,15 @@
     <ClCompile Include="..\AtCoder\code_fes_2016_c_b.cpp" />
     <ClCompile Include="..\AtCoder\code_fes_2016_c_c.cpp" />
     <ClCompile Include="..\AtCoder\code_fes_2016_c_d.cpp" />
+    <ClCompile Include="..\AtCoder\GCJ2017Round1Ba.cpp" />
+    <ClCompile Include="..\AtCoder\GCJ2017Round1Bb.cpp" />
     <ClCompile Include="..\AtCoder\GCJ_Qualification_Round2017a.cpp" />
     <ClCompile Include="..\AtCoder\GCJ_Qualification_Round2017b.cpp" />
     <ClCompile Include="..\AtCoder\GCJ_Qualification_Round2017c.cpp" />
+    <ClCompile Include="..\AtCoder\indeed2017a.cpp" />
+    <ClCompile Include="..\AtCoder\indeed2017b.cpp" />
+    <ClCompile Include="..\AtCoder\indeed2017c.cpp" />
+    <ClCompile Include="..\AtCoder\indeed2017d.cpp" />
     <ClCompile Include="..\AtCoder\minpro_a.cpp" />
     <ClCompile Include="..\AtCoder\minpro_b.cpp" />
     <ClCompile Include="..\AtCoder\minpro_c.cpp" />
