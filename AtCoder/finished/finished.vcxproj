@@ -268,9 +268,13 @@
     <ClCompile Include="..\AtCoder\abc57d.cpp" />
     <ClCompile Include="..\AtCoder\abc58a.cpp" />
     <ClCompile Include="..\AtCoder\abc58b.cpp" />
+    <ClCompile Include="..\AtCoder\abc59a.cpp" />
+    <ClCompile Include="..\AtCoder\abc59b.cpp" />
     <ClCompile Include="..\AtCoder\abc5b.cpp" />
     <ClCompile Include="..\AtCoder\abc5c.cpp" />
     <ClCompile Include="..\AtCoder\abc5d.cpp" />
+    <ClCompile Include="..\AtCoder\abc60a.cpp" />
+    <ClCompile Include="..\AtCoder\abc60b.cpp" />
     <ClCompile Include="..\AtCoder\abc6b.cpp" />
     <ClCompile Include="..\AtCoder\abc6c.cpp" />
     <ClCompile Include="..\AtCoder\abc7b.cpp" />
@@ -349,6 +353,8 @@
     <ClCompile Include="..\AtCoder\arc71.cpp" />
     <ClCompile Include="..\AtCoder\arc71d.cpp" />
     <ClCompile Include="..\AtCoder\arc72c.cpp" />
+    <ClCompile Include="..\AtCoder\arc73a.cpp" />
+    <ClCompile Include="..\AtCoder\arc73d.cpp" />
     <ClCompile Include="..\AtCoder\arc7a.cpp" />
     <ClCompile Include="..\AtCoder\arc8a.cpp" />
     <ClCompile Include="..\AtCoder\arc9a.cpp" />
@@ -388,6 +394,7 @@
     <ClCompile Include="..\AtCoder\RCOa.cpp" />
     <ClCompile Include="..\AtCoder\RCOb.cpp" />
     <ClCompile Include="..\AtCoder\s8pc4a.cpp" />
+    <ClCompile Include="..\AtCoder\srm713easy.cpp" />
     <ClCompile Include="..\AtCoder\TCO2017_Q_a.cpp" />
     <ClCompile Include="..\AtCoder\template.cpp" />
   </ItemGroup>

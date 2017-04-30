@@ -128,6 +128,7 @@
     <ClCompile Include="..\..\AOJ\working\Longest_Increasing_Subsequence.cpp" />
     <ClCompile Include="..\..\AOJ\working\prim.cpp" />
     <ClCompile Include="..\..\AOJ\working\prim_priority_queue.cpp" />
+    <ClCompile Include="..\..\AOJ\working\Range Minimum Query (RMQ).cpp" />
     <ClCompile Include="..\..\AOJ\working\Single_Source_Shortest_Path.cpp" />
     <ClCompile Include="..\..\AOJ\working\Topological_Sort_by_bfs.cpp" />
     <ClCompile Include="..\..\AOJ\working\Topological_Sort_by_dfs.cpp" />
@@ -150,6 +151,7 @@
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">template.cpp</ForcedIncludeFiles>
     </ClCompile>
     <ClCompile Include="Search.cpp" />
+    <ClCompile Include="SegmentTree.cpp" />
     <ClCompile Include="template.cpp">
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">template.cpp</ForcedIncludeFiles>
     </ClCompile>
