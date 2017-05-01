@@ -17,7 +17,7 @@ const double EPS = 1e-9;
 template<class T> bool chmax(T &a, const T &b) { if (a < b) { a = b; return true; } return false; }
 template<class T> bool chmin(T &a, const T &b) { if (a > b) { a = b; return true; } return false; }
 struct RangeMinimumQuery {
-	// 1-indexedで木を構成
+	// 0-indexedで木を構成
 	int n;
 	vector<int>d;
 	RangeMinimumQuery(int m) {
@@ -28,11 +28,16 @@ struct RangeMinimumQuery {
 	}
 	void update(int i, int x) {
 		// update ith (0-indexed) number
+		// index i に対応するleaf node の
+		// The index of leaf node which corresponds to ith num is (n+i-1).
 		i += n - 1;
 		d[i] = x;
 		while (i > 0) {
-			i = (i - 1) / 2;
-			d[i] = min(d[i * 2 + 1], d[i * 2 + 2]);
+			i = (i - 1) / 2;// parent:(n-1)/2
+			d[i] = min(d[i * 2 + 1], d[i * 2 + 2]);// children: (2*n+1),(2*n+2)
+			// 簡単に親や子にアクセスできる
+			// この番号付けが上手く働くのは、
+			// This is because SegmentTree is a complete binary tree.
 		}
 	}
 	int query(int l, int r) {
