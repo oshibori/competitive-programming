@@ -363,6 +363,7 @@
     <ClCompile Include="..\working\ALDS1_12_B.cpp" />
     <ClCompile Include="..\working\ALDS1_12_C.cpp" />
     <ClCompile Include="..\working\calc.cpp" />
+    <ClCompile Include="..\working\DSL_2.cpp" />
     <ClCompile Include="..\working\ITP1_10-D.cpp" />
     <ClCompile Include="..\working\ITP1_10-A.cpp" />
     <ClCompile Include="..\working\ITP1_10-C.cpp" />

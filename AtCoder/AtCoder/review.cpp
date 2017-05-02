@@ -17,46 +17,33 @@ const double EPS = 1e-9;
 template<class T> bool chmax(T &a, const T &b) { if (a < b) { a = b; return true; } return false; }
 template<class T> bool chmin(T &a, const T &b) { if (a > b) { a = b; return true; } return false; }
 template<typename T>
-struct RangeSumQuery {
-	// SegmentTree (1-indexed)
+struct BinaryIndexedTree {
 	int n;
-	vector<T>d;
-	RangeSumQuery(int m) {
-		for (n = 1; n < m; n <<= 1);
-		d.assign(2 * n, 0);
+	vector<int>d;
+	BinaryIndexedTree(int m) :n(m) {
+		d.assign(n + 1, 0);
 	}
 	void add(int i, T x) {
-		d[n + i] += x;
-		for (int j = (n + i) / 2; j > 0; j >>= 1) {
-			d[j] += x;
-		}
+		for (int j = i; j <= n; j += j&(-j))d[j] += x;
 	}
-	T sum(int a, int b) {
-		return sum(a, b, 1, 0, n);
+	T sum(int i) {
+		T ret(0);
+		for (int j = i; j > 0; j -= j&(-j))ret += d[j];
+		return ret;
 	}
-	T sum(int a, int b, int k, int l, int r) {
-		// [a,b) [l,r)
-		if (r <= a || b <= l)return 0;
-		else if (a <= l&&r <= b)return d[k];
-		else {
-			T vl, vr;
-			vl = sum(a, b, k * 2, l, (l + r) / 2);
-			vr = sum(a, b, k * 2 + 1, (l + r) / 2, r);
-			return (vl + vr);
-		}
+	T sum(int s, int t) {
+		return sum(t) - sum(s - 1);
 	}
 };
-
 signed main() {
 	cin.tie(0);
 	ios::sync_with_stdio(false);
 	int n, q; cin >> n >> q;
-	RangeSumQuery<int> rsq(n);
+	BinaryIndexedTree<int> bit(n);
 	rep(i, 0, q) {
 		int com, x, y; cin >> com >> x >> y;
-		if (com)cout << rsq.sum(x - 1, y) << endl;
-		else rsq.add(x - 1, y);
+		if (com)cout << bit.sum(x, y) << endl;
+		else bit.add(x, y);
 	}
-	dump(rsq.d);
 	return 0;
 }

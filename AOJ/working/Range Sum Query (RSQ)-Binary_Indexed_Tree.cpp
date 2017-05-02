@@ -16,29 +16,24 @@ const double PI = acos(-1);
 const double EPS = 1e-9;
 template<class T> bool chmax(T &a, const T &b) { if (a < b) { a = b; return true; } return false; }
 template<class T> bool chmin(T &a, const T &b) { if (a > b) { a = b; return true; } return false; }
-
+template<typename T>
 struct BinaryIndexedTree {
 	// 1-indexed
 	int n;
-	vector<int>d;
-	BinaryIndexedTree(int m): n(m){
+	vector<T>d;
+	BinaryIndexedTree(int m) : n(m) {
 		d.assign(m + 1, 0);
 	}
-	int sum(int a, int b) {
+	T sum(int a, int b) {
 		return sum(b) - sum(a - 1);
 	}
-	int sum(int i) {
-		int ret(0);
-		for (int j = i; j > 0; j -= j&(-j)) {
-			ret += d[j];
-		}
+	T sum(int i) {
+		T ret(0);
+		for (int j = i; j > 0; j -= j&(-j))ret += d[j];
 		return ret;
 	}
-	void add(int i, int x) {
-		while (i <= n) {
-			d[i] += x;
-			i += i&(-i);
-		}
+	void add(int i, T x) {
+		for (int j = i; j <= n; j += j&(-j))d[j] += x;
 	}
 };
 
@@ -48,10 +43,10 @@ signed main() {
 	ios::sync_with_stdio(false);
 
 	int n, q; cin >> n >> q;
-	BinaryIndexedTree BIT(n);
+	BinaryIndexedTree<int> BIT(n);
 	rep(i, 0, q) {
 		int com, a, b; cin >> com >> a >> b;
-		if (com)cout << BIT.sum(a , b ) << endl;
+		if (com)cout << BIT.sum(a, b) << endl;
 		else BIT.add(a, b);
 	}
 	//rep(i, 0, n + 1)cout << BIT.d[i] << " ";
