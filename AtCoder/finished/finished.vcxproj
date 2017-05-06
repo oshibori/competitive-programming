@@ -355,6 +355,7 @@
     <ClCompile Include="..\AtCoder\arc72c.cpp" />
     <ClCompile Include="..\AtCoder\arc73a.cpp" />
     <ClCompile Include="..\AtCoder\arc73d.cpp" />
+    <ClCompile Include="..\AtCoder\arc73e.cpp" />
     <ClCompile Include="..\AtCoder\arc7a.cpp" />
     <ClCompile Include="..\AtCoder\arc8a.cpp" />
     <ClCompile Include="..\AtCoder\arc9a.cpp" />

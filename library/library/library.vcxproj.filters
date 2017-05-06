@@ -138,6 +138,15 @@
     <ClCompile Include="..\..\AOJ\working\Range Sum Query (RSQ)-SegTree.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\AOJ\working\Traveling Salesman Problem.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AOJ\working\Range Update Query (RUQ).cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AOJ\working\The Smallest Window I.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bits\stdc++.h">

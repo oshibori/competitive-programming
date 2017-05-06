@@ -17,6 +17,8 @@ template<typename T>
 class DisjointSet {
 public:
 	// ２つのグループを１つにまとめる　と　2つの要素が同じグループに所属しているかどうかを判定する
+	// 木が深くなればなるほど効率が悪くなるので、
+	// rankを使うことにより必要以上に深さが大きくなることがないように管理する
 	vector<T>rank, p, S; // p->parent  S[findSet(v)] ->連結成分の大きさ
 	DisjointSet() {}
 	DisjointSet(int size) {

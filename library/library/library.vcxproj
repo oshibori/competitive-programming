@@ -131,9 +131,12 @@
     <ClCompile Include="..\..\AOJ\working\Range Minimum Query (RMQ).cpp" />
     <ClCompile Include="..\..\AOJ\working\Range Sum Query (RSQ)-Binary_Indexed_Tree.cpp" />
     <ClCompile Include="..\..\AOJ\working\Range Sum Query (RSQ)-SegTree.cpp" />
+    <ClCompile Include="..\..\AOJ\working\Range Update Query (RUQ).cpp" />
     <ClCompile Include="..\..\AOJ\working\Single_Source_Shortest_Path.cpp" />
+    <ClCompile Include="..\..\AOJ\working\The Smallest Window I.cpp" />
     <ClCompile Include="..\..\AOJ\working\Topological_Sort_by_bfs.cpp" />
     <ClCompile Include="..\..\AOJ\working\Topological_Sort_by_dfs.cpp" />
+    <ClCompile Include="..\..\AOJ\working\Traveling Salesman Problem.cpp" />
     <ClCompile Include="..\..\AOJ\working\union-find.cpp" />
     <ClCompile Include="..\..\AtCoder\AtCoder\abc6d.cpp" />
     <ClCompile Include="..\..\AtCoder\AtCoder\accumulate.cpp" />
