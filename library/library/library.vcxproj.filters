@@ -147,6 +147,12 @@
     <ClCompile Include="..\..\AOJ\working\The Smallest Window I.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\AOJ\working\The Maximum Number of Customers.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AOJ\working\Range Add Query (RAQ).cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bits\stdc++.h">

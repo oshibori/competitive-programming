@@ -291,6 +291,9 @@
     <ClCompile Include="..\AtCoder\agc11c.cpp" />
     <ClCompile Include="..\AtCoder\agc12a.cpp" />
     <ClCompile Include="..\AtCoder\agc12b.cpp" />
+    <ClCompile Include="..\AtCoder\agc14a.cpp" />
+    <ClCompile Include="..\AtCoder\agc14b.cpp" />
+    <ClCompile Include="..\AtCoder\agc14c.cpp" />
     <ClCompile Include="..\AtCoder\agc3a.cpp" />
     <ClCompile Include="..\AtCoder\agc9a.cpp" />
     <ClCompile Include="..\AtCoder\agc9b.cpp" />
@@ -394,6 +397,7 @@
     <ClCompile Include="..\AtCoder\paiza_hundred_thousand.cpp" />
     <ClCompile Include="..\AtCoder\RCOa.cpp" />
     <ClCompile Include="..\AtCoder\RCOb.cpp" />
+    <ClCompile Include="..\AtCoder\review.cpp" />
     <ClCompile Include="..\AtCoder\s8pc4a.cpp" />
     <ClCompile Include="..\AtCoder\srm713easy.cpp" />
     <ClCompile Include="..\AtCoder\TCO2017_Q_a.cpp" />
