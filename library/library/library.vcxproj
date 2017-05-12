@@ -133,6 +133,8 @@
     <ClCompile Include="..\..\AOJ\working\Range Sum Query (RSQ)-Binary_Indexed_Tree.cpp" />
     <ClCompile Include="..\..\AOJ\working\Range Sum Query (RSQ)-SegTree.cpp" />
     <ClCompile Include="..\..\AOJ\working\Range Update Query (RUQ).cpp" />
+    <ClCompile Include="..\..\AOJ\working\RMQ and RUQ.cpp" />
+    <ClCompile Include="..\..\AOJ\working\RSQ and RAQ.cpp" />
     <ClCompile Include="..\..\AOJ\working\Single_Source_Shortest_Path.cpp" />
     <ClCompile Include="..\..\AOJ\working\The Maximum Number of Customers.cpp" />
     <ClCompile Include="..\..\AOJ\working\The Smallest Window I.cpp" />

@@ -732,5 +732,8 @@
     <ClCompile Include="..\working\DSL_2.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="..\working\The Number of Windows.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

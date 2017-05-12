@@ -379,6 +379,7 @@
     <ClCompile Include="..\working\RUPC2017day2h.cpp" />
     <ClCompile Include="..\working\RUPC2017day3a.cpp" />
     <ClCompile Include="..\working\RUPC2017day3b.cpp" />
+    <ClCompile Include="..\working\The Number of Windows.cpp" />
     <ClCompile Include="..\working\分数を小数に.cpp" />
     <ClCompile Include="0149.cpp" />
     <ClCompile Include="RUPC2017day1a.cpp" />
