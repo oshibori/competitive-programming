@@ -30,6 +30,7 @@ bool lessX(const Point &p1, const Point &p2) { return (p1.x == p2.x) ? (p1.y < p
 bool lessY(const Point &p1, const Point &p2) { return (p1.y == p2.y) ? (p1.x < p2.x) : (p1.y < p2.y); }
 
 struct KDTree {
+	// —Ìˆæ’Tõ
 	struct Node {
 		int index, l, r;
 		Node() :index(NIL), l(NIL), r(NIL) {}
