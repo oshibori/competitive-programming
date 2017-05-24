@@ -275,6 +275,10 @@
     <ClCompile Include="..\AtCoder\abc5d.cpp" />
     <ClCompile Include="..\AtCoder\abc60a.cpp" />
     <ClCompile Include="..\AtCoder\abc60b.cpp" />
+    <ClCompile Include="..\AtCoder\abc61.cpp" />
+    <ClCompile Include="..\AtCoder\abc61b.cpp" />
+    <ClCompile Include="..\AtCoder\abc61c.cpp" />
+    <ClCompile Include="..\AtCoder\abc61d.cpp" />
     <ClCompile Include="..\AtCoder\abc6b.cpp" />
     <ClCompile Include="..\AtCoder\abc6c.cpp" />
     <ClCompile Include="..\AtCoder\abc7b.cpp" />
