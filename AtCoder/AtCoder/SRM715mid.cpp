@@ -16,41 +16,43 @@ const double PI = acos(-1);
 const double EPS = 1e-9;
 template<class T> bool chmax(T &a, const T &b) { if (a < b) { a = b; return true; } return false; }
 template<class T> bool chmin(T &a, const T &b) { if (a > b) { a = b; return true; } return false; }
-struct DisjointSet {
-	vector<int>p, rank;
-	DisjointSet(int n) {
-		p.resize(n);
-		rank.assign(n, 0);
-		rep(i, 0, n)p[i] = i;
-	}
-	int root(int x) {
-		if (x != p[x])p[x] = root(p[x]);
-		return p[x];
-	}
-	int same(int x, int y) {
-		return root(x) == root(y);
-	}
-	void unite(int x, int y) {
-		if (same(x, y))return;
-		
-		x = root(x), y = root(y);
+class  MaximumRangeDiv2 {
+public:
+	int findMax(string s) {
+		int L(-INF), S(INF);
+		int ret(0);
+		ret = count(all(s), '+') - count(all(s), '-');
+		rep(i, 0, s.size()) {
+			vector<int>ans; ans.emplace_back(0);
+			int v(0);
+			rep(j, 0, s.size()) {
+				if (s[j] == '+')v++;
+				else v--;
+				ans.emplace_back(v);
+				if (i == j) {
+					if (s[j] == '+') {
+						v -= 2;
+						ans.emplace_back(v);
+					}
+					else {
+						v += 2;
+						ans.emplace_back(v);
+					}
+				}
 
-		if (rank[x] < rank[y])p[x] = y;
-		else {
-			p[y] = x;
-			if (rank[x] == rank[y])rank[x]++;
+			}
+			dump(ans);
+			int a = *max_element(all(ans));
+			int b = *min_element(all(ans));
+			chmax(ret, abs(a - b));
 		}
+		return ret;
 	}
 };
 signed main() {
 	cin.tie(0);
 	ios::sync_with_stdio(false);
-	int n, q; cin >> n >> q;
-	DisjointSet uf(n);
-	rep(i, 0, q) {
-		int com, x, y; cin >> com >> x >> y;
-		if (com)cout << uf.same(x, y) << endl;
-		else uf.unite(x, y);
-	}
+	string s; cin >> s;
+	cout << MaximumRangeDiv2().findMax(s) << endl;
 	return 0;
 }

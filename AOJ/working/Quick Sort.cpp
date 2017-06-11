@@ -20,11 +20,11 @@ struct Card {
 	char c;
 	int v;
 	Card() {}
-	Card(int a) :v(a) {}
-	bool operator<=(const Card &p) const{
+	Card(char c, int v) :c(c), v(v) {}
+	bool operator<=(const Card &p)const {
 		return v <= p.v;
 	}
-	bool operator==(const Card &p) const{
+	bool operator==(const Card &p)const {
 		return c == p.c&&v == p.v;
 	}
 };
@@ -33,26 +33,23 @@ istream &operator >> (istream &is, Card &p) {
 	return is;
 }
 ostream &operator<<(ostream &os, Card &p) {
-	os << p.c << " " << p.v;
+	os << p.c << ' ' << p.v;
 	return os;
 }
-int partition(vector<Card>&a, int l, int r) {
-	Card v = a[r];
+template<typename T>
+int partition(vector<T>&a, int l, int r) {
+	T pivot = a[r];
 	int i(l - 1);
-	rep(j, l, r) {
-		if (a[j]<=v) {
-			swap(a[++i], a[j]);
-		}
-	}
-	swap(a[i + 1], a[r]);
-	return i + 1;
+	rep(j, l, r)if (a[j] <= pivot)swap(a[++i], a[j]);
+	swap(a[++i], a[r]);
+	return i;
 }
-void quicksort(vector<Card>&a, int l, int r) {
-	if (l < r) {
-		int p = partition(a, l, r);
-		quicksort(a, l, p - 1);
-		quicksort(a, p + 1, r);
-	}
+template<typename T>
+void quicksort(vector<T>&a, int l, int r) {
+	if (!(l < r))return;
+	int x = partition(a, l, r);
+	quicksort(a, l, x - 1);
+	quicksort(a, x + 1, r);
 }
 template<typename T>
 void merge(vector<T>&a, int l, int r) {
@@ -60,9 +57,9 @@ void merge(vector<T>&a, int l, int r) {
 	int n1 = mid - l, n2 = r - mid;
 	vector<T>L(n1 + 1), R(n2 + 1);
 	rep(i, 0, n1)L[i] = a[l + i];
-	L[n1] = T(INF);
+	L[n1] = T(0, INF);
 	rep(i, 0, n2)R[i] = a[mid + i];
-	R[n2] = T(INF);
+	R[n2] = T(0, INF);
 	int i(0), j(0);
 	rep(k, l, r) {
 		if (L[i] <= R[j])a[k] = L[i++];
@@ -72,9 +69,8 @@ void merge(vector<T>&a, int l, int r) {
 template<typename T>
 void mergesort(vector<T>&a, int l, int r) {
 	if (r - l > 1) {
-		int mid = (l + r) / 2;
-		mergesort(a, l, mid);
-		mergesort(a,mid, r);
+		mergesort(a, l, (l + r) / 2);
+		mergesort(a, (l + r) / 2, r);
 		merge(a, l, r);
 	}
 }
@@ -82,12 +78,12 @@ signed main() {
 	cin.tie(0);
 	ios::sync_with_stdio(false);
 	int N; cin >> N;
-	vector<Card>c(N); rep(i, 0, N)cin >> c[i];
-	vector<Card>cm(c), cq(c);
-	quicksort(cq, 0, N - 1);
-	mergesort(cm, 0, N);
-	if (cq == cm)cout << "Stable" << endl;
+	vector<Card> v(N); rep(i, 0, N) { cin >> v[i]; }
+	vector<Card>w(v);
+	mergesort(w, 0, N);
+	quicksort(v, 0, N - 1);
+	if (w == v)cout << "Stable" << endl;
 	else cout << "Not stable" << endl;
-	rep(i, 0, N)cout << cq[i] << endl;
+	rep(i, 0, N)cout << v[i] << endl;
 	return 0;
 }

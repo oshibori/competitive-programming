@@ -20,6 +20,10 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <Text Include="in.txt" />
+    <Text Include="out.txt" />
+  </ItemGroup>
+  <ItemGroup>
     <ClCompile Include="review.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>

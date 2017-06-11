@@ -22,6 +22,10 @@
     <ClInclude Include="dump.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="in.txt" />
+    <Text Include="out.txt" />
+  </ItemGroup>
+  <ItemGroup>
     <ClCompile Include="review.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
