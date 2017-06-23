@@ -306,6 +306,9 @@
     <ClCompile Include="..\AtCoder\agc15a.cpp" />
     <ClCompile Include="..\AtCoder\agc15b.cpp" />
     <ClCompile Include="..\AtCoder\agc15d.cpp" />
+    <ClCompile Include="..\AtCoder\agc16a.cpp" />
+    <ClCompile Include="..\AtCoder\agc16b.cpp" />
+    <ClCompile Include="..\AtCoder\agc16c.cpp" />
     <ClCompile Include="..\AtCoder\agc3a.cpp" />
     <ClCompile Include="..\AtCoder\agc9a.cpp" />
     <ClCompile Include="..\AtCoder\agc9b.cpp" />
@@ -377,6 +380,9 @@
     <ClCompile Include="..\AtCoder\arc7a.cpp" />
     <ClCompile Include="..\AtCoder\arc8a.cpp" />
     <ClCompile Include="..\AtCoder\arc9a.cpp" />
+    <ClCompile Include="..\AtCoder\cf419a.cpp" />
+    <ClCompile Include="..\AtCoder\cf419b.cpp" />
+    <ClCompile Include="..\AtCoder\cf419c.cpp" />
     <ClCompile Include="..\AtCoder\Chokudai_Contest3.cpp" />
     <ClCompile Include="..\AtCoder\code_fes_2015_b_a.cpp" />
     <ClCompile Include="..\AtCoder\code_fes_2015_b_b.cpp" />
@@ -431,6 +437,10 @@
     <ClCompile Include="..\AtCoder\yuki526.cpp" />
     <ClCompile Include="..\AtCoder\yuki527.cpp" />
     <ClCompile Include="..\AtCoder\yuki528.cpp" />
+    <ClCompile Include="..\AtCoder\yuki530.cpp" />
+    <ClCompile Include="..\AtCoder\yuki531.cpp" />
+    <ClCompile Include="..\AtCoder\yuki532.cpp" />
+    <ClCompile Include="..\AtCoder\yuki533.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -44,7 +44,7 @@ int solve() {
 			cur = T[v];
 			if (V[cur])break;
 		}
-		ans += min(S + (an - 2)*m, m + S + (an + 1)*s);
+		ans += min(S + (an - 2)*m, m + S + (an + 1)*s);// 2*(s+m)+(S-m+s)+(an-2)*s
 	}
 	return ans;
 }
