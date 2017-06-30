@@ -47,7 +47,7 @@ struct RangeMinimumQuery {
 		// query for min of [a,b)
 		// 後ろの方の引数は、計算の簡単化のための引数
 		// kは節点の番号、l,r はその節点が[l,r)に対応付いていることを表す
-		// したがって、外からはquery(a,b,0,0,n)として呼ぶ
+		// したがって、外からはquery(a,b,1,0,n)として呼ぶ
 
 		// [a,b) と [l,r)が交差しなければINF
 		if (r <= a || b <= l)return INF;

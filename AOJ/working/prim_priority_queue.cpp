@@ -13,12 +13,12 @@ using namespace std;
 const int INF = sizeof(int) == sizeof(long long) ? 0x3f3f3f3f3f3f3f3fLL : 0x3f3f3f3f;
 const int MOD = (int)(1e9 + 7);
 const int W(1), B(0);
-vector<vector<pair<int,int>>>M; // d,c
-int n;
+vector<vector<pair<int, int>>>M; // dist,cost
 int prim() {
+	int n = M.size();   //    Don't forget initializing!!!!!
 	vector<int>d(n, INF), color(n, W);
 	d[0] = 0;
-	priority_queue<pair<int,int>>pq; // d[v], v
+	priority_queue<pair<int, int>>pq; // d[v], v
 	pq.push(make_pair(0, 0));
 	while (!pq.empty()) {
 		pair<int, int>f(pq.top()); pq.pop();
@@ -26,17 +26,18 @@ int prim() {
 		if (d[f.second] < f.first*(-1)) continue;
 		rep(i, 0, M[f.second].size()) {
 			pair<int, int>u(M[f.second][i]);
-			if (color[u.first] != B&&u.second<d[u.first]) {
+			if (color[u.first] != B&&u.second < d[u.first]) {
 				d[u.first] = u.second;
 				pq.push(make_pair(d[u.first] * (-1), u.first));
 			}
 		}
 	}
-	return accumulate(all(d), 0) / 100 - d.size()+1;
+	return accumulate(all(d), 0) / 100 - d.size() + 1;
 }
 signed main() {
+	int n;
 	while (cin >> n, n) {
-		M = vector<vector<pair<int,int>>>(n, vector<pair<int,int>>());
+		M = vector<vector<pair<int, int>>>(n, vector<pair<int, int>>());
 		int m; cin >> m;
 		rep(i, 0, m) {
 			int a, b, d; char c; cin >> a >> c >> b >> c >> d;

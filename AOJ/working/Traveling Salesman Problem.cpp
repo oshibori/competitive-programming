@@ -28,7 +28,7 @@ signed main() {
 	}
 	int ans(INF);
 	vector<vector<int>>dp((1 << V), vector<int>(V, INF));
-
+	dp[(1 << V) - 1][0] = 0;
 	// 現在の状況(2^n)* 今どこにいるのか(n)* 次にどこにいくのか(n) = O(n*n*2^n)
 	// bits>X を満たすXは必ず計算し終わっている。
 	for (int bits = (1 << V) - 1 - 1; bits >= 0; bits--) {

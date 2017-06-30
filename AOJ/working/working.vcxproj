@@ -26,7 +26,7 @@
     <Text Include="out.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="review.cpp" />
+    <ClCompile Include="1166.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{51253551-6BDC-4AEB-BFFD-B9C4A9876C3A}</ProjectGuid>

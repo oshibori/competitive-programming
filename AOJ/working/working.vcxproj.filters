@@ -24,7 +24,7 @@
     <Text Include="out.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="review.cpp">
+    <ClCompile Include="1166.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>

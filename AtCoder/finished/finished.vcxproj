@@ -377,6 +377,8 @@
     <ClCompile Include="..\AtCoder\arc75c.cpp" />
     <ClCompile Include="..\AtCoder\arc75d.cpp" />
     <ClCompile Include="..\AtCoder\arc75e.cpp" />
+    <ClCompile Include="..\AtCoder\arc76c.cpp" />
+    <ClCompile Include="..\AtCoder\arc76d.cpp" />
     <ClCompile Include="..\AtCoder\arc7a.cpp" />
     <ClCompile Include="..\AtCoder\arc8a.cpp" />
     <ClCompile Include="..\AtCoder\arc9a.cpp" />
@@ -441,6 +443,10 @@
     <ClCompile Include="..\AtCoder\yuki531.cpp" />
     <ClCompile Include="..\AtCoder\yuki532.cpp" />
     <ClCompile Include="..\AtCoder\yuki533.cpp" />
+    <ClCompile Include="..\AtCoder\yuki536.cpp" />
+    <ClCompile Include="..\AtCoder\yuki537.cpp" />
+    <ClCompile Include="..\AtCoder\yuki538.cpp" />
+    <ClCompile Include="..\AtCoder\yuki541.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
