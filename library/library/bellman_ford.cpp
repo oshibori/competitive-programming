@@ -18,7 +18,7 @@ template<class T> bool chmax(T &a, const T &b) { if (a < b) { a = b; return true
 template<class T> bool chmin(T &a, const T &b) { if (a > b) { a = b; return true; } return false; }
 struct Edge {
 	int from, to, cost;
-	Edge(){}
+	Edge() {}
 	Edge(int from, int to, int cost) :from(from), to(to), cost(cost) {}
 };
 
@@ -46,7 +46,7 @@ signed main() {
 		}
 	}
 	int ans = -d[N - 1];
-
+	// Å’ZŒo˜Hã‚Ì•Â˜H‚ğŒŸo@abc061 D
 	vector<int>neg(N, 0);
 	rep(i, 0, N) {
 		rep(j, 0, M) {

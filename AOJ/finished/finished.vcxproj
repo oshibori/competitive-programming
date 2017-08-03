@@ -320,6 +320,7 @@
     <ClCompile Include="..\working\1153.cpp" />
     <ClCompile Include="..\working\1154.cpp" />
     <ClCompile Include="..\working\1155.cpp" />
+    <ClCompile Include="..\working\1166.cpp" />
     <ClCompile Include="..\working\1172.cpp" />
     <ClCompile Include="..\working\1179.cpp" />
     <ClCompile Include="..\working\1187.cpp" />

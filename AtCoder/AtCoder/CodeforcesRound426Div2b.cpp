@@ -6,7 +6,7 @@ using namespace std;
 #define dump(...)
 #endif
 
-#define int long long
+//#define int long long
 #define rep(i,a,b) for(int i=(a);i<(b);i++)
 #define rrep(i,a,b) for(int i=(b)-1;i>=(a);i--)
 #define all(c) begin(c),end(c)
@@ -16,45 +16,36 @@ const double PI = acos(-1);
 const double EPS = 1e-9;
 template<class T> bool chmax(T &a, const T &b) { if (a < b) { a = b; return true; } return false; }
 template<class T> bool chmin(T &a, const T &b) { if (a > b) { a = b; return true; } return false; }
-// ==x
-int number_of_windows(const vector<int> &a, int x) {
-	int n = a.size(), l = 0, r = 0;
-	int num = 0;
-	int sum = 0;
-	while (l < n) {
-		if (r == n || sum + a[r] > x) {
-			if (l == r) {
-				l++, r++;
-			}
-			else {
-				if (sum == x)num++;
-				sum -= a[l];
-				l++;
-			}
-		}
-		else {
-			sum += a[r];
-			r++;
-		}
-	}
-	return num;
-}
-// <=x
+
 signed main() {
 	cin.tie(0);
 	ios::sync_with_stdio(false);
-	int N, Q; cin >> N >> Q;
-	vector<int>a(N, 0);
-	rep(i, 0, N)cin >> a[i];
-	rep(i, 0, Q) {
-		int x; cin >> x;
-		int ans(0), sum(0), l(0);
-		rep(i, 0, N) {
-			sum += a[i];
-			while (sum > x)sum -= a[l++];
-			ans += i - l + 1;
-		}
-		cout << ans << endl;
+	int N, K; cin >> N >> K;
+	string s; cin >> s;
+	map<char, int>m;
+	int cnt(0);
+	vector<vector<int>>table(26);
+	vector<int>v(N + 1, 0);
+	dump(1);
+	rep(i, 0, N) {
+		table[s[i] - 'A'].push_back(i);
 	}
+	dump(2);
+	rep(i, 0, 26) {
+		dump(table[i].empty());
+		if (table[i].empty())continue;
+		v[table[i][0]]++;
+		v[table[i].back() + 1]--;
+	}
+	dump(3);
+	rep(i, 1, v.size())v[i] += v[i - 1];
+	bool f(true);
+	rep(i, 0, v.size()) {
+		if (v[i] > K)f = false;
+	}
+	if (f)cout << "NO" << endl;
+	else cout << "YES" << endl;
+
+	dump(v);
 	return 0;
 }

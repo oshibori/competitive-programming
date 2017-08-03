@@ -25,6 +25,15 @@ struct RangeSumQuery {
 		for (n = 1; n < m; n <<= 1);
 		d.assign(2 * n, 0);
 	}
+	RangeSumQuery(vector<T>&v) {
+		for (n = 1; n < v.size(); n <<= 1);
+		d.assign(2 * n, 0);
+		for (int i = 0; i < v.size(); i++)d[n + i] = v[i];
+		for (int i = d.size() - 1; i > 0; i--) {
+			d[i / 2] += d[i];
+		}
+
+	}
 	void add(int i, T x) {
 		d[n + i] += x;
 		for (int j = (n + i) / 2; j > 0; j >>= 1) {

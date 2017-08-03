@@ -6,7 +6,7 @@ using namespace std;
 #define dump(...)
 #endif
 
-#define int long long
+//#define int long long
 #define rep(i,a,b) for(int i=(a);i<(b);i++)
 #define rrep(i,a,b) for(int i=(b)-1;i>=(a);i--)
 #define all(c) begin(c),end(c)
@@ -16,45 +16,42 @@ const double PI = acos(-1);
 const double EPS = 1e-9;
 template<class T> bool chmax(T &a, const T &b) { if (a < b) { a = b; return true; } return false; }
 template<class T> bool chmin(T &a, const T &b) { if (a > b) { a = b; return true; } return false; }
-// ==x
-int number_of_windows(const vector<int> &a, int x) {
-	int n = a.size(), l = 0, r = 0;
-	int num = 0;
-	int sum = 0;
-	while (l < n) {
-		if (r == n || sum + a[r] > x) {
-			if (l == r) {
-				l++, r++;
-			}
-			else {
-				if (sum == x)num++;
-				sum -= a[l];
-				l++;
-			}
-		}
-		else {
-			sum += a[r];
-			r++;
-		}
-	}
-	return num;
-}
-// <=x
+
 signed main() {
 	cin.tie(0);
 	ios::sync_with_stdio(false);
-	int N, Q; cin >> N >> Q;
-	vector<int>a(N, 0);
-	rep(i, 0, N)cin >> a[i];
-	rep(i, 0, Q) {
-		int x; cin >> x;
-		int ans(0), sum(0), l(0);
+	int N, M; cin >> N >> M;
+	vector<vector<int>>A(N, vector<int>(M));
+	rep(i, 0, N)rep(j, 0, M)cin >> A[i][j];
+	rep(i, 0, N)rep(j, 0, M)A[i][j]--;
+	int ans(INF);
+	dump(A);
+	vector<int>v(N, 0);
+	dump(v);
+	int del(-1);
+	vector<int>deleted(M, 0);
+	while (true) {
+		dump(ans);
+		vector<int>cnt(M, 0);
 		rep(i, 0, N) {
-			sum += a[i];
-			while (sum > x)sum -= a[l++];
-			ans += i - l + 1;
+			dump(i, v[i]);
+			if (v[i] >= M)goto here;
+			cnt[A[i][v[i]]]++;
 		}
-		cout << ans << endl;
+		dump(ans);
+		auto x = max_element(all(cnt));
+		int dist = distance(cnt.begin(), x);
+		if (deleted[dist] == 1)break;
+		else deleted[dist] = 1;
+
+		chmin(ans, *x);
+
+		rep(i, 0, N) {
+			if (A[i][v[i]] == dist)v[i]++;
+		}
+
 	}
+	here:
+	cout << ans << endl;
 	return 0;
 }

@@ -16,45 +16,38 @@ const double PI = acos(-1);
 const double EPS = 1e-9;
 template<class T> bool chmax(T &a, const T &b) { if (a < b) { a = b; return true; } return false; }
 template<class T> bool chmin(T &a, const T &b) { if (a > b) { a = b; return true; } return false; }
-// ==x
-int number_of_windows(const vector<int> &a, int x) {
-	int n = a.size(), l = 0, r = 0;
-	int num = 0;
-	int sum = 0;
-	while (l < n) {
-		if (r == n || sum + a[r] > x) {
-			if (l == r) {
-				l++, r++;
-			}
-			else {
-				if (sum == x)num++;
-				sum -= a[l];
-				l++;
-			}
-		}
+int len = 200000;
+vector<int>L(len / 2), R(len / 2);
+int merge(vector<int>&a, int l, int mid, int r) {
+	int n1 = mid - l;
+	int n2 = r - mid;
+	rep(i, 0, n1)L[i] = a[l + i];
+	L[n1] = INF;
+	rep(i, 0, n2)R[i] = a[mid + i];
+	R[n2] = INF;
+	int ret(0), i(0), j(0);
+	rep(k, l, r) {
+		if (L[i] < R[j])a[k] = L[i++];
 		else {
-			sum += a[r];
-			r++;
+			a[k] = R[j++];
+			ret += n1 - i;
 		}
 	}
-	return num;
+	return ret;
 }
-// <=x
+int mergeSort(vector<int>&a, int l, int r) {
+	if (r - l > 1) {
+		int mid = (l + r) / 2;
+		return mergeSort(a, l, mid) + mergeSort(a, mid, r) + merge(a, l, mid, r);
+	}
+	else return 0;
+}
+
 signed main() {
 	cin.tie(0);
 	ios::sync_with_stdio(false);
-	int N, Q; cin >> N >> Q;
-	vector<int>a(N, 0);
-	rep(i, 0, N)cin >> a[i];
-	rep(i, 0, Q) {
-		int x; cin >> x;
-		int ans(0), sum(0), l(0);
-		rep(i, 0, N) {
-			sum += a[i];
-			while (sum > x)sum -= a[l++];
-			ans += i - l + 1;
-		}
-		cout << ans << endl;
-	}
+	int N; cin >> N;
+	vector<int> v(N); rep(i, 0, N) { cin >> v[i]; }
+	cout << mergeSort(v, 0, N) << endl;
 	return 0;
 }

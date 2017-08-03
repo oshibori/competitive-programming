@@ -16,45 +16,28 @@ const double PI = acos(-1);
 const double EPS = 1e-9;
 template<class T> bool chmax(T &a, const T &b) { if (a < b) { a = b; return true; } return false; }
 template<class T> bool chmin(T &a, const T &b) { if (a > b) { a = b; return true; } return false; }
-// ==x
-int number_of_windows(const vector<int> &a, int x) {
-	int n = a.size(), l = 0, r = 0;
-	int num = 0;
-	int sum = 0;
-	while (l < n) {
-		if (r == n || sum + a[r] > x) {
-			if (l == r) {
-				l++, r++;
-			}
-			else {
-				if (sum == x)num++;
-				sum -= a[l];
-				l++;
-			}
-		}
-		else {
-			sum += a[r];
-			r++;
-		}
-	}
-	return num;
-}
-// <=x
+
 signed main() {
 	cin.tie(0);
 	ios::sync_with_stdio(false);
-	int N, Q; cin >> N >> Q;
-	vector<int>a(N, 0);
-	rep(i, 0, N)cin >> a[i];
-	rep(i, 0, Q) {
-		int x; cin >> x;
-		int ans(0), sum(0), l(0);
+	int N; cin >> N;
+	vector<int> v(N); rep(i, 0, N) { cin >> v[i]; }
+	auto f = [&](int K) {
+		int cnt(0);
 		rep(i, 0, N) {
-			sum += a[i];
-			while (sum > x)sum -= a[l++];
-			ans += i - l + 1;
+			if (v[i] - (N - 1) > 0) {
+				int x = (v[i] ) / N;
+				
+			}
 		}
-		cout << ans << endl;
+		return accumulate(all(v), 0ll) - K <= (N - 1)*N;
+	};
+	int l = 0, r = 50 * (1e16) + 1;
+	while (r - l > 1) {
+		int mid = (l + r) / 2;
+		if (f(mid))r = mid;
+		else l = mid;
 	}
+	cout << l << endl;
 	return 0;
 }
