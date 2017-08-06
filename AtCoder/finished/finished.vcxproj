@@ -390,6 +390,8 @@
     <ClCompile Include="..\AtCoder\arc79c.cpp" />
     <ClCompile Include="..\AtCoder\arc79d.cpp" />
     <ClCompile Include="..\AtCoder\arc7a.cpp" />
+    <ClCompile Include="..\AtCoder\arc80c.cpp" />
+    <ClCompile Include="..\AtCoder\arc80d.cpp" />
     <ClCompile Include="..\AtCoder\arc8a.cpp" />
     <ClCompile Include="..\AtCoder\arc9a.cpp" />
     <ClCompile Include="..\AtCoder\cf419a.cpp" />
