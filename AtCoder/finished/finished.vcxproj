@@ -286,6 +286,10 @@
     <ClCompile Include="..\AtCoder\abc6b.cpp" />
     <ClCompile Include="..\AtCoder\abc6c.cpp" />
     <ClCompile Include="..\AtCoder\abc6d.cpp" />
+    <ClCompile Include="..\AtCoder\abc70a.cpp" />
+    <ClCompile Include="..\AtCoder\abc70b.cpp" />
+    <ClCompile Include="..\AtCoder\abc70c.cpp" />
+    <ClCompile Include="..\AtCoder\abc70d.cpp" />
     <ClCompile Include="..\AtCoder\abc7b.cpp" />
     <ClCompile Include="..\AtCoder\abc7c.cpp" />
     <ClCompile Include="..\AtCoder\abc7d.cpp" />
@@ -363,6 +367,8 @@
     <ClCompile Include="..\AtCoder\arc50a.cpp" />
     <ClCompile Include="..\AtCoder\arc51a.cpp" />
     <ClCompile Include="..\AtCoder\arc52a.cpp" />
+    <ClCompile Include="..\AtCoder\arc58b.cpp" />
+    <ClCompile Include="..\AtCoder\arc59b.cpp" />
     <ClCompile Include="..\AtCoder\arc5a.cpp" />
     <ClCompile Include="..\AtCoder\arc60d.cpp" />
     <ClCompile Include="..\AtCoder\arc61d.cpp" />
@@ -378,6 +384,7 @@
     <ClCompile Include="..\AtCoder\arc73a.cpp" />
     <ClCompile Include="..\AtCoder\arc73d.cpp" />
     <ClCompile Include="..\AtCoder\arc73e.cpp" />
+    <ClCompile Include="..\AtCoder\arc74a.cpp" />
     <ClCompile Include="..\AtCoder\arc75c.cpp" />
     <ClCompile Include="..\AtCoder\arc75d.cpp" />
     <ClCompile Include="..\AtCoder\arc75e.cpp" />
@@ -386,12 +393,15 @@
     <ClCompile Include="..\AtCoder\arc77c.cpp" />
     <ClCompile Include="..\AtCoder\arc77d.cpp" />
     <ClCompile Include="..\AtCoder\arc77e.cpp" />
+    <ClCompile Include="..\AtCoder\arc78b.cpp" />
     <ClCompile Include="..\AtCoder\arc78c.cpp" />
     <ClCompile Include="..\AtCoder\arc79c.cpp" />
     <ClCompile Include="..\AtCoder\arc79d.cpp" />
     <ClCompile Include="..\AtCoder\arc7a.cpp" />
     <ClCompile Include="..\AtCoder\arc80c.cpp" />
     <ClCompile Include="..\AtCoder\arc80d.cpp" />
+    <ClCompile Include="..\AtCoder\arc81c.cpp" />
+    <ClCompile Include="..\AtCoder\arc81d.cpp" />
     <ClCompile Include="..\AtCoder\arc8a.cpp" />
     <ClCompile Include="..\AtCoder\arc9a.cpp" />
     <ClCompile Include="..\AtCoder\cf419a.cpp" />

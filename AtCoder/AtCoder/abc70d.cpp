@@ -1,17 +1,21 @@
-#define _USE_MATH_DEFINES
 #include "bits/stdc++.h"
 using namespace std;
+#ifdef _DEBUG
+#include "dump.hpp"
+#else
+#define dump(...)
+#endif
 
-//#define int long long
-#define DBG 1
-#define dump(o) if(DBG){cerr<<#o<<" "<<o<<endl;}
-#define dumpc(o) if(DBG){cerr<<#o; for(auto &e:(o))cerr<<" "<<e;cerr<<endl;}
+#define int long long
 #define rep(i,a,b) for(int i=(a);i<(b);i++)
 #define rrep(i,a,b) for(int i=(b)-1;i>=(a);i--)
-#define each(it,c) for(auto it=(c).begin();it!=(c).end();it++)
-#define all(c) c.begin(),c.end()
+#define all(c) begin(c),end(c)
 const int INF = sizeof(int) == sizeof(long long) ? 0x3f3f3f3f3f3f3f3fLL : 0x3f3f3f3f;
-const int MOD = (int)(1e9 + 7);
+const int MOD = (int)(1e9) + 7;
+const double PI = acos(-1);
+const double EPS = 1e-9;
+template<class T> bool chmax(T &a, const T &b) { if (a < b) { a = b; return true; } return false; }
+template<class T> bool chmin(T &a, const T &b) { if (a > b) { a = b; return true; } return false; }
 
 // O( ( |V| + |E| ) * log|V| )
 const int W = 0, B = 1;
@@ -40,18 +44,25 @@ vector<int> dijkstra(const vector<vector<pair<int, int>>> &g, int s) {
 	return d;
 }
 signed main() {
-	int n;
-	cin >> n;
-	vector<vector<pair<int, int>>> adj(n, vector<pair<int, int>>()); // node, cost
-	rep(i, 0, n) {
-		int u, k; cin >> u >> k;
-		rep(j, 0, k) {
-			int v, c; cin >> v >> c;
-			// vは頂点の番号、cは有効辺の重み
-			adj[u].push_back(make_pair(v, c));
-
-		}
+	cin.tie(0);
+	ios::sync_with_stdio(false);
+	int N; cin >> N;
+	vector<vector<pair<int, int>>> adj(N, vector<pair<int, int>>());
+	rep(i, 0, N-1) {
+		int a, b, c; cin >> a >> b >> c;
+		a--, b--;
+		adj[a].emplace_back(make_pair(b, c));
+		adj[b].emplace_back(make_pair(a, c));
 	}
-	auto dijkstra(adj);
+
+	int Q, K; cin >> Q >> K;
+	K--;
+	auto d = dijkstra(adj, K);
+	rep(i, 0, Q) {
+		int x, y; cin >> x >> y;
+
+		x--, y--;
+		cout << d[x] + d[y] << endl;
+	}
 	return 0;
 }

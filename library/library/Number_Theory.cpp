@@ -14,7 +14,7 @@ vector<int> divisor(int x) {
 //Å‘åŒö–ñ”
 int gcd(int x, int y) { return y ? gcd(y, x%y) : x; }
 //Å¬Œö”{”
-int lcm(int x, int y) { return x*y / gcd(x, y); }
+int lcm(int x, int y) { return x / gcd(x, y) * y; }
 //Å‘åŒö–ñ” •¡”ŒÂ
 int gcd(const vector<int> &v) {
 	int ret = v[0];
