@@ -6,7 +6,7 @@ using namespace std;
 #define dump(...)
 #endif
 
-#define int long long
+//#define int long long
 #define rep(i,a,b) for(int i=(a);i<(b);i++)
 #define rrep(i,a,b) for(int i=(b)-1;i>=(a);i--)
 #define all(c) begin(c),end(c)
@@ -20,19 +20,20 @@ template<class T> bool chmin(T &a, const T &b) { if (a > b) { a = b; return true
 signed main() {
 	cin.tie(0);
 	ios::sync_with_stdio(false);
-	int K; cin >> K;
+	int N, x; cin >> N >> x;
+	if (x == 1 || x == 2 * N - 1)cout << "No" << endl;
+	else {
+		cout << "Yes" << endl;
+		if (N == 2) {
+			cout << 1 << endl << 2 << endl << 3 << endl;
+		}
+		else {
 
-	int N = 50;
+			for (int i = 1; i <= 2 * N - 1; i++) {
+				cout << (x + N - i + 2 * N - 1 - 1) % (2 * N - 1) + 1 << endl;
+			}
 
-	vector<int>v(N, N - 1 + K / N);
-
-	K %= N;
-	rep(i, 0, K) {
-		sort(all(v));
-		v[0] += N;
-		rep(j, 1, v.size())v[j]--;
+		}
 	}
-	cout << N << endl;
-	rep(i, 0, v.size())cout << v[i] << (i == v.size() - 1 ? '\n' : ' ');
 	return 0;
 }

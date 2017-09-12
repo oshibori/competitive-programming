@@ -6,7 +6,7 @@ using namespace std;
 #define dump(...)
 #endif
 
-#define int long long
+//#define int long long
 #define rep(i,a,b) for(int i=(a);i<(b);i++)
 #define rrep(i,a,b) for(int i=(b)-1;i>=(a);i--)
 #define all(c) begin(c),end(c)
@@ -20,19 +20,22 @@ template<class T> bool chmin(T &a, const T &b) { if (a > b) { a = b; return true
 signed main() {
 	cin.tie(0);
 	ios::sync_with_stdio(false);
-	int K; cin >> K;
-
-	int N = 50;
-
-	vector<int>v(N, N - 1 + K / N);
-
-	K %= N;
-	rep(i, 0, K) {
-		sort(all(v));
-		v[0] += N;
-		rep(j, 1, v.size())v[j]--;
+	int N; cin >> N;
+	vector<int> p(N + 1), pos(N + 1); rep(i, 1, N + 1) { cin >> p[i]; pos[p[i]] = i; }
+	vector<int>a(N + 1), b(N + 1);
+	rep(i, 1, N + 1) {
+		a[i] = i*(N); b[i] = (N + 1 - i)*(N);
 	}
-	cout << N << endl;
-	rep(i, 0, v.size())cout << v[i] << (i == v.size() - 1 ? '\n' : ' ');
+	dump(a);
+	dump(b);
+	rep(i, 1, N + 1) {
+		// -:i, +:N+1-i
+		
+		a[p[i]] += i - 1;
+	}
+	rep(i, 1, N + 1)cout << a[i] << (i == N ? '\n' : ' ');
+
+	rep(i, 1, N + 1)cout << b[i] << (i == N ? '\n' : ' ');
+
 	return 0;
 }

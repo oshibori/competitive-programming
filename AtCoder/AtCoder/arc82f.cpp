@@ -6,7 +6,7 @@ using namespace std;
 #define dump(...)
 #endif
 
-#define int long long
+//#define int long long
 #define rep(i,a,b) for(int i=(a);i<(b);i++)
 #define rrep(i,a,b) for(int i=(b)-1;i>=(a);i--)
 #define all(c) begin(c),end(c)
@@ -20,19 +20,44 @@ template<class T> bool chmin(T &a, const T &b) { if (a > b) { a = b; return true
 signed main() {
 	cin.tie(0);
 	ios::sync_with_stdio(false);
+	int X; cin >> X;
 	int K; cin >> K;
+	vector<int> r(K + 1, 0); rep(i, 1, K + 1) { cin >> r[i]; }
+	int Q; cin >> Q;
 
-	int N = 50;
 
-	vector<int>v(N, N - 1 + K / N);
-
-	K %= N;
-	rep(i, 0, K) {
-		sort(all(v));
-		v[0] += N;
-		rep(j, 1, v.size())v[j]--;
+	vector<int>d; d.emplace_back(0);
+	rep(i, 1, K + 1) {
+		d.emplace_back(r[i] - r[i - 1]);
 	}
-	cout << N << endl;
-	rep(i, 0, v.size())cout << v[i] << (i == v.size() - 1 ? '\n' : ' ');
+	dump(d);
+	rep(i, 0, d.size()) {
+		if (i & 1)d[i] *= -1;
+	}
+	dump(d);
+//	rep(i, 1, d.size())d[i] += d[i - 1];
+	dump(r);
+	dump(d);
+
+	auto rel = [&](int &z) {
+		if (z < 0)z = 0;
+		if (z > X)z = X;
+	};
+
+	rep(i, 0, Q) {
+		int index(0);
+		int t, a; cin >> t >> a;
+		while (index < r.size() && r[index] <= t) {
+			a += d[index];
+			rel(a);
+			//dump(a);
+			index++;
+		}
+//		a += d[index];
+//		rel(a);
+		a += (t - r[index-1])*(index % 2 == 0 ? 1 : -1);
+		rel(a);
+		cout << a << endl;
+	}
 	return 0;
 }

@@ -17,22 +17,38 @@ const double EPS = 1e-9;
 template<class T> bool chmax(T &a, const T &b) { if (a < b) { a = b; return true; } return false; }
 template<class T> bool chmin(T &a, const T &b) { if (a > b) { a = b; return true; } return false; }
 
+int allmin(vector<int>&v, int l, int r) {
+	// [l,r)
+	if (!(l < r))return 0;
+
+	int x = distance(v.begin(), min_element(v.begin() + l, v.begin() + r));
+
+	return (x - l + 1)*(r - x)*v[x] + allmin(v, l, x) + allmin(v, x + 1, r);
+}
+
+
 signed main() {
 	cin.tie(0);
 	ios::sync_with_stdio(false);
-	int K; cin >> K;
-
-	int N = 50;
-
-	vector<int>v(N, N - 1 + K / N);
-
-	K %= N;
-	rep(i, 0, K) {
-		sort(all(v));
-		v[0] += N;
-		rep(j, 1, v.size())v[j]--;
+	int N; cin >> N;
+	vector<int> v(N), pos(N); rep(i, 0, N) {
+		cin >> v[i];
+		v[i]--;
+		pos[v[i]] = i;
 	}
-	cout << N << endl;
-	rep(i, 0, v.size())cout << v[i] << (i == v.size() - 1 ? '\n' : ' ');
+	int ans(0);
+	set<int>s;
+	s.insert(-1);
+	s.insert(N);
+	rep(i, 0, N) {
+		auto x = s.insert(pos[i]);
+		set<int>::iterator l, r;
+		l = r = x.first;
+		l--, r++;
+
+		ans += (i + 1)*(pos[i] - *l)*(*r - pos[i]);
+	}
+	cout << ans << endl;
+
 	return 0;
 }

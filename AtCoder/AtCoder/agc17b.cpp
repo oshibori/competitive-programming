@@ -20,19 +20,16 @@ template<class T> bool chmin(T &a, const T &b) { if (a > b) { a = b; return true
 signed main() {
 	cin.tie(0);
 	ios::sync_with_stdio(false);
-	int K; cin >> K;
-
-	int N = 50;
-
-	vector<int>v(N, N - 1 + K / N);
-
-	K %= N;
-	rep(i, 0, K) {
-		sort(all(v));
-		v[0] += N;
-		rep(j, 1, v.size())v[j]--;
+	int N, A, B, C, D; cin >> N >> A >> B >> C >> D;
+	bool f(false);
+	int cnt = N - 1;
+	rep(i, 0, cnt + 1) {
+		int j = cnt - i;
+		int l = A - j*D + i*C, r = A - j*C + i*D;
+		
+		//dump(i,j,l, r);
+		if (l <= B&&B <= r)f = true;
 	}
-	cout << N << endl;
-	rep(i, 0, v.size())cout << v[i] << (i == v.size() - 1 ? '\n' : ' ');
+	cout << (f ? "YES" : "NO") << endl;
 	return 0;
 }
