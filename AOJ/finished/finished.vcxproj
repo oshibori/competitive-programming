@@ -333,6 +333,7 @@
     <ClCompile Include="..\working\1147.cpp" />
     <ClCompile Include="..\working\2005.cpp" />
     <ClCompile Include="..\working\2006.cpp" />
+    <ClCompile Include="..\working\2014.cpp" />
     <ClCompile Include="..\working\2015.cpp" />
     <ClCompile Include="..\working\2018.cpp" />
     <ClCompile Include="..\working\2100.cpp" />
@@ -357,6 +358,10 @@
     <ClCompile Include="..\working\2699.cpp" />
     <ClCompile Include="..\working\2746.cpp" />
     <ClCompile Include="..\working\2752.cpp" />
+    <ClCompile Include="..\working\acpc2017day2c.cpp" />
+    <ClCompile Include="..\working\acpc2017day2d.cpp" />
+    <ClCompile Include="..\working\acpc2017day2e.cpp" />
+    <ClCompile Include="..\working\acpc2017day3c.cpp" />
     <ClCompile Include="..\working\ALDS1_11_A.cpp" />
     <ClCompile Include="..\working\ALDS1_11_B.cpp" />
     <ClCompile Include="..\working\ALDS1_11_C.cpp" />

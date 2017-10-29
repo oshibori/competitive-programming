@@ -1,17 +1,21 @@
-#define _USE_MATH_DEFINES
 #include "bits/stdc++.h"
 using namespace std;
+#ifdef _DEBUG
+#include "dump.hpp"
+#else
+#define dump(...)
+#endif
 
 //#define int long long
-#define DBG 1
-#define dump(o) if(DBG){cerr<<#o<<" "<<o<<endl;}
-#define dumpc(o) if(DBG){cerr<<#o; for(auto &e:(o))cerr<<" "<<e;cerr<<endl;}
 #define rep(i,a,b) for(int i=(a);i<(b);i++)
 #define rrep(i,a,b) for(int i=(b)-1;i>=(a);i--)
-#define each(it,c) for(auto it=(c).begin();it!=(c).end();it++)
-#define all(c) c.begin(),c.end()
+#define all(c) begin(c),end(c)
 const int INF = sizeof(int) == sizeof(long long) ? 0x3f3f3f3f3f3f3f3fLL : 0x3f3f3f3f;
-const int MOD = (int)(1e9 + 7);
+const int MOD = (int)(1e9) + 7;
+const double PI = acos(-1);
+const double EPS = 1e-9;
+template<class T> bool chmax(T &a, const T &b) { if (a < b) { a = b; return true; } return false; }
+template<class T> bool chmin(T &a, const T &b) { if (a > b) { a = b; return true; } return false; }
 
 class DisjointSet {
 public:
@@ -21,7 +25,7 @@ public:
 	vector<int>rank, p, S; // p->parent  S[findSet(v)] ->˜AŒ‹¬•ª‚Ì‘å‚«‚³
 	DisjointSet() {}
 	DisjointSet(int size) {
-		// [0,size)@ 
+
 		S.resize(size, 1);
 		rank.resize(size, 0);
 		p.resize(size, 0);
@@ -61,17 +65,30 @@ public:
 		return S[findSet(x)];
 	}
 };
+
 signed main() {
-	int n, a, b, q, t;
-	cin >> n >> q;
-	DisjointSet ds(n);
-	rep(i, 0, q) {
-		cin >> t >> a >> b;
-		if (t == 0)ds.unite(a, b);
-		else if (t == 1) {
-			if (ds.same(a, b))cout << 1 << endl;
-			else cout << 0 << endl;
+	cin.tie(0);
+	ios::sync_with_stdio(false);
+	int N, M; cin >> N >> M;
+	vector<vector<int>>v(N);
+	set<int>spoken;
+	DisjointSet union_find(M);
+
+	rep(i, 0, N) {
+		int K; cin >> K;
+		rep(j, 0, K) {
+			int l; cin >> l;
+			l--;
+			v[i].emplace_back(l);
+			spoken.insert(l);
+
+			union_find.unite(v[i][0], l);
+
 		}
 	}
+
+	cout << (spoken.size() == union_find.connectedComponentSize(v[0][0]) ? "YES" : "NO") << endl;
+
+
 	return 0;
 }

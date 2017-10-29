@@ -40,7 +40,7 @@ int prim() {
 	rep(i, 0, n) {
 		if (p[i] != -1)sum += M[i][p[i]];
 	}
-	return accumulate(d.begin(), d.end(), 0);
+	return accumulate(d.begin(), d.end(), 0ll);
 
 }
 signed main() {

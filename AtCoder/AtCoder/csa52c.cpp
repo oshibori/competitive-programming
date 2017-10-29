@@ -1,18 +1,21 @@
-#define _USE_MATH_DEFINES
 #include "bits/stdc++.h"
 using namespace std;
+#ifdef _DEBUG
+#include "dump.hpp"
+#else
+#define dump(...)
+#endif
 
 //#define int long long
-#define DBG 1
-#define dump(o) if(DBG){cerr<<#o<<" "<<o<<endl;}
-#define dumpc(o) if(DBG){cerr<<#o; for(auto &e:(o))cerr<<" "<<e;cerr<<endl;}
 #define rep(i,a,b) for(int i=(a);i<(b);i++)
 #define rrep(i,a,b) for(int i=(b)-1;i>=(a);i--)
-#define each(it,c) for(auto it=(c).begin();it!=(c).end();it++)
-#define all(c) c.begin(),c.end()
+#define all(c) begin(c),end(c)
 const int INF = sizeof(int) == sizeof(long long) ? 0x3f3f3f3f3f3f3f3fLL : 0x3f3f3f3f;
-const int MOD = (int)(1e9 + 7);
-
+const int MOD = (int)(1e9) + 7;
+const double PI = acos(-1);
+const double EPS = 1e-9;
+template<class T> bool chmax(T &a, const T &b) { if (a < b) { a = b; return true; } return false; }
+template<class T> bool chmin(T &a, const T &b) { if (a > b) { a = b; return true; } return false; }
 class DisjointSet {
 public:
 	// ２つのグループを１つにまとめる　と　2つの要素が同じグループに所属しているかどうかを判定する
@@ -62,16 +65,45 @@ public:
 	}
 };
 signed main() {
-	int n, a, b, q, t;
-	cin >> n >> q;
-	DisjointSet ds(n);
-	rep(i, 0, q) {
-		cin >> t >> a >> b;
-		if (t == 0)ds.unite(a, b);
-		else if (t == 1) {
-			if (ds.same(a, b))cout << 1 << endl;
-			else cout << 0 << endl;
+	cin.tie(0);
+	ios::sync_with_stdio(false);
+	int N, K; cin >> N >> K;
+	vector<int>a, b, c;
+	DisjointSet uf(N);
+	rep(i, 0, N - 1) {
+		int x, y, z; cin >> x >> y >> z;
+		x--, y--;
+		a.push_back(x);
+		b.push_back(y);
+		c.push_back(z);
+		if (z == 0)uf.unite(x, y);
+
+	}
+
+	dump(uf.connectedComponentSize(0));
+	if (uf.connectedComponentSize(0) > K) {
+		cout << -1 << endl;
+		return 0;
+	}
+	set<int>v;
+	rep(i, 0, N - 1) {
+		if (!uf.same(a[i],0) && !uf.same(b[i],0)) uf.unite(a[i], b[i]);
+	}
+	
+	rep(i, 0, N - 1) {
+		if (!uf.same(a[i], b[i])) {
+			if (uf.same(a[i],0))v.insert(b[i]);
+			else if (uf.same(b[i],0))v.insert(a[i]);
 		}
 	}
+	int ans(0);
+	vector<int>d;
+	for (auto &o : v)d.push_back(uf.connectedComponentSize(o));
+	sort(all(d), greater<int>());
+	while (N > K&&ans < d.size()) {
+		N -= d[ans++];
+	}
+	cout << ans << endl;
+
 	return 0;
 }
