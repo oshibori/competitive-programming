@@ -35,7 +35,13 @@ signed main() {
   ios::sync_with_stdio(false);
 
   int N; cin >> N;
-  vector<int> v(N); rep(i, 0, N){ cin >> v[i]; }
+  vector<int> p(N); rep(i, 0, N){ cin >> p[i]; }
+  vector<int>dp(N*111,0);
+  dp[0]=1;
+  rep(i,0,N)rrep(j,p[i],dp.size())
+    dp[j]|=dp[j-p[i]];
+
+  cout<<count(all(dp),1)<<endl;
 
   return 0;
 }

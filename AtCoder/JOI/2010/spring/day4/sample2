@@ -1,0 +1,13 @@
+3 2 1000 10 10
+878
+712
+0 2 1 open
+0 1 1 open
+0 3 1 open
+100 3 1 correct
+100 2 1 correct
+100 1 2 open
+200 2 2 open
+200 1 2 incorrect
+300 1 2 correct
+300 2 2 correct
