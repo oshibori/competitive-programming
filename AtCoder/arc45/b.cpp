@@ -1,16 +1,21 @@
-#include "bits/stdc++.h"
+#include <bits/stdc++.h>
 using namespace std;
 #ifdef _DEBUG
+#define _GLIBCXX_DEBUG
 #include "dump.hpp"
 #else
 #define dump(...)
 #endif
 
 //#define int long long
+typedef __int128_t Int;
+#define DBG 1
 #define rep(i, a, b) for (int i = (a); i < (b); i++)
 #define rrep(i, a, b) for (int i = (b)-1; i >= (a); i--)
+#define loop(n) rep(loop, (0), (n))
 #define all(c) begin(c), end(c)
-const int INF = (1ll << 31) - 1;
+const int INF =
+    sizeof(int) == sizeof(long long) ? 0x3f3f3f3f3f3f3f3fLL : 0x3f3f3f3f;
 const int MOD = (int)(1e9) + 7;
 const double PI = acos(-1);
 const double EPS = 1e-9;
@@ -29,13 +34,13 @@ template <class T> bool chmin(T &a, const T &b) {
   return false;
 }
 template <typename T> struct RangeMinimumQuery {
-  // 1-indexed‚Å–Ø‚ğ\¬
-  // ‚»‚ê‚¼‚ê‚Ì—v‘f‚Í 0-indexed
+  // 1-indexedã§æœ¨ã‚’æ§‹æˆ
+  // ãã‚Œãã‚Œã®è¦ç´ ã¯ 0-indexed
   int n;
   vector<T> d;
   RangeMinimumQuery(int m) {
     // m is the number of data
-    // ŠÈ’P‚É‚·‚é‚½‚ßA—v‘f”‚ğ‚Q‚Ì‚×‚«æ‚É
+    // ç°¡å˜ã«ã™ã‚‹ãŸã‚ã€è¦ç´ æ•°ã‚’ï¼’ã®ã¹ãä¹—ã«
     for (n = 1; n < m; n <<= 1)
       ;
     d.assign(2 * n, INF);
@@ -51,58 +56,66 @@ template <typename T> struct RangeMinimumQuery {
       d[i] = min(d[i * 2], d[i * 2 + 1]);
     }
   }
+
   void update(int i, T x) {
     // update ith (0-indexed) number
-    // index i ‚É‘Î‰‚·‚éleaf node ‚Ì
+    // index i ã«å¯¾å¿œã™ã‚‹leaf node ã®
     // The index of leaf node which corresponds to ith num is (n+i).
     d[n + i] = x;
     for (int j = (n + i) / 2; j > 0; j >>= 1) {
       d[j] = min(d[j * 2], d[j * 2 + 1]); // children: (2*n),(2*n+1)
-                                          // ŠÈ’P‚Ée‚âq‚ÉƒAƒNƒZƒX‚Å‚«‚é
+      // ç°¡å˜ã«è¦ªã‚„å­ã«ã‚¢ã‚¯ã‚»ã‚¹ã§ãã‚‹
       // This is why SegmentTree is a complete binary tree.
     }
   }
   T query(int l, int r) {
     // query [l,r)
-    return query(l, r, 1, 0, n); // n‚Å‚È‚¢‚ÆŠ®‘S“ñ•ª–Ø‚É‚È‚ç‚È‚¢
+    return query(l, r, 1, 0, n); // nã§ãªã„ã¨å®Œå…¨äºŒåˆ†æœ¨ã«ãªã‚‰ãªã„
   }
   T query(int a, int b, int k, int l, int r) {
     // query for min of [a,b)
-    // Œã‚ë‚Ì•û‚Ìˆø”‚ÍAŒvZ‚ÌŠÈ’P‰»‚Ì‚½‚ß‚Ìˆø”
-    // k‚Íß“_‚Ì”Ô†Al,r ‚Í‚»‚Ìß“_‚ª[l,r)‚É‘Î‰•t‚¢‚Ä‚¢‚é‚±‚Æ‚ğ•\‚·
-    // ‚µ‚½‚ª‚Á‚ÄAŠO‚©‚ç‚Íquery(a,b,1,0,n)‚Æ‚µ‚ÄŒÄ‚Ô
+    // å¾Œã‚ã®æ–¹ã®å¼•æ•°ã¯ã€è¨ˆç®—ã®ç°¡å˜åŒ–ã®ãŸã‚ã®å¼•æ•°
+    // kã¯ç¯€ç‚¹ã®ç•ªå·ã€l,r ã¯ãã®ç¯€ç‚¹ãŒ[l,r)ã«å¯¾å¿œä»˜ã„ã¦ã„ã‚‹ã“ã¨ã‚’è¡¨ã™
+    // ã—ãŸãŒã£ã¦ã€å¤–ã‹ã‚‰ã¯query(a,b,1,0,n)ã¨ã—ã¦å‘¼ã¶
 
-    // [a,b) ‚Æ [l,r)‚ªŒğ·‚µ‚È‚¯‚ê‚ÎINF
+    // [a,b) ã¨ [l,r)ãŒäº¤å·®ã—ãªã‘ã‚Œã°INF
     if (r <= a || b <= l)
       return INF;
 
-    // [a,b)‚ª[l,r)‚ğŠ®‘S‚ÉŠÜ‚ñ‚Å‚¢‚ê‚ÎA‚±‚Ìß“_‚Ì’l
+    // [a,b)ãŒ[l,r)ã‚’å®Œå…¨ã«å«ã‚“ã§ã„ã‚Œã°ã€ã“ã®ç¯€ç‚¹ã®å€¤
     if (a <= l && r <= b)
       return d[k];
     else {
-      //‚»‚¤‚Å‚È‚¯‚ê‚ÎA2‚Â‚Ìq‚ÌÅ¬’l
+      //ãã†ã§ãªã‘ã‚Œã°ã€2ã¤ã®å­ã®æœ€å°å€¤
       T vl = query(a, b, k * 2, l, (l + r) / 2);
       T vr = query(a, b, k * 2 + 1, (l + r) / 2, r);
       return min(vl, vr);
     }
   }
 };
+
 signed main() {
   cin.tie(0);
   ios::sync_with_stdio(false);
-  int n, q;
-  cin >> n >> q;
-  RangeMinimumQuery<int> rmq(n);
-  rep(i, 0, q) {
-    int com;
-    cin >> com;
-    int x, y;
-    cin >> x >> y;
-    if (com)
-      cout << rmq.query(x, y + 1) << endl;
-    else
-      rmq.update(x, y);
+
+  int N, M;
+  cin >> N >> M;
+  vector<int> imos(N + 10, 0);
+  vector<int> s(M), t(M);
+  rep(i, 0, M) { cin >> s[i] >> t[i]; }
+  rep(i, 0, M) {
+    imos[s[i]]++;
+    imos[t[i] + 1]--;
   }
-  // dump(rmq.d);
+  rep(i, 1, imos.size()) imos[i] += imos[i - 1];
+  RangeMinimumQuery<int> seg(imos);
+  vector<int> ans;
+  rep(i, 0, M) {
+    if (seg.query(s[i], t[i] + 1) >= 2)
+      ans.push_back(i + 1);
+  }
+  cout << ans.size() << endl;
+  rep(i, 0, ans.size()) cout << ans[i] << endl;
+
   return 0;
 }

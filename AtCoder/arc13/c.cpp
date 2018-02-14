@@ -1,9 +1,17 @@
+#define _GLIBCXX_DEBUG
 #include <bits/stdc++.h>
 using namespace std;
+#ifdef _DEBUG
+#include "dump.hpp"
+#else
+#define dump(...)
+#endif
 
 //#define int long long
+#define DBG 1
 #define rep(i, a, b) for (int i = (a); i < (b); i++)
 #define rrep(i, a, b) for (int i = (b)-1; i >= (a); i--)
+#define loop(n) rep(loop, (0), (n))
 #define all(c) begin(c), end(c)
 const int INF =
     sizeof(int) == sizeof(long long) ? 0x3f3f3f3f3f3f3f3fLL : 0x3f3f3f3f;
@@ -24,38 +32,31 @@ template <class T> bool chmin(T &a, const T &b) {
   }
   return false;
 }
-
 signed main() {
   cin.tie(0);
   ios::sync_with_stdio(false);
-  cout<<setprecision(12);
-
   int N;
   cin >> N;
-  vector<int> t(N + 1);
-  rep(i, 1, N + 1) {
-    cin >> t[i];
-    t[i] *= 2;
-    t[i] += t[i - 1];
-  }
-  vector<double> v(N);
-  rep(i, 0, N) {
-    cin >> v[i];
-    v[i] /= 2;
-  }
+  int ans = 0;
+  loop(N) {
+    int X, Y, Z;
+    cin >> X >> Y >> Z;
+    int M;
+    cin >> M;
+    vector<int> x(M), y(M), z(M);
+    rep(i, 0, M) cin >> x[i] >> y[i] >> z[i];
+    int sx = *min_element(all(x));
+    int ex = *max_element(all(x));
+    int sy = *min_element(all(y));
+    int ey = *max_element(all(y));
+    int sz = *min_element(all(z));
+    int ez = *max_element(all(z));
 
-  vector<double> time(t.back() + 1, INF);
-  time[0] = time[time.size() - 1] = 0;
-
-  rep(i, 1, N + 1) {
-    rep(j, t[i - 1], t[i] + 1) { chmin(time[j], v[i - 1]); }
+    ans ^= sx ;ans^= X - (ex + 1);
+    ans ^= sy ;ans^= Y - (ey + 1);
+    ans ^= sz ;ans^= Z - (ez + 1);
   }
-
-  rep(i, 0, N + 1) {
-    rep(j, t[i] + 1, t[i + 1] + 1) { chmin(time[j], time[j - 1] + 0.25); }
-    rrep(j, t[i], t[i + 1]) { chmin(time[j], time[j + 1] + 0.25); }
-  }
-  cout << accumulate(all(time), 0.0) << endl;
+  cout << (ans == 0 ? "LOSE" : "WIN") << endl;
 
   return 0;
 }

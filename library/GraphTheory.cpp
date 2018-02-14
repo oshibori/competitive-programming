@@ -1,41 +1,130 @@
-ï»¿using Weight = int;
+using Weight = int;
 using Flow = int;
 struct Edge {
 	int s, d; Weight w; Flow c;
 	Edge() {};
 	Edge(int s, int d, Weight w = 1) : s(s), d(d), w(w), c(w) {};
-	bool operator<(const Edge &e)const { return w < e.w; }
 };
+bool operator<(const Edge &e1, const Edge &e2) { return e1.w < e2.w; }
+bool operator>(const Edge &e1, const Edge &e2) { return e2 < e1; }
+inline ostream &operator<<(ostream &os, const Edge &e) { return (os << '(' << e.s << ", " << e.d << ", " << e.w << ')'); }
+
 using Edges = vector<Edge>;
 using Graph = vector<Edges>;
 using Array = vector<Weight>;
 using Matrix = vector<Array>;
 
-inline ostream &operator<<(ostream &os, const Edge &e) { return (os << '(' << e.s << ", " << e.d << ", " << e.w << ')'); }
-
-void add_edge(Graph &g, int a, int b, Weight w = 1) {
-	g[a].emplace_back(a, b, w);
-	g[b].emplace_back(b, a, w);
+void addArc(Graph &g, int s, int d, Weight w = 1) {
+	g[s].emplace_back(s, d, w);
 }
-void add_arc(Graph &g, int s, int d, Weight w = 1) { g[s].emplace_back(s, d, w); }
+void addEdge(Graph &g, int a, int b, Weight w = 1) {
+	addArc(g, a, b, w);
+	addArc(g, b, a, w);
+}
 
-//æœªæ¢ç´¢, æ¢ç´¢ä¸­, æ¢ç´¢æ¸ˆ
-enum { WHITE, GRAY, BLACK };
 
-//å˜ä¸€å§‹ç‚¹æœ€çŸ­çµŒè·¯(è² é–‰è·¯ãªã—)
-//Dijkstra O((E+V)logV)
-//dist: å§‹ç‚¹ã‹ã‚‰å„é ‚ç‚¹ã¾ã§ã®æœ€çŸ­è·é›¢
-//æˆ»ã‚Šå€¤: æœ€çŸ­çµŒè·¯æœ¨ã®è¦ªé ‚ç‚¹(æ ¹ã¯-1)
+//‘S’Tõ
+
+void dfs(const Graph &g, int root) {
+	int n = g.size();
+	vector<bool> vis(n);
+	stack<int> st; st.emplace(root);
+	while (st.size()) {
+		int u = st.top(); st.pop();
+		if (vis[u])continue;
+		vis[u] = true;
+		/* ˆ— */
+		for (auto &e : g[u]) {
+			if (vis[e.d])continue;
+			/* ˆ— */
+			st.emplace(e.d);
+		}
+	}
+}
+
+void bfs(const Graph &g, int root) {
+	int n = g.size();
+	vector<bool> vis(n);
+	queue<int> q; q.emplace(root);
+	while (q.size()) {
+		int u = q.front(); q.pop();
+		if (vis[u])continue;
+		vis[u] = true;
+		/* ˆ— */
+		for (auto &e : g[u]) {
+			if (vis[e.d])continue;
+			/* ˆ— */
+			q.emplace(e.d);
+		}
+	}
+}
+
+void solve() {
+	int n;
+	Graph g(n);
+	vector<bool> vis(n);
+	function<void(int)> dfs = [&](int u) {
+		if (vis[u])return;
+		vis[u] = true;
+		/* ˆ— */
+		for (auto &e : g[u]) {
+			if (vis[e.d])continue;
+			/* ˆ— */
+			dfs(e.d);
+		}
+	};
+	auto bfs = [&](int root) {
+		vector<bool> vis(n);
+		queue<int> q; q.emplace(root);
+		while (q.size()) {
+			int u = q.front(); q.pop();
+			if (vis[u])continue;
+			vis[u] = true;
+			/* ˆ— */
+			for (auto &e : g[u]) {
+				if (vis[e.d])continue;
+				/* ˆ— */
+				q.emplace(e.d);
+			}
+		}
+	};
+	//not verified
+	auto unweightedShortestPath = [&](int root, Array &dist) {
+		dist.assign(n, INF); dist[root] = 0;
+		vector<bool> vis(n);
+		queue<int> q; q.emplace(root);
+		while (q.size()) {
+			int u = q.front(); q.pop();
+			if (vis[u])continue;
+			vis[u] = true;
+			for (auto &e : g[u]) {
+				if (vis[e.d])continue;
+				dist[e.d] = dist[u] + 1;
+				q.emplace(e.d);
+			}
+		}
+	};
+}
+
+
+//Å’ZŒo˜H–â‘è
+
+//’Pˆên“_Å’ZŒo˜H(•‰•Â˜H‚È‚µ)
+//Dijkstra O((|E|+|V|)log|V|)
+//dist: n“_‚©‚çŠe’¸“_‚Ü‚Å‚ÌÅ’Z‹——£
+//–ß‚è’l: Å’ZŒo˜H–Ø‚Ìe’¸“_(ª‚Í-1)
 vector<int> dijkstra(const Graph &g, int s, Array &dist) {
 	int n = g.size();
+	assert(s < n);
+	enum { WHITE, GRAY, BLACK };
 	vector<int> color(n, WHITE); color[s] = GRAY;
 	vector<int> prev(n, -1);
 	dist.assign(n, INF); dist[s] = 0;
-	using State = tuple<Weight, int, int>; //å§‹ç‚¹ã‹ã‚‰ã®æœ€çŸ­è·é›¢ å­ è¦ª
+	using State = tuple<Weight, int, int>; //n“_‚©‚ç‚ÌÅ’Z‹——£ q e
 	priority_queue<State, vector<State>, greater<State>> pq; pq.emplace(0, s, -1);
 	while (pq.size()) {
-		Weight d; int v, u; tie(d, v, u) = pq.top(); pq.pop(); //distãŒæœ€å°ã¨ãªã‚‹Stateã‚’å–ã‚Šå‡ºã™
-		if (dist[v] < d)continue; //ã™ã§ã«æœ€çŸ­ã§ãªã‘ã‚Œã°ç„¡è¦–
+		Weight d; int v, u; tie(d, v, u) = pq.top(); pq.pop();
+		if (dist[v] < d)continue;
 		color[v] = BLACK; prev[v] = u;
 		for (auto &e : g[v]) {
 			if (color[e.d] == BLACK)continue;
@@ -49,13 +138,11 @@ vector<int> dijkstra(const Graph &g, int s, Array &dist) {
 	return prev;
 }
 
-//æœ¨ã®æ·±ã•
-
-//å˜ä¸€å§‹ç‚¹æœ€çŸ­çµŒè·¯(è² é–‰è·¯ã‚ã‚Š)
-//Bellman-Ford O(VE)
-//dist: å§‹ç‚¹ã‹ã‚‰å„é ‚ç‚¹ã¾ã§ã®æœ€çŸ­è·é›¢
-//æˆ»ã‚Šå€¤: æœ€çŸ­çµŒè·¯æœ¨ã®è¦ªé ‚ç‚¹, è² é–‰è·¯ãªã—:true ã‚ã‚Š:false
-pair<vector<int>, bool> bellman_ford(const Graph &g, int s, Array &dist) {
+//’Pˆên“_Å’ZŒo˜H(•‰•Â˜H‚ ‚è)
+//Bellman-Ford O(|V||E|)
+//dist: n“_‚©‚çŠe’¸“_‚Ü‚Å‚ÌÅ’Z‹——£
+//–ß‚è’l: Å’ZŒo˜H–Ø‚Ìe’¸“_, •‰•Â˜H‚È‚µ:true ‚ ‚è:false
+pair<vector<int>, bool> bellmanFord(const Graph &g, int s, Array &dist) {
 	int n = g.size();
 	vector<int> prev(n, -1);
 	Edges es; for (int i = 0; i < n; i++) for (auto &e : g[i]) es.emplace_back(e);
@@ -76,23 +163,25 @@ pair<vector<int>, bool> bellman_ford(const Graph &g, int s, Array &dist) {
 	return make_pair(prev, !negative_cycle);
 }
 
-//çµŒè·¯å¾©å…ƒ
-//å§‹ç‚¹ã‹ã‚‰çµ‚ç‚¹ã¾ã§ã®çµŒè·¯ã‚’å–å¾—
-//çµ‚ç‚¹ã‹ã‚‰è¦ªã‚’å†å¸°çš„ã«è¾¿ã‚Šå§‹ç‚¹ã«ç€ãã¾ã§ã®çµŒè·¯ã‚’åè»¢ã—ã¦ã„ã‚‹
-//å­˜åœ¨ã—ãªã„å ´åˆã®æˆ»ã‚Šå€¤: vector<int>()
-vector<int> get_path(int s, int g, vector<int> prev) {
+//Œo˜H•œŒ³
+//n“_‚©‚çI“_‚Ü‚Å‚ÌŒo˜H‚ğæ“¾
+//I“_‚©‚çe‚ğÄ‹A“I‚É’H‚èn“_‚É’…‚­‚Ü‚Å‚ÌŒo˜H‚ğ”½“]‚µ‚Ä‚¢‚é
+//‘¶İ‚µ‚È‚¢ê‡‚Ì–ß‚è’l: vector<int>()
+vector<int> getPath(int s, int g, vector<int> prev) {
 	vector<int> path;
 	path.emplace_back(g);
 	for (int i = g; i != s; ) {
-		if (i == -1)return vector<int>();
+		if (i == -1)
+			return vector<int>();
 		path.emplace_back(i = prev[i]);
 	}
 	reverse(path.begin(), path.end());
 	return path;
 }
-////çµŒè·¯å¾©å…ƒ(Warshall-Floyd)
-////å­˜åœ¨ã—ãªã„å ´åˆã®æˆ»ã‚Šå€¤: ?
-//vector<int> get_path(int s, int g, vector<vector<int>> next) {
+
+////Œo˜H•œŒ³(Warshall-Floyd)
+////‘¶İ‚µ‚È‚¢ê‡‚Ì–ß‚è’l: ?
+//vector<int> getPath(int s, int g, vector<vector<int>> next) {
 //	vector<int> path;
 //	for (int i = s; i != g; i = next[i][g])
 //		path.emplace_back(i);
@@ -100,11 +189,11 @@ vector<int> get_path(int s, int g, vector<int> prev) {
 //	return path;
 //}
 //
-////å…¨ç‚¹å¯¾é–“æœ€çŸ­çµŒè·¯ All Pairs Shortest Path ãƒã‚°ã‚ã‚Š
+////‘S“_‘ÎŠÔÅ’ZŒo˜H All Pairs Shortest Path ƒoƒO‚ ‚è
 ////Warshall Floyd O(V^3)
-////æˆ»ã‚Šå€¤:
-////next[i][j]: iã‹ã‚‰jã¸ã®æœ€çŸ­çµŒè·¯ã«ãŠã‘ã‚‹iã®1ã¤å¾Œã®ç‚¹ è¾æ›¸é †æœ€å°
-////è² é–‰è·¯ãªã—:true ã‚ã‚Š:false
+////–ß‚è’l:
+////next[i][j]: i‚©‚çj‚Ö‚ÌÅ’ZŒo˜H‚É‚¨‚¯‚éi‚Ì1‚ÂŒã‚Ì“_ «‘‡Å¬
+////•‰•Â˜H‚È‚µ:true ‚ ‚è:false
 //pair<vector<vector<int>>, bool> warshall_floyd(const Graph &g, Matrix &dist) {
 //	int n = g.size();
 //	dist.assign(n, Array(n, INF));
@@ -123,7 +212,7 @@ vector<int> get_path(int s, int g, vector<int> prev) {
 //					next[i][j] = next[i][k];
 //				}
 //				else if (k != i && dist[i][k] + dist[k][j] == dist[i][j])
-//					next[i][j] = min(next[i][j], next[i][k]); //è¾æ›¸é †æœ€å°
+//					next[i][j] = min(next[i][j], next[i][k]); //«‘‡Å¬
 //			}
 //	bool negative_cycle = false;
 //	for (int i = 0; i < n; i++)
@@ -132,10 +221,10 @@ vector<int> get_path(int s, int g, vector<int> prev) {
 //	return make_pair(next, !negative_cycle);
 //}
 
-//å…¨ç‚¹å¯¾é–“æœ€çŸ­çµŒè·¯ 
-//Warshall-Floyd O(V^3)
-//æˆ»ã‚Šå€¤: è² é–‰è·¯ãªã—:true ã‚ã‚Š:false
-bool warshall_floyd(const Graph &g, Matrix &dist) {
+//‘S“_‘ÎŠÔÅ’ZŒo˜H 
+//Warshall-Floyd O(|V|^3)
+//–ß‚è’l: •‰•Â˜H‚È‚µ:true ‚ ‚è:false
+bool warshallFloyd(const Graph &g, Matrix &dist) {
 	int n = g.size();
 	dist.assign(n, Array(n, INF));
 	for (int i = 0; i < n; i++) dist[i][i] = 0;
@@ -155,17 +244,49 @@ bool warshall_floyd(const Graph &g, Matrix &dist) {
 	return !negative_cycle;
 }
 
-//å…¨ç‚¹å¯¾é–“æœ€çŸ­çµŒè·¯ 
-void all_pairs_shortest_paths_by_dijkstra(const Graph &g, Matrix &dists) {
+//‘S“_‘ÎŠÔÅ’ZŒo˜H
+//Warshall-Floyd O(|V|^3)
+//ƒCƒ“ƒ‰ƒCƒ“”Å
+void warshallFloyd() {
+	static const int N = 100;
+	static int wf[N][N];
+	int n; cin >> n;
+	rep(i, 0, n)rep(j, 0, n)wf[i][j] = INF;
+	rep(i, 0, n)wf[i][i] = 0;
+
+	int m; cin >> m;
+	rep(i, 0, m) {
+		int s, d, w; cin >> s >> d >> w;
+		wf[s][d] = min(wf[s][d], w);
+	}
+
+	rep(k, 0, n)rep(i, 0, n)rep(j, 0, n) {
+		if (wf[i][k] != INF&&wf[k][j] != INF)
+			wf[i][j] = min(wf[i][j], wf[i][k] + wf[k][j]);
+	}
+
+	int i, j;
+
+	//i‚ğ’Ê‚é•‰•Â˜H‚ª‚ ‚é‚©
+	wf[i][i] < 0;
+
+	//i‚©‚çj‚ÖŒü‚©‚¤“¹‚Å‚ ‚è•‰•Â˜H‚ğ’Ê‚é‚à‚Ì‚ª‚ ‚é‚©
+	rep(k, 0, n)
+		if (wf[i][k] != INF&&wf[k][j] != INF&&wf[k][k] < 0);
+}
+//http://judge.u-aizu.ac.jp/onlinejudge/review.jsp?rid=2243165
+
+//‘S“_‘ÎŠÔÅ’ZŒo˜H 
+void allPairsShortestPathsByDijkstra(const Graph &g, Matrix &dists) {
 	int n = g.size();
 	dists.resize(n);
 	for (int i = 0; i < n; i++)
 		dijkstra(g, i, dists[i]);
 }
 
-//æœ€çŸ­çµŒè·¯DAGã‚’æ§‹ç¯‰
-//ã©ã®ã‚ˆã†ãªçµŒè·¯ã‚’é€šã£ã¦ã‚‚æœ€çŸ­çµŒè·¯ã«ãªã‚‹
-Graph build_dag(const Graph &g, int s) {
+//Å’ZŒo˜HDAG‚ğ\’z
+//‚Ç‚Ì‚æ‚¤‚ÈŒo˜H‚ğ’Ê‚Á‚Ä‚àÅ’ZŒo˜H‚É‚È‚é
+Graph buildDag(const Graph &g, int s) {
 	Graph dag(g.size());
 	Array dist; dijkstra(g, s, dist);
 	for (auto &es : g)for (auto &e : es)
@@ -174,114 +295,33 @@ Graph build_dag(const Graph &g, int s) {
 	return dag;
 }
 
-//ãƒˆãƒãƒ­ã‚¸ã‚«ãƒ«ã‚½ãƒ¼ãƒˆ O(E+V)
-//å…¥æ¬¡æ•°ãŒ0ã®ç‚¹ã¨è¾ºã‚’å–ã‚Šé™¤ããªãŒã‚‰retã«çªã£è¾¼ã‚€
-vector<int> topological_sort(const Graph &g) {
+//ƒgƒ|ƒƒWƒJƒ‹ƒ\[ƒg O(|E|+|V|)
+//“üŸ”‚ª0‚Ì“_‚Æ•Ó‚ğæ‚èœ‚«‚È‚ª‚çret‚É“Ë‚Á‚Ş
+vector<int> topologicalSort(const Graph &g) {
 	int n = g.size(), k = 0;
-	vector<int> ord(n), indeg(n); //å…¥æ¬¡æ•°
+	vector<int> ord(n), indeg(n); //“üŸ”
 	for (auto &es : g) for (auto &e : es) indeg[e.d]++;
-	queue<int> Q;
-	for (int i = 0; i < n; i++) if (indeg[i] == 0) Q.push(i);
-	while (!Q.empty()) {
-		int v = Q.front(); Q.pop(); ord[k++] = v;
-		for (auto &e : g[v]) if (--indeg[e.d] == 0) Q.push(e.d);
+	queue<int> q;
+	for (int i = 0; i < n; i++) if (indeg[i] == 0) q.push(i);
+	while (!q.empty()) {
+		int v = q.front(); q.pop(); ord[k++] = v;
+		for (auto &e : g[v]) if (--indeg[e.d] == 0) q.push(e.d);
 	}
 	return *max_element(indeg.begin(), indeg.end()) == 0 ? ord : vector<int>();
 }
 
-//Tarjan's off-line lowest common ancestors (dfså†å¸°)
-//æ§‹ç¯‰O(N) ã‚¯ã‚¨ãƒª(1)
-struct Query {
-	int u, v;
-	Query(int u, int v) :u(u), v(v) {}
-};
-struct LowestCommonAncestor {
-	vector<vector<pair<int, Query>>> query_set;
-	Graph g;
-	vector<int> color;
-	vector<int> ancestor;
-	vector<int> res;
-	UnionFind uf;
-	LowestCommonAncestor(const Graph &g, vector<Query> &query) :g(g), color(g.size()), ancestor(g.size()), uf(g.size()), res(query.size()), query_set(g.size()) {
-		int n = query.size();
-		for (int i = 0; i < n; i++) {
-			query_set[query[i].u].emplace_back(i, query[i]);
-			query_set[query[i].v].emplace_back(i, query[i]);
-		}
-	}
-	void visit(int s, int prev) {
-		ancestor[uf.root(s)] = s;
-		for (auto &e : g[s]) {
-			if (e.d == prev)continue;
-			visit(e.d, s);
-			uf.unite(e.s, e.d);
-			ancestor[uf.root(s)] = s;
-		}
-		color[s] = 1;
-		for (auto &p : query_set[s]) {
-			Query q = p.second;
-			int w = (q.v == s ? q.u : q.u == s ? q.v : -1);
-			if (w == -1 || !color[w])continue;
-			res[p.first] = ancestor[uf.root(w)];
-		}
-	}
-	vector<int> solve(int root) {
-		int n = g.size();
-		UnionFind uf(n);
-		vector<int> color(n), ancestor(n);
-		visit(root, -1);
-		return res;
-	}
-};
-
-
-
 #include "UnionFind.cpp"
-
-//æœ€å°å…¨åŸŸæœ¨
-//Kruskal O(|E|log|E|)
-pair<Weight, Edges> kruskal(const Graph &g) {
-	UnionFind UF(g.size());
-	Edges es;
-	for (int i = 0; i < g.size(); i++) for (auto &e : g[i]) es.emplace_back(e);
-	sort(es.begin(), es.end());
-	Weight total = 0;
-	Edges T;
-	for (auto &e : es) if (!UF.same(e.s, e.d)) {
-		T.push_back(e); total += e.w; UF.unite(e.s, e.d);
-	}
-	return make_pair(total, T);
-}
-
-//æœ€å°å…¨åŸŸæœ¨
-//Prim O(ElogV)
-//rã‹ã‚‰åˆ°é”å¯èƒ½ãªé ‚ç‚¹ãŒå¯¾è±¡
-//Edgeã‚’ bool operator<(const Edge &e)const { return w > e.w; } ã«ã™ã‚‹å¿…è¦ãŒã‚ã‚‹
-pair<Weight, Edges> prim(const Graph &g, int r = 0) {
-	Edges T; Weight total = 0; vector<int> v(g.size());
-	priority_queue <Edge> q;
-	q.emplace(-1, r, 0);
-	while (q.size()) {
-		Edge e = q.top(); q.pop();
-		if (v[e.d]) continue;
-		v[e.d] = true;
-		total += e.w; if (e.s != -1) T.emplace_back(e);
-		for (auto &f : g[e.d]) if (!v[f.d]) q.emplace(f);
-	}
-	return make_pair(total, T);
-}
-
-//ç„¡å‘ã‚°ãƒ©ãƒ•ãŒé€£çµã‚°ãƒ©ãƒ•ã‹åˆ¤å®š O(EÎ±(E))
-bool is_connected_graph(const Graph &udg) {
+//–³ŒüƒOƒ‰ƒt‚ª˜AŒ‹ƒOƒ‰ƒt‚©”»’è O(|E|ƒ¿(|E|))
+bool isConnectedGraph(const Graph &udg) {
 	int n = udg.size();
-	UnionFind UF(n);
-	for (auto &es : udg)for (auto &e : es) UF.unite(e.d, e.s);
-	return UF.size == 1;
+	UnionFind uf(n);
+	for (auto &es : udg)for (auto &e : es) uf.unite(e.d, e.s);
+	return uf.size == 1;
 }
 
-//ç„¡å‘ã‚°ãƒ©ãƒ•ãŒã‚ªã‚¤ãƒ©ãƒ¼ã‚°ãƒ©ãƒ•ã‹åˆ¤å®šï¼ˆã‚ªã‚¤ãƒ©ãƒ¼é–‰è·¯ã‚’æŒã¤ï¼‰
-bool is_eulerian_graph(const Graph &udg) {
-	if (!is_connected_graph(udg))return false;
+//–³ŒüƒOƒ‰ƒt‚ªƒIƒCƒ‰[ƒOƒ‰ƒt‚©”»’èiƒIƒCƒ‰[•Â˜H‚ğ‚Âj
+bool isEulerianGraph(const Graph &udg) {
+	if (!isConnectedGraph(udg))return false;
 	int n = udg.size();
 	vector<int> degree(n, 0);
 	for (auto &es : udg)for (auto &e : es) degree[e.d]++, degree[e.s]++;
@@ -290,9 +330,9 @@ bool is_eulerian_graph(const Graph &udg) {
 	return true;
 }
 
-//ç„¡å‘ã‚°ãƒ©ãƒ•ãŒæº–ã‚ªã‚¤ãƒ©ãƒ¼ã‚°ãƒ©ãƒ•ã‹åˆ¤å®šï¼ˆé–‰è·¯ã§ãªã„ã‚ªã‚¤ãƒ©ãƒ¼è·¯ã‚’æŒã¤ï¼‰
-bool is_semi_eulerian_graph(const Graph &udg) {
-	if (!is_connected_graph(udg))return false;
+//–³ŒüƒOƒ‰ƒt‚ª€ƒIƒCƒ‰[ƒOƒ‰ƒt‚©”»’èi•Â˜H‚Å‚È‚¢ƒIƒCƒ‰[˜H‚ğ‚Âj
+bool isSemiEulerianGraph(const Graph &udg) {
+	if (!isConnectedGraph(udg))return false;
 	int n = udg.size();
 	vector<int> degree(n, 0);
 	for (auto &es : udg)for (auto &e : es) degree[e.d]++, degree[e.s]++;
@@ -305,46 +345,7 @@ bool is_semi_eulerian_graph(const Graph &udg) {
 	return odd == 2;
 }
 
-//äºŒéƒ¨ã‚°ãƒ©ãƒ• O(f(N+M)) fã¯æœ€å¤§ãƒãƒƒãƒãƒ³ã‚°ã®æ•°ã§é«˜ã€…N
-class BipartiteMatching {
-public:
-	int n;
-	vector<vector<int>> g;
-	vector<int> match;
-	BipartiteMatching(int n) : n(n), g(n), match(n), used(n) {}
-	void add_edge(int u, int v) {
-		g[u].emplace_back(v);
-		g[v].emplace_back(u);
-	}
-	//æœ€å¤§ãƒãƒƒãƒãƒ³ã‚°
-	int maximum_matching() {
-		int ret = 0;
-		fill(match.begin(), match.end(), -1);
-		for (int v = 0; v < n; v++) {
-			if (match[v] == -1) {
-				fill(used.begin(), used.end(), false);
-				if (dfs(v)) ret++;
-			}
-		}
-		return ret;
-	}
-private:
-	vector<int> used;
-	bool dfs(int v) {
-		used[v] = true;
-		for (int u : g[v]) {
-			int w = match[u];
-			if (w == -1 || (!used[w] && dfs(w))) {
-				match[v] = u;
-				match[u] = v;
-				return true;
-			}
-		}
-		return false;
-	}
-};
-
-//äºŒæ¬¡å…ƒé…åˆ—ã‹ã‚‰Graphã‚’ç”Ÿæˆ
+//“ñŸŒ³”z—ñ‚©‚çGraph‚ğ¶¬
 Graph build(const vector<vector<char>> &v) {
 	const int H = v.size(), W = v[0].size();
 	static const int di[4] = { 1,0,-1,0 }, dj[4] = { 0,1,0,-1 };
@@ -356,12 +357,13 @@ Graph build(const vector<vector<char>> &v) {
 			int ni = i + di[k], nj = j + dj[k];
 			if (!inrange(ni, nj))continue;
 			int s = idx(i, j), d = idx(ni, nj);
-			add_arc(g, s, d);
+			addArc(g, s, d);
 		}
 	}
 	return g;
 }
 
+//“ñŸŒ³”z—ñ‚©‚çGraph‚ğ¶¬
 Graph build(const vector<vector<char>> &v, int w) {
 	const int H = v.size(), W = v[0].size();
 	static const int di[4] = { 1,0,-1,0 }, dj[4] = { 0,1,0,-1 };
@@ -373,11 +375,17 @@ Graph build(const vector<vector<char>> &v, int w) {
 			int ni = i + di[k], nj = j + dj[k];
 			if (!inrange(ni, nj))continue;
 			int s = idx(i, j), d = idx(ni, nj);
-			if (v[ni][nj] == '#')add_arc(g, s, d, w);
-			else add_arc(g, s, d, 1);
+			if (v[ni][nj] == '#')addArc(g, s, d, w);
+			else addArc(g, s, d, 1);
 		}
 	}
 	return g;
 }
-//Contact GitHub API Training Shop Blog About
-//Â© 2017 GitHub, Inc.Terms Privacy Security Status Help
+
+//s <= d ‚©‚Â s1 <= s2 ‚©‚Â d1 <= d2 ‚ğ–‚½‚·‚æ‚¤‚Éƒ\[ƒg
+void sort(Edges &es) {
+	for (auto &e : es)
+		if (e.s > e.d)
+			swap(e.s, e.d);
+	sort(es.begin(), es.end(), [](const Edge &e1, const Edge &e2) {return e1.s == e2.s ? e1.d < e2.d : e1.s < e2.s; });
+}
