@@ -34,64 +34,6 @@ template <class T> bool chmin(T &a, const T &b) {
   return false;
 }
 
-using P = pair<char, int>;
-vector<P> L, R;
-bool f(P x, P y) {
-  if (y.first == 'E')
-    return true;
-  else if (x.first == 'E')
-    return false;
-  else if (x.first == y.first)
-    return x.second < y.second;
-  else
-    return x.first < y.first;
-}
-bool g(P x, P y) {
-  if (y.first == 'E')
-    return true;
-  else if (x.first == 'E')
-    return false;
-  else if (x.first == y.first)
-    return x.second < y.second;
-  else if (x.first == 'W')
-    return true;
-  else
-    return false;
-}
-bool zz = true;
-bool h(P x, P y) {
-  if (zz)
-    return f(x, y);
-  else
-    return g(x, y);
-}
-int merge(vector<P> &a, int l, int mid, int r) {
-  int n1 = mid - l;
-  int n2 = r - mid;
-  rep(i, 0, n1) L[i] = a[l + i];
-  L[n1] = make_pair('E', INF);
-  rep(i, 0, n2) R[i] = a[mid + i];
-  R[n2] = make_pair('E', INF);
-  int ret(0), i(0), j(0);
-  rep(k, l, r) {
-    dump(L[i], R[j]);
-    if (h(L[i], R[j]))
-      a[k] = L[i++];
-    else {
-      a[k] = R[j++];
-      ret += n1 - i;
-    }
-  }
-  return ret;
-}
-int mergeSort(vector<P> &a, int l, int r) {
-  if (r - l > 1) {
-    int mid = (l + r) / 2;
-    return mergeSort(a, l, mid) + mergeSort(a, mid, r) + merge(a, l, mid, r);
-  } else
-    return 0;
-}
-
 template <typename T> struct BinaryIndexedTree {
   // 1-indexed
   int n;
@@ -167,15 +109,51 @@ signed main() {
   ios::sync_with_stdio(false);
   int N;
   cin >> N;
-  R.resize(N);
-  L.resize(N);
-  vector<P> v(2 * N);
-  rep(i, 0, 2 * N) { cin >> v[i].first >> v[i].second; }
-  dump(v);
-  int ans = mergeSort(v, 0, 2 * N);
-  //zz = false;
-  //ans += mergeSort(v, 0, 2 * N);
-  cout << ans << endl;
-  dump(v);
+
+  vector<pair<char, int>> v(2 * N + 1);
+  rep(i, 1, 2 * N + 1) { cin >> v[i].first >> v[i].second; }
+
+  vector<vector<int>> costb(N + 1, vector<int>(N + 1)),
+      costw(N + 1, vector<int>(N + 1));
+
+  rep(j, 0, N + 1) {
+    BinaryIndexedTree<int> bitb(N), bitw(N);
+    int b = 0, w = 0;
+    rep(i, 1, 2 * N + 1) {
+      if (v[i].first == 'B') {
+        costb[v[i].second - 1][j] = b + w - bitb.sum(v[i].second);
+        bitb.add(v[i].second, 1);
+        b++;
+      } else {
+        if (v[i].second > j)
+          w++;
+      }
+    }
+  }
+  rep(i, 0, N + 1) {
+    BinaryIndexedTree<int> bitb(N), bitw(N);
+    int b = 0, w = 0;
+    rep(j, 1, 2 * N + 1) {
+      if (v[j].first == 'W') {
+        costw[i][v[j].second - 1] = b + w - bitw.sum(v[j].second);
+        bitw.add(v[j].second, 1);
+        w++;
+      } else {
+        if (v[j].second > i)
+          b++;
+      }
+    }
+  }
+
+  vector<vector<int>>dp(N+1,vector<int>(N+1,INF));
+  dp[0][0]=0;
+  
+  rep(i,0,N+1)rep(j,0,N+1){
+    if(i-1>=0)chmin(dp[i][j],dp[i-1][j]+costb[i-1][j]);
+    if(j-1>=0)chmin(dp[i][j],dp[i][j-1]+costw[i][j-1]);
+  }
+  dump(dp);
+  cout<<dp[N][N]<<endl;
+
   return 0;
 }
