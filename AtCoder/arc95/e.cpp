@@ -19,6 +19,7 @@ const int INF =
 const int MOD = (int)(1e9) + 7;
 const double PI = acos(-1);
 const double EPS = 1e-9;
+using pii = pair<int, int>;
 template <class T> bool chmax(T &a, const T &b) {
   if (a < b) {
     a = b;
@@ -34,60 +35,79 @@ template <class T> bool chmin(T &a, const T &b) {
   return false;
 }
 
+int H, W;
+vector<string> S, T;
+bool check() {
+  map<string, int> mp;
+  rep(j, 0, W) {
+    string s;
+    rep(i, 0, H) {
+      if (T[i][j] == '#')
+        s += T[H - 1 - i][j];
+      else
+        s += T[i][j];
+    }
+    string t = s;
+    reverse(all(t));
+    if (s <= t)
+      mp[s]++;
+    else
+      mp[t]--;
+  }
+  int c = 0;
+  for (auto p : mp) {
+    dump(p);
+    if (p.second == 0)
+      continue;
+    string s = p.first;
+    string t = s;
+    reverse(all(t));
+
+    if (s != t)
+      return false;
+    else {
+      if (p.second & 1){
+        c++;
+      }
+      if(c==2)return false;
+    }
+  }
+  return true;
+}
+bool dfs(int s, int k) {
+  dump(s, k);
+  if (s == 0) {
+    return check();
+  }
+
+  int c = 0;
+  while (~s >> c & 1)
+    c++;
+  T[k] = S[c];
+  rep(i, c + 1, H) {
+    if (s >> i & 1) {
+      T[H - 1 - k] = S[i];
+      if (dfs(s ^ (1 << c) ^ (1 << i), k + 1))
+        return true;
+    }
+  }
+  return false;
+}
 signed main() {
   cin.tie(0);
   ios::sync_with_stdio(false);
   cout << fixed << setprecision(12);
 
-  int H, W;
   cin >> H >> W;
-  vector<string> v(H);
-  rep(i, 0, H) { cin >> v[i]; }
-
-  map<char, vector<map<char, int>>> vv;
-
-  rep(i, 0, H) rep(j, 0, W) {
-    map<char, int> t;
-    t[v[i][j]]++;
-    rep(k, 0, H) {
-      if (k == i)
-        continue;
-      t[v[k][j]]++;
-    }
-    rep(k, 0, W) {
-      if (k == j)
-        continue;
-      t[v[i][k]]++;
-    }
-    vv[v[i][j]].push_back(t);
+  S.resize(H);
+  T.resize(H);
+  rep(i, 0, H) { cin >> S[i]; }
+  if (H & 1) {
+    S.push_back(string(W, '#'));
+    H++;
+    T.push_back(string());
   }
+  cout << (dfs((1 << H) - 1, 0) ? "YES" : "NO") << endl;
 
-  bool f = true;
-  int c=0;
-  for (auto x : vv) {
-    auto y = x.second;
-
-    int n = y.size();
-    vector<bool> used(n, false);
-    rep(i, 0, n) {
-      if(used[i])continue;
-      rep(j, i + 1, n) {
-        if (used[j])
-          continue;
-        if (y[i] == y[j]) {
-          used[j] = true;
-          break;
-        }
-
-        if (j == n - 1) {
-          f = false;
-          c++;
-        }
-      }
-    }
-  }
-
-  if(H%2==1 and W%2==1 and c==1)f=true;
-  cout << (f ? "YES" : "NO") << endl;
   return 0;
 }

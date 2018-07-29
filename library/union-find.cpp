@@ -22,9 +22,8 @@ using namespace std;
 const int INF =
     sizeof(int) == sizeof(long long) ? 0x3f3f3f3f3f3f3f3fLL : 0x3f3f3f3f;
 const int MOD = (int)(1e9 + 7);
-template <typename T> class DisjointSet {
-public:
-  vector<T> rank, p;
+struct DisjointSet {
+  vector<int> rank, p;
   DisjointSet() {}
   DisjointSet(int size) {
     rank.resize(size, 0);
@@ -62,7 +61,7 @@ public:
 signed main() {
   int n, a, b, q, t;
   cin >> n >> q;
-  DisjointSet<int> ds(n);
+  DisjointSet ds(n);
   rep(i, 0, q) {
     cin >> t >> a >> b;
     if (t == 0)
