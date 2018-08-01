@@ -7,7 +7,7 @@ using namespace std;
 #define dump(...)
 #endif
 
-//#define int long long
+#define int long long
 // typedef __int128_t Int;
 #define DBG 1
 #define rep(i, a, b) for (int i = (a); i < (b); i++)
@@ -19,6 +19,7 @@ const int INF =
 const int MOD = (int)(1e9) + 7;
 const double PI = acos(-1);
 const double EPS = 1e-9;
+using pii = pair<int, int>;
 template <class T> bool chmax(T &a, const T &b) {
   if (a < b) {
     a = b;
@@ -33,37 +34,27 @@ template <class T> bool chmin(T &a, const T &b) {
   }
   return false;
 }
-// anothoer https://beta.atcoder.jp/contests/arc099/submissions/2926148
-//
-// isBipartite ? =======================================================
-vector<vector<int>> g;
-vector<int> color;
-bool isBipartite_proc(int, int);
-bool isBipartite() {
-  color.resize(g.size(), 0);
-  rep(i, 0, g.size()) {
-    if (color[i] == 0) {
-      if (!isBipartite_proc(i, 1))
-        return false;
-    }
-  }
-  return true;
+int gcd(int x, int y) { return (y == 0 ? x : gcd(y, x % y)); }
+int lcm(int x, int y) { return x / gcd(x, y) * y; }
+int lcm(const vector<int> &v) {
+  int ret = v[0];
+  for (int i = 1; i < v.size(); i++)
+    ret = lcm(ret, v[i]);
+  return ret;
 }
-bool isBipartite_proc(int v, int c ) {
-  color[v] = c;
-  for (auto u : g[v]) {
-    if (color[u] == c)
-      return false;
-    if (color[u] == 0 and !isBipartite_proc(u, -c))
-      return false;
-  }
-  return true;
-}
-//======================================================================
+
 signed main() {
   cin.tie(0);
   ios::sync_with_stdio(false);
   cout << fixed << setprecision(12);
+
+  int N, Z;
+  cin >> N >> Z;
+  vector<int> a(N);
+  rep(i, 0, N) { cin >> a[i]; }
+  vector<int> d(N);
+  rep(i, 0, N) { d[i] = gcd(a[i], Z); }
+  cout << lcm(d) << endl;
 
   return 0;
 }

@@ -49,7 +49,7 @@ signed main() {
   rep(i, 0, N) { cin >> v[i]; }
   rep(i, 1, N) x[i] += x[i - 1];
 
-  vector<pair<int, int>> p;
+  vector<pair<int, int>> p,b;
   for (int bits = 0; bits < (1 << N); bits++) {
     int cost = 0, value = 0;
     rep(i, 0, N) {
@@ -60,8 +60,11 @@ signed main() {
     }
     p.push_back(make_pair(cost, value));
   }
-  dump(p);
   sort(all(p));
+
+
+
+
   int ans = 0;
   rep(i, 0, N) {
     auto u = upper_bound(all(p), P(x[i], INF));

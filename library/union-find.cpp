@@ -22,6 +22,33 @@ using namespace std;
 const int INF =
     sizeof(int) == sizeof(long long) ? 0x3f3f3f3f3f3f3f3fLL : 0x3f3f3f3f;
 const int MOD = (int)(1e9 + 7);
+
+struct UnionFind {
+  // https://beta.atcoder.jp/contests/arc099/submissions/2926148
+  // written by ei1333
+  vector<int> data;
+
+  UnionFind(int sz) { data.assign(sz, -1); }
+
+  bool unite(int x, int y) {
+    x = find(x), y = find(y);
+    if (x == y)
+      return (false);
+    if (data[x] > data[y])
+      swap(x, y);
+    data[x] += data[y];
+    data[y] = x;
+    return (true);
+  }
+
+  int find(int k) {
+    if (data[k] < 0)
+      return (k);
+    return (data[k] = find(data[k]));
+  }
+
+  int size(int k) { return (-data[find(k)]); }
+};
 struct DisjointSet {
   vector<int> rank, p;
   DisjointSet() {}
