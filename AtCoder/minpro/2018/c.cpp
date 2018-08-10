@@ -7,6 +7,7 @@ using namespace std;
 #define dump(...)
 #endif
 
+#define dump(...)
 #define int long long
 // typedef __int128_t Int;
 #define DBG 1
@@ -14,6 +15,7 @@ using namespace std;
 #define rrep(i, a, b) for (int i = (b)-1; i >= (a); i--)
 #define loop(n) rep(loop, (0), (n))
 #define all(c) begin(c), end(c)
+using pii = pair<int, int>;
 const int INF =
     sizeof(int) == sizeof(long long) ? 0x3f3f3f3f3f3f3f3fLL : 0x3f3f3f3f;
 const int MOD = (int)(1e9) + 7;
@@ -34,6 +36,21 @@ template <class T> bool chmin(T &a, const T &b) {
   return false;
 }
 typedef pair<int, int> P;
+struct State {
+  int s = 0, cost = 0, value = 0;
+  State() {}
+  State(int s, int cost, int value) : s(s), cost(cost), value(value) {}
+};
+ostream &operator<<(ostream &os, State a) {
+  dump(a.s, a.cost, a.value);
+  return os;
+}
+int bitcount(int x) {
+  int ret = !!x;
+  while (x -= x & -x)
+    ret++;
+  return ret;
+}
 signed main() {
   cin.tie(0);
   ios::sync_with_stdio(false);
@@ -41,41 +58,55 @@ signed main() {
 
   int N;
   cin >> N;
-  vector<int> x(N);
-  rep(i, 0, N) { cin >> x[i]; }
+  vector<int> x(N + 1);
+  rep(i, 1, N + 1) { cin >> x[i]; }
   vector<int> c(N);
   rep(i, 0, N) { cin >> c[i]; }
   vector<int> v(N);
   rep(i, 0, N) { cin >> v[i]; }
-  rep(i, 1, N) x[i] += x[i - 1];
+  rep(i, 1, N + 1) x[i] += x[i - 1];
 
-  vector<pair<int, int>> p,b;
-  for (int bits = 0; bits < (1 << N); bits++) {
-    int cost = 0, value = 0;
+  vector<vector<int>> f(N + 1, vector<int>(1 << N));
+
+  rep(k, 1, N + 1) {
+    rep(bits, 1, 1 << N) {
+      int cost = 0, value = 0;
+      rep(i, 0, N) {
+        if (bits >> i & 1) {
+          cost += c[i];
+          value += v[i];
+        }
+      }
+      if (cost <= x[k]) {
+        f[k][bits] = value;
+      } else {
+        rep(i, 0, N) {
+          if (bits >> i & 1) {
+            chmax(f[k][bits], f[k][bits ^ (1 << i)]);
+          }
+        }
+      }
+      dump(k, bits, f[k][bits]);
+    }
+  }
+
+  vector<int> dp(1 << N);
+  rep(bits, 1, 1 << N) {
+    dp[bits] = f[N - bitcount(bits)][bits];
+    dump(N - bitcount(bits), bits, dp[bits]);
+    int x = INF;
     rep(i, 0, N) {
-      if ((bits >> i) & 1) {
-        cost += c[i];
-        value += v[i];
+      if (bits >> i & 1) {
+        chmin(x, dp[bits ^ (1 << i)]);
       }
     }
-    p.push_back(make_pair(cost, value));
+    chmax(dp[bits], x);
+    dump(N - bitcount(bits), bits, dp[bits]);
   }
-  sort(all(p));
 
+  cout << dp.back() << endl;
 
-
-
-  int ans = 0;
-  rep(i, 0, N) {
-    auto u = upper_bound(all(p), P(x[i], INF));
-    dump(*u);
-    int d = u - p.begin();
-    dump(d);
-    int index = max(0ll, d - i - 1-1);
-    dump(index);
-    chmax(ans, p[index].second);
-  }
-  cout << ans << endl;
-
+  dump(f);
+  dump(dp);
   return 0;
 }
