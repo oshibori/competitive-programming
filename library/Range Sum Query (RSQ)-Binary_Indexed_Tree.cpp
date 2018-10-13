@@ -30,6 +30,7 @@ struct BinaryIndexedTree {
 		//   for (int x = 1; x < N; ++x) bit[x + (x & -x)] += bit[x];
 		d.assign(m + 1, 0);
 	}
+  // [a,b] 1-indexed
 	T sum(int a, int b) {
 		return sum(b) - sum(a - 1);
 	}

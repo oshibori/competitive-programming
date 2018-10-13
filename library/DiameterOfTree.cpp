@@ -42,7 +42,8 @@ struct Graph {
   int V;
   vector<vector<Edge>> g;
   Graph(int V) : V(V), g(V) {}
-  void add_edge(int s, int t, int w = 1) { g[s].push_back(Edge(s, t, w)); }
+  void add_arc(int s,int t,int w=1){g[s].emplace_back(s,t,w);}
+  void add_edge(int s, int t, int w = 1) { add_arc(s,t,w);add_arc(t,s,w); }
   void dfs(vector<int> &x, int v, int p, int d) {
     x[v] = d;
     rep(i, 0, g[v].size()) {
@@ -73,7 +74,6 @@ signed main() {
     int s, t, w;
     cin >> s >> t >> w;
     g.add_edge(s, t, w);
-    g.add_edge(t, s, w);
   }
   cout << g.diameter() << endl;
   return 0;

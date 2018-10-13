@@ -22,9 +22,10 @@ const double EPS = 1e-9;
 
 struct SCC {
   int V;
-  vector<vector<int>> G, rG;
+  vector<vector<int>> G, rG, SC;
   vector<int> vs, cmp; // post order, topological order
   vector<bool> used;
+
   SCC() {}
   SCC(int V) : V(V), G(V), rG(V), used(V), cmp(V) {}
   void add_arc(int s, int t) {
@@ -50,6 +51,7 @@ struct SCC {
   int scc() {
     fill(all(used), false);
     vs.clear();
+    SC.clear();
     rep(v, 0, V) {
       if (not used[v])
         dfs(v);
@@ -60,6 +62,9 @@ struct SCC {
       if (not used[vs[i]])
         rdfs(vs[i], k++);
     }
+    SC.resize(k);
+    rep(i, 0, V) { SC[cmp[i]].emplace_back(i); }
+    rep(i, 0, V) { sort(all(SC[i])); }
     return k;
   }
 };

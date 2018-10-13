@@ -2,26 +2,70 @@
 #include "bits/stdc++.h"
 using namespace std;
 
-//#define int long long
 #define DBG 1
-#define dump(o)                                                                \
-  if (DBG) {                                                                   \
-    cerr << #o << " " << o << endl;                                            \
-  }
-#define dumpc(o)                                                               \
-  if (DBG) {                                                                   \
-    cerr << #o;                                                                \
-    for (auto &e : (o))                                                        \
-      cerr << " " << e;                                                        \
-    cerr << endl;                                                              \
-  }
 #define rep(i, a, b) for (int i = (a); i < (b); i++)
 #define rrep(i, a, b) for (int i = (b)-1; i >= (a); i--)
-#define each(it, c) for (auto it = (c).begin(); it != (c).end(); it++)
 #define all(c) c.begin(), c.end()
 const int INF =
     sizeof(int) == sizeof(long long) ? 0x3f3f3f3f3f3f3f3fLL : 0x3f3f3f3f;
-const int MOD = (int)(1e9 + 7);
+
+// 重み付きunion-find
+// https://qiita.com/drken/items/cce6fc5c579051e64fab
+// n: 要素数
+// SUM_UNITY: 基本的に 0 を入れます
+// SUM_UNITY について補足ですが、重み付き UnionFind の重みは一般にアーベル群
+// (足し算と引き算ができる代数系) を乗せられます。その場合は、SUM_UNITY
+// には「アーベル群の単位元」を入れます。
+template <class Abel> struct UnionFind {
+  vector<int> par;
+  vector<int> rank;
+  vector<Abel> diff_weight;
+
+  UnionFind(int n = 1, Abel SUM_UNITY = 0) { init(n, SUM_UNITY); }
+
+  void init(int n = 1, Abel SUM_UNITY = 0) {
+    par.resize(n);
+    rank.resize(n);
+    diff_weight.resize(n);
+    for (int i = 0; i < n; ++i)
+      par[i] = i, rank[i] = 0, diff_weight[i] = SUM_UNITY;
+  }
+
+  int root(int x) {
+    if (par[x] == x) {
+      return x;
+    } else {
+      int r = root(par[x]);
+      diff_weight[x] += diff_weight[par[x]];
+      return par[x] = r;
+    }
+  }
+
+  Abel weight(int x) {
+    root(x);
+    return diff_weight[x];
+  }
+
+  bool issame(int x, int y) { return root(x) == root(y); }
+
+  bool merge(int x, int y, Abel w) {
+    w += weight(x);
+    w -= weight(y);
+    x = root(x);
+    y = root(y);
+    if (x == y)
+      return false;
+    if (rank[x] < rank[y])
+      swap(x, y), w = -w;
+    if (rank[x] == rank[y])
+      ++rank[x];
+    par[y] = x;
+    diff_weight[y] = w;
+    return true;
+  }
+
+  Abel diff(int x, int y) { return weight(y) - weight(x); }
+};
 
 struct UnionFind {
   // https://beta.atcoder.jp/contests/arc099/submissions/2926148
@@ -85,20 +129,3 @@ struct DisjointSet {
     return p[x];
   }
 };
-signed main() {
-  int n, a, b, q, t;
-  cin >> n >> q;
-  DisjointSet ds(n);
-  rep(i, 0, q) {
-    cin >> t >> a >> b;
-    if (t == 0)
-      ds.unite(a, b);
-    else if (t == 1) {
-      if (ds.same(a, b))
-        cout << 1 << endl;
-      else
-        cout << 0 << endl;
-    }
-  }
-  return 0;
-}

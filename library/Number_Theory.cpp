@@ -108,6 +108,7 @@ bool miller_rabin_primality_test(long long x, int iteration) {
 
 //ãtå≥
 // xy%m=1, y<m Ç∆Ç»ÇÈyÇãÅÇﬂÇÈ
+// xÇ∆mÇÕå›Ç¢Ç…ëf
 long long modinv(long long x, long long m) {
   long long s, t;
   extgcd(x, m, s, t);

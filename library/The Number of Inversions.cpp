@@ -107,7 +107,7 @@ int theNunberOfInversion(vector<int>&a) {
 
 	int ans(0);
 	rep(i, 0, a.size()) {
-		ans += i - bit.sum(a[i]);
+		ans += i - bit.sum(a[i]);// ans+=bit.sum(a[i]);
 		bit.add(a[i], 1);
 	}
 	return ans;
