@@ -29,48 +29,51 @@ template <class T> bool chmin(T &a, const T &b) {
   }
   return false;
 }
+int A, B;
+int a[1010], b[1010];
+int dp[1010][1010];
+/*
+int dfs(int x, int y) {
+  pii &ret = dp[x][y];
+  if (ret.fi >= 0)
+    return ret;
+  ret.fi = ret.se = 0;
+  pii l=dfs(x+1,y),r=dfs(x,y+1);
+  if((x+y)%2==(A+B)%2){
 
+  }
+  else{
+
+  }
+}
+*/
 signed main() {
   cin.tie(0);
   ios::sync_with_stdio(false);
 
-  int A, B;
   cin >> A >> B;
-  vector<int> a(A);
   rep(i, 0, A) { cin >> a[i]; }
-  vector<int> b(B);
   rep(i, 0, B) { cin >> b[i]; }
 
-  vector<vector<int>> dp(A + 1, vector<int>(B + 1, 0));
-  rep(i, 1, A + 1) {
-    if (i & 1)
-      dp[i][0] = dp[i - 1][0] + a[i - 1];
-    else {
-      dp[i][0] = dp[i - 1][0];
-    }
+  rep(i, 0, 1010) rep(j, 0, 1010) dp[i][j] = 0;
+  rrep(i, 0, A) {
+    dp[i][B] = ((i + B) % 2 == 0 ? dp[i + 1][B] + a[i] : dp[i + 1][B]);
   }
-  rep(i, 1, B + 1) {
-    if (i & 1)
-      dp[0][i] = dp[0][i - 1] + b[i - 1];
-    else
-      dp[0][i] = dp[0][i - 1];
+  rrep(j, 0, B) {
+    dp[A][j] = ((j + A) % 2 == 0 ? dp[A][j + 1] + b[j] : dp[A][j + 1]);
   }
 
-  rep(i,1,A+1)rep(j,1,B+1){
-    if((i+j)&1){
-      chmax(dp[i][j],dp[i-1][j-1]+max(a[i-1],b[i-1]));
-      chmax(dp[i][j],dp[i-1][j]+a[i-1]);
-      chmax(dp[i][j],dp[i][j-1]+b[j-1]);
-    }
-    else {
-      dp[i][j]=INF;
-      chmin(dp[i][j],dp[i-1][j-1]+min(a[i-1],b[j-1]));
-      chmin(dp[i][j],dp[i-1][j]);
-      chmin(dp[i][j],dp[i][j-1]);
+  rrep(i, 0, A) {
+    rrep(j, 0, B) {
+      if ((i + j) % 2 == 0) {
+        dp[i][j] = max(dp[i + 1][j] + a[i], dp[i][j + 1] + b[j]);
+      } else {
+        dp[i][j] = min(dp[i + 1][j], dp[i][j + 1]);
+      }
+      dump(i, j, dp[i][j]);
     }
   }
-
-  cout<<dp[A][B]<<endl;
+  cout << dp[0][0] << endl;
 
   return 0;
 }

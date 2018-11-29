@@ -110,7 +110,68 @@ signed main() {
   cin >> H >> W >> X;
   vector<string> s(H);
   rep(i, 0, H) { cin >> s[i]; }
-  vector<vector<int>> f(H, vector<int>(W, -1));
+
+  vector<vector<int>> v(H, vector<int>(W, INF));
+  vector<vector<int>> danger(H, vector<int>(W, 0));
+  vector<vector<int>> color(H, vector<int>(W, 0));
+  priority_queue<tuple<int, int, int>, vector<tuple<int, int, int>>,
+                 greater<tuple<int, int, int>>>
+      pq;
+  int sx, sy, gx, gy;
+  rep(i, 0, H) {
+    rep(j, 0, W) {
+      if (s[i][j] == '@') {
+        pq.push(make_tuple(0, i, j));
+      } else if (s[i][j] == 'S') {
+        sx = i, sy = j;
+      } else if (s[i][j] == 'G') {
+        gx = i, gy = j;
+      }
+    }
+  }
+  int dx[] = {1, 0, -1, 0}, dy[] = {0, 1, 0, -1};
+  auto inrange = [&](int x, int y) {
+    return 0 <= x and x < H and 0 <= y and y < W;
+  };
+  while (pq.size()) {
+    int c, i, j;
+    tie(c, i, j) = pq.top();
+    pq.pop();
+    if (c == X + 1 or danger[i][j])
+      continue;
+    danger[i][j] = 1;
+    rep(k, 0, 4) {
+      int x = i + dx[k], y = j + dy[k];
+      if (inrange(x, y) and s[x][y] != '#') {
+        pq.push(make_tuple(c + 1, x, y));
+      }
+    }
+  }
+  printvv(danger);
+
+  pq.push(make_tuple(0, sx, sy));
+  v[sx][sy] = 0;
+  while (pq.size()) {
+    int c, i, j;
+    tie(c, i, j) = pq.top();
+    pq.pop();
+    if (v[i][j] < c)
+      continue;
+    color[i][j] = 1;
+    rep(k, 0, 4) {
+      int x = i + dx[k], y = j + dy[k];
+      if (inrange(x, y) and s[x][y] != '#' and !danger[x][y] and
+          !color[x][y] and chmin(v[x][y], c + 1)) {
+        pq.push(make_tuple(c + 1, x, y));
+      }
+    }
+  }
+
+  if (v[gx][gy] != INF) {
+    cout << v[gx][gy] << endl;
+  } else {
+    cout << -1 << endl;
+  }
 
   return 0;
 }

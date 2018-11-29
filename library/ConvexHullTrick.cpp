@@ -35,16 +35,21 @@ template <class T> bool chmin(T &a, const T &b) {
 }
 // source http://satanic0258.hatenablog.com/entry/2016/08/16/181331
 // https://yukicoder.me/problems/no/703
+// addの直線の傾きの単調性が保証されている
 class ConvexHullTrick {
 public:
   deque<pair<int, int>> lines;
+  // queryのxの単調性が保証されているとき、true
   bool isMonotonic = false;
   function<bool(int, int)> comp = [](int l, int r) {
     return l >= r; // min
     // return l <= r; // max
   };
 
+  // l1,l2,l3のうち、l2が不必要であるかどうか
   bool check(pair<int, int> l1, pair<int, int> l2, pair<int, int> l3) {
+    if (l1 < l3)
+      swap(l1, l3);
     int a1 = l1.first, b1 = l1.second;
     int a2 = l2.first, b2 = l2.second;
     int a3 = l3.first, b3 = l3.second;
@@ -70,10 +75,10 @@ public:
       int l = 0, r = lines.size();
       while (r - l > 1) {
         int m = (l + r) / 2;
-        if (comp(f(m, x), f(m - 1, x))) {
-          r = m;
-        } else {
+        if (comp(f(m - 1, x), f(m, x))) {
           l = m;
+        } else {
+          r = m;
         }
       }
       return f(l, x);
