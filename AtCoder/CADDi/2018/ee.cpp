@@ -8,7 +8,7 @@ using namespace std;
 #define dump(...)
 #endif
 
-//#define int long long
+#define int long long
 #define ll long long
 #define ll1 1ll
 #define ONE 1ll
@@ -109,23 +109,49 @@ signed main(signed argc, char *argv[]) {
   ios::sync_with_stdio(false);
   cout << fixed << setprecision(12);
 
-  int N, c;
-  cin >> N >> c;
-  vector<int> a(N);
-  rep(i, 0, N) { cin >> a[i]; }
-  map<int, int> cnt, mi;
-  int ans = 0;
-  rep(i, 0, N) {
-    if (a[i] == c)
-      cnt[a[i]]++;
-    else {
-      chmin(mi[a[i]], cnt[a[i]] - cnt[c]);
-      int r = ++cnt[a[i]] - cnt[c];
-      int l = mi[a[i]];
-      chmax(ans, r - l);
+  int N;
+  cin >> N;
+  vector<int> A(N);
+  rep(i, 0, N) { cin >> A[i]; }
+  vector<int> dpplus(N, 0);
+  rrep(i, 0, N - 1) {
+    int x = A[i];
+    int y = A[i + 1];
+    int cnt = 0;
+    while (x > y) {
+      y *= 4ll;
+      cnt += 2ll;
     }
+    dpplus[i] = dpplus[i + 1] + cnt * (N - 1 - i);
   }
-  cout << ans + count(all(a), c) << endl;
+  vector<int> dpminus(N, 0);
+  dpminus[0] = 1;
+  rep(i, 1, N) {
+    int x = -A[i - 1];
+    int y = -A[i];
+    int cnt = 0;
+    dump(x, y);
+    while (x > y) {
+      x *= 4ll;
+      cnt += 2;
+    }
+    dump(cnt);
+    dpminus[i] = dpminus[i - 1] + 1 + cnt * i;
+  }
+
+  dump(dpplus);
+  dump(dpminus);
+  int ans = INF;
+  rep(i, 0, N + 1) {
+    int tmp = 0;
+    if (i < N)
+      tmp += dpplus[i];
+    if (i - 1 >= 0)
+      tmp += dpminus[i - 1];
+    dump(tmp);
+    chmin(ans, tmp);
+  }
+  cout << ans << endl;
 
   return 0;
 }

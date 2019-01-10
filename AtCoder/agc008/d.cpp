@@ -8,7 +8,7 @@ using namespace std;
 #define dump(...)
 #endif
 
-//#define int long long
+#define int long long
 #define ll long long
 #define ll1 1ll
 #define ONE 1ll
@@ -103,29 +103,61 @@ template <class T> bool chmin(T &a, const T &b) {
   }
   return false;
 }
-
+void NO() {
+  cout << "No" << endl;
+  exit(0);
+}
 signed main(signed argc, char *argv[]) {
   cin.tie(0);
   ios::sync_with_stdio(false);
   cout << fixed << setprecision(12);
 
-  int N, c;
-  cin >> N >> c;
-  vector<int> a(N);
-  rep(i, 0, N) { cin >> a[i]; }
-  map<int, int> cnt, mi;
-  int ans = 0;
-  rep(i, 0, N) {
-    if (a[i] == c)
-      cnt[a[i]]++;
-    else {
-      chmin(mi[a[i]], cnt[a[i]] - cnt[c]);
-      int r = ++cnt[a[i]] - cnt[c];
-      int l = mi[a[i]];
-      chmax(ans, r - l);
+  int N;
+  cin >> N;
+  vector<int> v(N * N + 1, -1);
+  vector<int> x(N + 1), w(N + 1);
+  vector<pii> y;
+  rep(i, 1, N + 1) {
+    cin >> x[i];
+    v[x[i]] = i;
+    y.eb(x[i], i);
+  }
+  sort(all(y));
+  dump(y);
+  int j = 1;
+  rep(i, 0, y.size()) {
+    loop(y[i].se - 1) {
+      while (v[j] > 0)
+        j++;
+      v[j] = y[i].se;
+      j++;
     }
   }
-  cout << ans + count(all(a), c) << endl;
+  j = N * N;
+  rrep(i, 0, y.size()) {
+    loop(N - y[i].se) {
+      while (v[j] > 0)
+        j--;
+      v[j] = y[i].se;
+      j--;
+    }
+  }
+  dump(v);
+
+  bool f = true;
+  rep(i, 1, N * N + 1) { w[v[i]]++; }
+  rep(i, 1, N + 1) {
+    f &= w[i] == N;
+    int c = 0;
+    rep(k, 1, x[i]) { c += v[k] == i; }
+    f &= c == i - 1;
+  }
+
+  if (f) {
+    cout << "Yes" << endl;
+    rep(i, 1, N * N + 1) { cout << v[i] << (i == N * N ? '\n' : ' '); }
+  } else
+    cout << "No" << endl;
 
   return 0;
 }

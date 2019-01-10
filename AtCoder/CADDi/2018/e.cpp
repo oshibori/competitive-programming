@@ -8,7 +8,7 @@ using namespace std;
 #define dump(...)
 #endif
 
-//#define int long long
+#define int long long
 #define ll long long
 #define ll1 1ll
 #define ONE 1ll
@@ -50,39 +50,38 @@ template <typename T> void printvv(const vector<vector<T>> &v) {
   }
   cerr << endl;
 }
-/*
-   typedef __int128_t Int;
-   std::ostream &operator<<(std::ostream &dest, __int128_t value) {
-   std::ostream::sentry s(dest);
-   if (s) {
-   __uint128_t tmp = value < 0 ? -value : value;
-   char buffer[128];
-   char *d = std::end(buffer);
-   do {
-   --d;
- *d = "0123456789"[tmp % 10];
- tmp /= 10;
- } while (tmp != 0);
- if (value < 0) {
- --d;
- *d = '-';
- }
- int len = std::end(buffer) - d;
- if (dest.rdbuf()->sputn(d, len) != len) {
- dest.setstate(std::ios_base::badbit);
- }
- }
- return dest;
- }
 
- __int128 parse(string &s) {
- __int128 ret = 0;
- for (int i = 0; i < s.length(); i++)
- if ('0' <= s[i] && s[i] <= '9')
- ret = 10 * ret + s[i] - '0';
- return ret;
- }
- */
+typedef __int128_t Int;
+std::ostream &operator<<(std::ostream &dest, __int128_t value) {
+  std::ostream::sentry s(dest);
+  if (s) {
+    __uint128_t tmp = value < 0 ? -value : value;
+    char buffer[128];
+    char *d = std::end(buffer);
+    do {
+      --d;
+      *d = "0123456789"[tmp % 10];
+      tmp /= 10;
+    } while (tmp != 0);
+    if (value < 0) {
+      --d;
+      *d = '-';
+    }
+    int len = std::end(buffer) - d;
+    if (dest.rdbuf()->sputn(d, len) != len) {
+      dest.setstate(std::ios_base::badbit);
+    }
+  }
+  return dest;
+}
+
+__int128 parse(string &s) {
+  __int128 ret = 0;
+  for (int i = 0; i < s.length(); i++)
+    if ('0' <= s[i] && s[i] <= '9')
+      ret = 10 * ret + s[i] - '0';
+  return ret;
+}
 
 #ifndef _DEBUG
 #define printvv(...)
@@ -103,29 +102,56 @@ template <class T> bool chmin(T &a, const T &b) {
   }
   return false;
 }
-
+//高速累乗 繰り返し自乗法
+//オーバーフローする可能性があれば掛け算にmodmul()を使う
+Int modpow(Int base, long long exponent) {
+  Int res = 1;
+  while (exponent > 0) {
+    if (exponent & 1)
+      res = res * base;
+    base = base * base;
+    exponent >>= 1;
+  }
+  return res;
+}
+//高速累乗 繰り返し自乗法
+//オーバーフローする可能性があれば掛け算にmodmul()を使う
+long long modpow(long long base, long long exponent) {
+  long long res = 1;
+  while (exponent > 0) {
+    if (exponent & 1)
+      res = res * base;
+    base = base * base;
+    exponent >>= 1;
+  }
+  return res;
+}
 signed main(signed argc, char *argv[]) {
   cin.tie(0);
   ios::sync_with_stdio(false);
   cout << fixed << setprecision(12);
 
-  int N, c;
-  cin >> N >> c;
-  vector<int> a(N);
-  rep(i, 0, N) { cin >> a[i]; }
-  map<int, int> cnt, mi;
-  int ans = 0;
-  rep(i, 0, N) {
-    if (a[i] == c)
-      cnt[a[i]]++;
-    else {
-      chmin(mi[a[i]], cnt[a[i]] - cnt[c]);
-      int r = ++cnt[a[i]] - cnt[c];
-      int l = mi[a[i]];
-      chmax(ans, r - l);
+  int N;
+  cin >> N;
+  vector<int> A(N);
+  rep(i, 0, N) { cin >> A[i]; }
+  vector<vector<int>> dp(N, vector<int>(16));
+
+  rrep(i, 0, N) {
+    rep(j, 0, 16) {
+      if (i == N - 1) {
+        dp[i][j] = j;
+      } else {
+        int x=A[i]*modpow(4,j);
+        int y=A[i+1];
+        int k=0;
+        while(x>=y){
+          y*=4;
+          k++;
+        }
+      }
     }
   }
-  cout << ans + count(all(a), c) << endl;
 
   return 0;
 }

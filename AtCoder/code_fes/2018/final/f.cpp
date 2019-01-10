@@ -8,7 +8,7 @@ using namespace std;
 #define dump(...)
 #endif
 
-//#define int long long
+#define int long long
 #define ll long long
 #define ll1 1ll
 #define ONE 1ll
@@ -104,28 +104,54 @@ template <class T> bool chmin(T &a, const T &b) {
   return false;
 }
 
+int dp[100001];
 signed main(signed argc, char *argv[]) {
   cin.tie(0);
   ios::sync_with_stdio(false);
   cout << fixed << setprecision(12);
 
-  int N, c;
-  cin >> N >> c;
-  vector<int> a(N);
-  rep(i, 0, N) { cin >> a[i]; }
-  map<int, int> cnt, mi;
-  int ans = 0;
+  int N, K;
+  cin >> N >> K;
+  vector<int> t(N), a(N);
+  rep(i, 0, N) { cin >> t[i] >> a[i]; }
+  /*
+  vector<priority_queue<int, vector<int>, greater<int>>> v(2);
+  int grume = 0;
+  int sum = 0;
   rep(i, 0, N) {
-    if (a[i] == c)
-      cnt[a[i]]++;
-    else {
-      chmin(mi[a[i]], cnt[a[i]] - cnt[c]);
-      int r = ++cnt[a[i]] - cnt[c];
-      int l = mi[a[i]];
-      chmax(ans, r - l);
+    if (t[i] == 0)
+      grume--;
+    else
+      grume++;
+    v[t[i]].push(a[i]);
+    if (grume == 0) {
+      while (v[1].size())
+        sum += v[1].top(), v[1].pop();
+    } else if (grume == K) {
+      while (v[0].size())
+        sum += v[0].top(), v[0].pop();
+    } else if (grume > K)
+      v[1].pop(), grume--;
+    else if (grume < 0)
+      v[0].pop(), grume++;
+  }
+
+  rep(i, 0, v.size()) {
+    while (v[i].size())
+      sum += v[i].top(), v[i].pop();
+  }
+  cout << sum << endl;
+  */
+
+  memset(dp, 0, sizeof(dp));
+  rrep(i, 0, N) {
+    if (t[i]) {
+      rep(j, 0, K) { chmax(dp[j], dp[j + 1] + a[i]); }
+    } else {
+      rrep(j, 1, K + 1) { chmax(dp[j], dp[j - 1] + a[i]); }
     }
   }
-  cout << ans + count(all(a), c) << endl;
+  cout << dp[0] << endl;
 
   return 0;
 }

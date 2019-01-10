@@ -8,7 +8,7 @@ using namespace std;
 #define dump(...)
 #endif
 
-//#define int long long
+#define int long long
 #define ll long long
 #define ll1 1ll
 #define ONE 1ll
@@ -109,23 +109,38 @@ signed main(signed argc, char *argv[]) {
   ios::sync_with_stdio(false);
   cout << fixed << setprecision(12);
 
-  int N, c;
-  cin >> N >> c;
-  vector<int> a(N);
-  rep(i, 0, N) { cin >> a[i]; }
-  map<int, int> cnt, mi;
-  int ans = 0;
+  int N;
+  cin >> N;
+  vector<int> A(N);
+  rep(i, 0, N) { cin >> A[i]; }
+  map<int, vector<int>> mp;
+  vector<int> B(A);
   rep(i, 0, N) {
-    if (a[i] == c)
-      cnt[a[i]]++;
-    else {
-      chmin(mi[a[i]], cnt[a[i]] - cnt[c]);
-      int r = ++cnt[a[i]] - cnt[c];
-      int l = mi[a[i]];
-      chmax(ans, r - l);
-    }
+    if (B[i] != 0)
+      mp[B[i]].eb(i);
   }
-  cout << ans + count(all(a), c) << endl;
+  sort(all(B));
+  B.erase(unique(all(B)), B.end());
+  reverse(all(B));
+
+  int c = 0, ans = 0;
+  vector<int> visited(N, 0);
+  for (auto x : B) {
+    for (auto y : mp[x]) {
+      int z = 0;
+      if (y - 1 >= 0)
+        z += visited[y - 1];
+      if (y + 1 < N)
+        z += visited[y + 1];
+      visited[y] = 1;
+      if (z == 2)
+        c--;
+      else if (z == 0)
+        c++;
+    }
+    chmax(ans, c);
+  }
+  cout << ans << endl;
 
   return 0;
 }

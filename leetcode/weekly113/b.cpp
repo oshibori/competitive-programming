@@ -8,7 +8,7 @@ using namespace std;
 #define dump(...)
 #endif
 
-//#define int long long
+#define int long long
 #define ll long long
 #define ll1 1ll
 #define ONE 1ll
@@ -103,29 +103,51 @@ template <class T> bool chmin(T &a, const T &b) {
   }
   return false;
 }
-
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+  void nodesort(TreeNode *v) {
+    if (v == NULL)
+      return;
+    if (v->left == NULL) {
+      swap(v->left, v->right);
+    } else if (v->right != NULL) {
+      if ((v->left->val) > (v->right->val)) {
+        swap(v->left, v->right);
+      }
+    }
+    nodesort(v->left);
+    nodesort(v->right);
+  }
+  void dfs(TreeNode *root, vector<int> &v) {
+    if (root == NULL)
+      return;
+    v.eb(root->val);
+    dfs(root->left, v);
+    dfs(root->right, v);
+    return;
+  }
+  bool flipEquiv(TreeNode *root1, TreeNode *root2) {
+    nodesort(root1);
+    nodesort(root2);
+    vector<int> v1, v2;
+    dfs(root1,v1);
+    dfs(root2,v2);
+    return v1==v2;
+  }
+};
 signed main(signed argc, char *argv[]) {
   cin.tie(0);
   ios::sync_with_stdio(false);
   cout << fixed << setprecision(12);
-
-  int N, c;
-  cin >> N >> c;
-  vector<int> a(N);
-  rep(i, 0, N) { cin >> a[i]; }
-  map<int, int> cnt, mi;
-  int ans = 0;
-  rep(i, 0, N) {
-    if (a[i] == c)
-      cnt[a[i]]++;
-    else {
-      chmin(mi[a[i]], cnt[a[i]] - cnt[c]);
-      int r = ++cnt[a[i]] - cnt[c];
-      int l = mi[a[i]];
-      chmax(ans, r - l);
-    }
-  }
-  cout << ans + count(all(a), c) << endl;
 
   return 0;
 }

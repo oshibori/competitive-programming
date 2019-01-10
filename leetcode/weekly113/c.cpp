@@ -103,29 +103,37 @@ template <class T> bool chmin(T &a, const T &b) {
   }
   return false;
 }
-
+class Solution {
+public:
+  vector<int> deckRevealedIncreasing(vector<int> &deck) {
+    sort(all(deck));
+    dump(deck);
+    deque<int> d;
+    rep(i, 0, deck.size()) d.pb(i);
+    dump(d);
+    vector<int> ans;
+    while (d.size()) {
+      ans.eb(d[0]);
+      d.pop_front();
+      if (d.size()) {
+        d.pb(d[0]);
+        d.pop_front();
+      }
+    }
+    dump(ans);
+    vector<int>aaa(deck.size());
+    rep(i, 0, deck.size()) { aaa[ans[i]] = deck[i]; }
+    dump(aaa);
+    return aaa;
+  }
+};
 signed main(signed argc, char *argv[]) {
   cin.tie(0);
   ios::sync_with_stdio(false);
   cout << fixed << setprecision(12);
 
-  int N, c;
-  cin >> N >> c;
-  vector<int> a(N);
-  rep(i, 0, N) { cin >> a[i]; }
-  map<int, int> cnt, mi;
-  int ans = 0;
-  rep(i, 0, N) {
-    if (a[i] == c)
-      cnt[a[i]]++;
-    else {
-      chmin(mi[a[i]], cnt[a[i]] - cnt[c]);
-      int r = ++cnt[a[i]] - cnt[c];
-      int l = mi[a[i]];
-      chmax(ans, r - l);
-    }
-  }
-  cout << ans + count(all(a), c) << endl;
+  vector<int> v = {17, 13, 11, 2, 3, 5, 7};
+  Solution().deckRevealedIncreasing(v);
 
   return 0;
 }

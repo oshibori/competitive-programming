@@ -204,6 +204,28 @@ vector<int> prime_factorization(int x) {
   return factors;
 }
 
+//素因数分解 faster
+// http://www.osak.jp/diary/diary_201310.html#20131017
+vector<int> prime_factorization(int x) {
+  vector<int> min_fact(x + 1);
+  min_fact[1] = 1;
+  for (int i = 2; i <= x; i++) {
+    if (min_fact[i] != 0)
+      continue;
+    for (int j = i; j <= x; j += i) {
+      if (min_fact[j] == 0)
+        min_fact[j] = i;
+    }
+  }
+  vector<int>fact;
+  while(x>1){
+    int f = min_fact[x];
+    fact.emplace_back(f);
+    x/=f;
+  }
+  return fact;
+}
+
 //オイラーのφ関数（Euler's totient function）
 // nと互いに素な数[1,n]の個数
 // http://mathtrain.jp/phi

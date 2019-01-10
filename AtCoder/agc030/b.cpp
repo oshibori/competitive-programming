@@ -8,7 +8,7 @@ using namespace std;
 #define dump(...)
 #endif
 
-//#define int long long
+#define int long long
 #define ll long long
 #define ll1 1ll
 #define ONE 1ll
@@ -104,28 +104,72 @@ template <class T> bool chmin(T &a, const T &b) {
   return false;
 }
 
+int dp[2222][2222][2];
+tuple<int, int, int> restoration[2222][2222][2];
+int X[2222];
+int L;
+int N;
+int dfs(int x, int y, int z) {
+  int &ret = dp[x][y][z];
+  if (ret >= 0)
+    return ret;
+  if (x == y) {
+    return 0;
+  }
+  if (z == 0) {
+    int a = dfs(x + 1, y, 0) + X[x + 1] - X[x];
+    int b = dfs(x + 1, y, 1) + X[x] + L - X[y];
+    if (a > b) {
+      restoration[x][y][z] = make_tuple(x + 1, y, 0);
+    } else
+      restoration[x][y][z] = make_tuple(x + 1, y, 1);
+  } else {
+    int a = dfs(x, y - 1, 1) + X[y] - X[y - 1];
+    int b = dfs(x, y - 1, 0) + X[x] + L - X[y];
+    if (a > b) {
+      restoration[x][y][z] = make_tuple(x, y - 1, 1);
+    } else
+      restoration[x][y][z] = make_tuple(x, y - 1, 0);
+  }
+  return ret;
+}
 signed main(signed argc, char *argv[]) {
   cin.tie(0);
   ios::sync_with_stdio(false);
   cout << fixed << setprecision(12);
 
-  int N, c;
-  cin >> N >> c;
-  vector<int> a(N);
-  rep(i, 0, N) { cin >> a[i]; }
-  map<int, int> cnt, mi;
-  int ans = 0;
-  rep(i, 0, N) {
-    if (a[i] == c)
-      cnt[a[i]]++;
-    else {
-      chmin(mi[a[i]], cnt[a[i]] - cnt[c]);
-      int r = ++cnt[a[i]] - cnt[c];
-      int l = mi[a[i]];
-      chmax(ans, r - l);
-    }
+  rep(i, 0, 2222) rep(j, 0, 2222) rep(k, 0, 2) dp[i][j][k] = -1;
+  cin >> L;
+  cin >> N;
+  assert(N <= 2000);
+  rep(i, 0, N) { cin >> X[i]; }
+  int a = dfs(0, N - 1, 0) + X[0];
+  int b = dfs(0, N - 1, 1) + L - X[N - 1];
+  int ans = max(a, b);
+  int x = 0, y = N - 1, z;
+  if (a > b) {
+    z = 0;
+  } else {
+    z = 1;
   }
-  cout << ans + count(all(a), c) << endl;
+  dump(x, y, z);
+  while (x != y) {
+    auto t = restoration[x][y][z];
+    dump(t);
+    int cur, nxt;
+    if (z == 0) {
+      cur = x;
+    } else {
+      cur = y;
+    }
+    tie(x, y, z) = t;
+    if (z == 0) {
+      nxt = x;
+    } else {
+      nxt = y;
+    }
+    dump(cur,nxt);
+  }
 
   return 0;
 }

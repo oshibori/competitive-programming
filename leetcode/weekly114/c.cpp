@@ -103,29 +103,63 @@ template <class T> bool chmin(T &a, const T &b) {
   }
   return false;
 }
+class Solution {
+public:
+  bool f(int i, vector<int> &v, vector<string> &A) {
+    if (v.size() == 0)
+      return 1;
+    int j = 0;
+    while (j + 1 < v.size() and A[v[j]][i] <= A[v[j + 1]][i]) {
+      j++;
+    }
+    return j == v.size() - 1;
+  }
+  bool g(int i, vector<vector<int>> &v, vector<string> &A) {
+    int ret = 1;
+    for (auto &w : v) {
+      ret &= f(i, w, A);
+    }
+    return ret;
+  }
+  int minDeletionSize(vector<string> &A) {
+    vector<string> v(A);
+    int n = v.size();
+    int m = v[0].size();
+    vector<vector<int>> w;
+    w.eb(vector<int>(n));
+    iota(all(w[0]), 0);
+    dump(w);
 
+    int ans = 0;
+    rep(i, 0, m) {
+      if (g(i, w, A)) {
+        dump(i, w);
+        vector<vector<int>> t;
+        for (auto u : w) {
+          map<char, vector<int>> mp;
+          rep(j, 0, u.size()) { mp[A[u[j]][i]].eb(u[j]); }
+          for (auto u : mp) {
+            t.eb(u.se);
+          }
+        }
+        swap(w, t);
+        ans++;
+      }
+    }
+    dump(m - ans, ans);
+    return m - ans;
+  }
+};
 signed main(signed argc, char *argv[]) {
   cin.tie(0);
   ios::sync_with_stdio(false);
   cout << fixed << setprecision(12);
 
-  int N, c;
-  cin >> N >> c;
-  vector<int> a(N);
-  rep(i, 0, N) { cin >> a[i]; }
-  map<int, int> cnt, mi;
-  int ans = 0;
-  rep(i, 0, N) {
-    if (a[i] == c)
-      cnt[a[i]]++;
-    else {
-      chmin(mi[a[i]], cnt[a[i]] - cnt[c]);
-      int r = ++cnt[a[i]] - cnt[c];
-      int l = mi[a[i]];
-      chmax(ans, r - l);
-    }
-  }
-  cout << ans + count(all(a), c) << endl;
+   vector<string> input{"ca", "bb", "ac"};
+//   vector<string> input{"xc", "yb", "za"};
+//   vector<string> input{"zyx", "wvu", "tsr"};
+  //vector<string> input{"bbjwefkpb", "axmksfchw"};
+  Solution().minDeletionSize(input);
 
   return 0;
 }

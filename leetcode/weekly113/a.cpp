@@ -103,29 +103,31 @@ template <class T> bool chmin(T &a, const T &b) {
   }
   return false;
 }
-
+class Solution {
+public:
+  string largestTimeFromDigits(vector<int> &A) {
+    sort(all(A));
+    int a = -1;
+    int b = -1, c = 0;
+    do {
+      int x = A[0] * 10 + A[1];
+      int y = A[2] * 10 + A[3];
+      if (x < 24 and y < 60 and (a < x or b < y)) {
+        a = x;
+        b = y;
+      }
+    } while (next_permutation(all(A)));
+    if (a != -1 and b != -1)
+      return (a < 10 ? "0" : "") + to_string(a) + ":" + (b < 10 ? "0" : "") +
+             to_string(b);
+    else
+      return "";
+  }
+};
 signed main(signed argc, char *argv[]) {
   cin.tie(0);
   ios::sync_with_stdio(false);
   cout << fixed << setprecision(12);
-
-  int N, c;
-  cin >> N >> c;
-  vector<int> a(N);
-  rep(i, 0, N) { cin >> a[i]; }
-  map<int, int> cnt, mi;
-  int ans = 0;
-  rep(i, 0, N) {
-    if (a[i] == c)
-      cnt[a[i]]++;
-    else {
-      chmin(mi[a[i]], cnt[a[i]] - cnt[c]);
-      int r = ++cnt[a[i]] - cnt[c];
-      int l = mi[a[i]];
-      chmax(ans, r - l);
-    }
-  }
-  cout << ans + count(all(a), c) << endl;
 
   return 0;
 }

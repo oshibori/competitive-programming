@@ -8,7 +8,7 @@ using namespace std;
 #define dump(...)
 #endif
 
-//#define int long long
+#define int long long
 #define ll long long
 #define ll1 1ll
 #define ONE 1ll
@@ -103,29 +103,60 @@ template <class T> bool chmin(T &a, const T &b) {
   }
   return false;
 }
-
+int ans = 0;
+vector<pii> g[111111];
+int up[111111], down[111111];
+void dfs(int p, int v) {
+  vector<pii> lis;
+  lis.eb(0, 0);
+  for (auto e : g[v]) {
+    if (e.fi == p)
+      continue;
+    dfs(v, e.fi);
+    if (e.se == 0) {
+      lis.eb(up[e.fi] + 1, -1);
+    } else if (e.se == 1) {
+      lis.eb(-1, down[e.fi] + 1);
+    } else {
+      lis.eb(up[e.fi] + 1, down[e.fi] + 1);
+    }
+  }
+  int ma = 0;
+  rep(i, 0, lis.size()) {
+    chmax(ans, ma + lis[i].se);
+    chmax(ma, lis[i].fi);
+  }
+  ma = 0;
+  rrep(i, 0, lis.size()) {
+    chmax(ans, ma + lis[i].se);
+    chmax(ma, lis[i].fi);
+  }
+  rep(i, 0, lis.size()) {
+    chmax(up[v], lis[i].fi);
+    chmax(down[v], lis[i].se);
+  }
+}
 signed main(signed argc, char *argv[]) {
   cin.tie(0);
   ios::sync_with_stdio(false);
   cout << fixed << setprecision(12);
 
-  int N, c;
-  cin >> N >> c;
-  vector<int> a(N);
-  rep(i, 0, N) { cin >> a[i]; }
-  map<int, int> cnt, mi;
-  int ans = 0;
-  rep(i, 0, N) {
-    if (a[i] == c)
-      cnt[a[i]]++;
-    else {
-      chmin(mi[a[i]], cnt[a[i]] - cnt[c]);
-      int r = ++cnt[a[i]] - cnt[c];
-      int l = mi[a[i]];
-      chmax(ans, r - l);
+  int N;
+  cin >> N;
+  loop(N - 1) {
+    int a, b, t;
+    cin >> a >> b >> t;
+    a--, b--;
+    if (t == 1) {
+      g[a].eb(b, 1);
+      g[b].eb(a, 0);
+    } else {
+      g[a].eb(b, 2);
+      g[b].eb(a, 2);
     }
   }
-  cout << ans + count(all(a), c) << endl;
+  dfs(-1,0);
+  cout << ans-1 << endl;
 
   return 0;
 }

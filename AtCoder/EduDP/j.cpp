@@ -8,7 +8,7 @@ using namespace std;
 #define dump(...)
 #endif
 
-//#define int long long
+#define int long long
 #define ll long long
 #define ll1 1ll
 #define ONE 1ll
@@ -104,28 +104,40 @@ template <class T> bool chmin(T &a, const T &b) {
   return false;
 }
 
+int N;
+int a[333];
+double dp[333][333][333];
+double dfs(int x, int y, int z) {
+  if (x < 0 or y < 0 or z < 0)
+    return 0;
+  int w = N - (x + y + z);
+  if (w == N)
+    return 0;
+  if (dp[x][y][z] != -1)
+    return dp[x][y][z];
+
+  double t = 1;
+  t += (double)x / N * dfs(x - 1, y, z);
+  t += (double)y / N * dfs(x + 1, y - 1, z);
+  t += (double)z / N * dfs(x, y + 1, z - 1);
+  t /= (1 - (double)w / N);
+  return dp[x][y][z] = t;
+}
 signed main(signed argc, char *argv[]) {
   cin.tie(0);
   ios::sync_with_stdio(false);
   cout << fixed << setprecision(12);
 
-  int N, c;
-  cin >> N >> c;
-  vector<int> a(N);
-  rep(i, 0, N) { cin >> a[i]; }
-  map<int, int> cnt, mi;
-  int ans = 0;
+  rep(i, 0, 333) rep(j, 0, 333) rep(k, 0, 333) dp[i][j][k] = -1;
+
+  cin >> N;
+  vector<int> v(4, 0);
   rep(i, 0, N) {
-    if (a[i] == c)
-      cnt[a[i]]++;
-    else {
-      chmin(mi[a[i]], cnt[a[i]] - cnt[c]);
-      int r = ++cnt[a[i]] - cnt[c];
-      int l = mi[a[i]];
-      chmax(ans, r - l);
-    }
+    cin >> a[i];
+    v[a[i]]++;
   }
-  cout << ans + count(all(a), c) << endl;
+  dump(dfs(0, 0, 0));
+  cout << dfs(v[1], v[2], v[3]) << endl;
 
   return 0;
 }

@@ -8,7 +8,7 @@ using namespace std;
 #define dump(...)
 #endif
 
-//#define int long long
+#define int long long
 #define ll long long
 #define ll1 1ll
 #define ONE 1ll
@@ -109,23 +109,32 @@ signed main(signed argc, char *argv[]) {
   ios::sync_with_stdio(false);
   cout << fixed << setprecision(12);
 
-  int N, c;
-  cin >> N >> c;
-  vector<int> a(N);
-  rep(i, 0, N) { cin >> a[i]; }
-  map<int, int> cnt, mi;
-  int ans = 0;
+  int N, M;
+  cin >> N >> M;
+  int job[101][101][101];
+  memset(job, 0, sizeof(job));
   rep(i, 0, N) {
-    if (a[i] == c)
-      cnt[a[i]]++;
-    else {
-      chmin(mi[a[i]], cnt[a[i]] - cnt[c]);
-      int r = ++cnt[a[i]] - cnt[c];
-      int l = mi[a[i]];
-      chmax(ans, r - l);
+    int a, b, c, w;
+    cin >> a >> b >> c >> w;
+    chmax(job[a][b][c], w);
+  }
+  rep(i, 0, 101) {
+    rep(j, 0, 101) {
+      rep(k, 0, 101) {
+        if (i - 1 >= 0)
+          chmax(job[i][j][k], job[i - 1][j][k]);
+        if (j - 1 >= 0)
+          chmax(job[i][j][k], job[i][j - 1][k]);
+        if (k - 1 >= 0)
+          chmax(job[i][j][k], job[i][j][k - 1]);
+      }
     }
   }
-  cout << ans + count(all(a), c) << endl;
+  loop(M) {
+    int x, y, z;
+    cin >> x >> y >> z;
+    cout << job[x][y][z] << endl;
+  }
 
   return 0;
 }

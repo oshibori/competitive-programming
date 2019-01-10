@@ -103,29 +103,63 @@ template <class T> bool chmin(T &a, const T &b) {
   }
   return false;
 }
-
+class Solution {
+public:
+  //高速累乗 繰り返し自乗法
+  //オーバーフローする可能性があれば掛け算にmodmul()を使う
+  long long modpow(long long base, long long exponent) {
+    long long res = 1;
+    while (exponent > 0) {
+      if (exponent & 1)
+        res = res * base;
+      base = base * base;
+      exponent >>= 1;
+    }
+    return res;
+  }
+  int tallestBillboard(vector<int> &rods) {
+    unordered_map<int, int> mp;
+    int n = rods.size() / 2;
+    int ans = 0;
+    rep(i, 0, modpow(3, n)) {
+      int v = i;
+      int x = 0, y = 0;
+      rep(j, 0, n) {
+        if (v % 3 == 0) {
+          x += rods[j];
+          y += rods[j];
+        } else if (v % 3 == 1) {
+          x += rods[j];
+          y -= rods[j];
+        }
+        v /= 3;
+      }
+      chmax(mp[abs(y)], x);
+    }
+    int m = rods.size() - n;
+    rep(i, 0, modpow(3, m)) {
+      int v = i;
+      int x = 0, y = 0;
+      rep(j, 0, m) {
+        if (v % 3 == 0) {
+          x += rods[j + n];
+          y += rods[j + n];
+        } else if (v % 3 == 1) {
+          x += rods[j + n];
+          y -= rods[j + n];
+        }
+        v /= 3;
+      }
+      if (mp.count(abs(y)))
+        chmax(ans, mp[abs(y)] + x);
+    }
+    return ans / 2;
+  }
+};
 signed main(signed argc, char *argv[]) {
   cin.tie(0);
   ios::sync_with_stdio(false);
   cout << fixed << setprecision(12);
-
-  int N, c;
-  cin >> N >> c;
-  vector<int> a(N);
-  rep(i, 0, N) { cin >> a[i]; }
-  map<int, int> cnt, mi;
-  int ans = 0;
-  rep(i, 0, N) {
-    if (a[i] == c)
-      cnt[a[i]]++;
-    else {
-      chmin(mi[a[i]], cnt[a[i]] - cnt[c]);
-      int r = ++cnt[a[i]] - cnt[c];
-      int l = mi[a[i]];
-      chmax(ans, r - l);
-    }
-  }
-  cout << ans + count(all(a), c) << endl;
 
   return 0;
 }

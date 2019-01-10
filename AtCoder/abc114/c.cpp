@@ -8,7 +8,7 @@ using namespace std;
 #define dump(...)
 #endif
 
-//#define int long long
+#define int long long
 #define ll long long
 #define ll1 1ll
 #define ONE 1ll
@@ -109,23 +109,40 @@ signed main(signed argc, char *argv[]) {
   ios::sync_with_stdio(false);
   cout << fixed << setprecision(12);
 
-  int N, c;
-  cin >> N >> c;
-  vector<int> a(N);
-  rep(i, 0, N) { cin >> a[i]; }
-  map<int, int> cnt, mi;
+  int N;
+  cin >> N;
+
   int ans = 0;
-  rep(i, 0, N) {
-    if (a[i] == c)
-      cnt[a[i]]++;
-    else {
-      chmin(mi[a[i]], cnt[a[i]] - cnt[c]);
-      int r = ++cnt[a[i]] - cnt[c];
-      int l = mi[a[i]];
-      chmax(ans, r - l);
+  string s(10, '0');
+  s[0] = '3';
+  reverse(all(s));
+  dump(s);
+  dump(stoll(s));
+  while (stoll(s) <= N) {
+    dump(stoll(s));
+    if(count(all(s),'3') and count(all(s),'5') and count(all(s),'7'))
+    ans++;
+    reverse(all(s));
+    int i = 0;
+    while (i < s.size()) {
+      if (s[i] == '3') {
+        s[i] = '5';
+        break;
+      } else if (s[i] == '5') {
+        s[i] = '7';
+        break;
+      } else if (s[i] == '7') {
+        s[i] = '3';
+      } else if (s[i] == '0') {
+        s[i] = '3';
+        break;
+      }
+      i++;
     }
+    reverse(all(s));
+    dump(stoll(s));
   }
-  cout << ans + count(all(a), c) << endl;
+  cout << ans << endl;
 
   return 0;
 }

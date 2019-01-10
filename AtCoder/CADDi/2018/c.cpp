@@ -8,7 +8,7 @@ using namespace std;
 #define dump(...)
 #endif
 
-//#define int long long
+#define int long long
 #define ll long long
 #define ll1 1ll
 #define ONE 1ll
@@ -103,29 +103,76 @@ template <class T> bool chmin(T &a, const T &b) {
   }
   return false;
 }
-
+//エラトステネスの篩
+vector<char> eratos(int n) {
+  vector<char> is_prime(n + 1, true);
+  is_prime[0] = is_prime[1] = false;
+  for (int i = 2; i * i <= n; i++)
+    if (is_prime[i]) {
+      int j = i + i;
+      while (j <= n) {
+        is_prime[j] = false;
+        j += i;
+      }
+    }
+  return is_prime;
+}
+//戻り値: n以下の素数
+vector<int> get_primes(int n) {
+  vector<char> is_prime = eratos(n);
+  vector<int> primes;
+  for (int i = 0; i < n + 1; i++)
+    if (is_prime[i])
+      primes.emplace_back(i);
+  return primes;
+}
+//素因数分解
+vector<int> prime_factorization(int x) {
+  vector<int> primes = get_primes(sqrt(x)); //√x以下の素数について調べれば良い
+  vector<int> factors;
+  // xまでのeratosと同じ。ｘはgiven ｘまでの最大の素数。
+  // だんだん左によってくる。だからsqrt(x)まででいい
+  for (auto &p : primes) {
+    while (x % p == 0) {
+      x /= p;
+      factors.emplace_back(p);
+    }
+  }
+  if (x != 1)
+    factors.emplace_back(x);
+  return factors;
+}
+//高速累乗 繰り返し自乗法
+//オーバーフローする可能性があれば掛け算にmodmul()を使う
+long long modpow(long long base, long long exponent) {
+  long long res = 1;
+  while (exponent > 0) {
+    if (exponent & 1)
+      res = res * base;
+    base = base * base;
+    exponent >>= 1;
+  }
+  return res;
+}
 signed main(signed argc, char *argv[]) {
   cin.tie(0);
   ios::sync_with_stdio(false);
   cout << fixed << setprecision(12);
 
-  int N, c;
-  cin >> N >> c;
-  vector<int> a(N);
-  rep(i, 0, N) { cin >> a[i]; }
-  map<int, int> cnt, mi;
-  int ans = 0;
-  rep(i, 0, N) {
-    if (a[i] == c)
-      cnt[a[i]]++;
-    else {
-      chmin(mi[a[i]], cnt[a[i]] - cnt[c]);
-      int r = ++cnt[a[i]] - cnt[c];
-      int l = mi[a[i]];
-      chmax(ans, r - l);
+  int N, P;
+  cin >> N >> P;
+  auto fact = prime_factorization(P);
+  int ans = 1;
+  map<int, int> mp;
+  for (auto x : fact)
+    mp[x]++;
+  for (auto p : mp) {
+    if (p.se >= N) {
+      int g = p.se / N;
+      ans *= modpow(p.fi, g);
     }
   }
-  cout << ans + count(all(a), c) << endl;
+  cout << ans << endl;
 
   return 0;
 }

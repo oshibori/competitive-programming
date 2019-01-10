@@ -8,7 +8,7 @@ using namespace std;
 #define dump(...)
 #endif
 
-//#define int long long
+#define int long long
 #define ll long long
 #define ll1 1ll
 #define ONE 1ll
@@ -109,23 +109,45 @@ signed main(signed argc, char *argv[]) {
   ios::sync_with_stdio(false);
   cout << fixed << setprecision(12);
 
-  int N, c;
-  cin >> N >> c;
-  vector<int> a(N);
-  rep(i, 0, N) { cin >> a[i]; }
-  map<int, int> cnt, mi;
-  int ans = 0;
-  rep(i, 0, N) {
-    if (a[i] == c)
-      cnt[a[i]]++;
-    else {
-      chmin(mi[a[i]], cnt[a[i]] - cnt[c]);
-      int r = ++cnt[a[i]] - cnt[c];
-      int l = mi[a[i]];
-      chmax(ans, r - l);
+  string s, t;
+  cin >> s >> t;
+  vector<vector<int>> dp(s.size() + 1, vector<int>(t.size() + 1));
+  vector<vector<int>> re(dp);
+
+  rep(i, 1, s.size() + 1) {
+    rep(j, 1, t.size() + 1) {
+      chmax(dp[i][j], dp[i - 1][j]);
+      chmax(dp[i][j], dp[i][j - 1]);
+      bool f = false;
+      if (s[i - 1] == t[j - 1]) {
+        f = true;
+        chmax(dp[i][j], dp[i - 1][j - 1] + 1);
+      }
+
+      if (dp[i][j] == dp[i - 1][j]) {
+        re[i][j] = 1;
+      } else if (dp[i][j] == dp[i][j - 1]) {
+        re[i][j] = 2;
+      } else if (f and dp[i][j] == dp[i - 1][j - 1] + 1) {
+        re[i][j] = 3;
+      }
     }
   }
-  cout << ans + count(all(a), c) << endl;
+  string ans;
+  int i = s.size(), j = t.size();
+  while (i > 0 and j > 0) {
+    if (re[i][j] == 1) {
+      i--;
+    } else if (re[i][j] == 2) {
+      j--;
+    } else if (re[i][j] == 3) {
+      ans.pb(s[i - 1]);
+      i--;
+      j--;
+    }
+  }
+  reverse(all(ans));
+  cout<<ans<<endl;
 
   return 0;
 }

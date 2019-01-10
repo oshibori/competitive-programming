@@ -8,7 +8,7 @@ using namespace std;
 #define dump(...)
 #endif
 
-//#define int long long
+#define int long long
 #define ll long long
 #define ll1 1ll
 #define ONE 1ll
@@ -104,28 +104,86 @@ template <class T> bool chmin(T &a, const T &b) {
   return false;
 }
 
+int H, W;
+bool inrange(int x, int y) { return 0 <= x and x < H and 0 <= y and y < W; }
+int dx[] = {1, 0, -1, 0}, dy[] = {0, 1, 0, -1};
+bool check(vector<vector<int>> &v) {
+  bool f = true;
+  rep(i, 0, H * W - 1) {
+    if (v[i / W][i % W] + 1 != v[(i + 1) / W][(i + 1) % W])
+      f = false;
+  }
+  return f;
+}
+using node = vector<vector<int>>;
+int h(vector<vector<int>> &v) {
+  int ret = 0;
+  rep(i, 0, v.size()) {
+    rep(j, 0, v[i].size()) {
+      if (not v[i][j])
+        continue;
+      int k = v[i][j] - 1;
+      int x = k / W;
+      int y = k % W;
+      ret += abs(i - x) + abs(j - y);
+    }
+  }
+  return ret;
+}
+int bfs(vector<vector<int>> v) {
+  using state = tuple<int, node>;
+  priority_queue<state, vector<state>, greater<state>> pq;
+  pq.push(state(h(v), v));
+  map<node, int> mp, color;
+  mp[v] = 0;
+  vector<vector<int>> w(H, vector<int>(W));
+  rep(i, 0, H) rep(j, 0, W) w[i][j] = i * W + j + 1;
+  w[H - 1][W - 1] = 0;
+  while (pq.size()) {
+    node u;
+    int c;
+    tie(c, u) = pq.top();
+    pq.pop();
+    if (u == w) {
+      break;
+    }
+    rep(i, 0, u.size()) {
+      rep(j, 0, u[i].size()) {
+        if (u[i][j] == 0) {
+          rep(k, 0, 4) {
+            int a = i + dx[k], b = j + dy[k];
+            if (inrange(a, b)) {
+              auto nu = u;
+              swap(nu[i][j], nu[a][b]);
+              if (not mp.count(nu)) {
+                mp[nu] = INF;
+              }
+              if (chmin(mp[nu], mp[u] + 1)) {
+                if (mp[nu] + h(nu) < 24)
+                  pq.push(state(mp[nu] + h(nu), nu));
+              }
+            }
+          }
+          goto here;
+        }
+      }
+    }
+  here:;
+  }
+  if (not mp.count(w))
+    mp[w] = 24;
+  return mp[w];
+}
+
 signed main(signed argc, char *argv[]) {
   cin.tie(0);
   ios::sync_with_stdio(false);
   cout << fixed << setprecision(12);
 
-  int N, c;
-  cin >> N >> c;
-  vector<int> a(N);
-  rep(i, 0, N) { cin >> a[i]; }
-  map<int, int> cnt, mi;
-  int ans = 0;
-  rep(i, 0, N) {
-    if (a[i] == c)
-      cnt[a[i]]++;
-    else {
-      chmin(mi[a[i]], cnt[a[i]] - cnt[c]);
-      int r = ++cnt[a[i]] - cnt[c];
-      int l = mi[a[i]];
-      chmax(ans, r - l);
-    }
-  }
-  cout << ans + count(all(a), c) << endl;
+  cin >> H >> W;
+  vector<vector<int>> v(H, vector<int>(W));
+  rep(i, 0, H) rep(j, 0, W) { cin >> v[i][j]; }
+  cout << bfs(v) << endl;
 
   return 0;
 }

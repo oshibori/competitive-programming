@@ -45,7 +45,7 @@ struct Graph {
     used = vector<int>(V, 0);
     G = vector<vector<Edge>>(V);
   }
-  void add_edge(int from, int to, int cost = 1) {
+  void add_arc(int from, int to, int cost = 1) {
     G[from].push_back(Edge(from, to, cost, G[to].size()));
     G[to].push_back(Edge(to, from, 0, G[from].size() - 1));
   }
@@ -87,7 +87,7 @@ signed main() {
   rep(i, 0, E) {
     int a, b, c;
     cin >> a >> b >> c;
-    g.add_edge(a, b, c);
+    g.add_arc(a, b, c);
   }
   cout << g.max_flow(0, V - 1) << endl;
 

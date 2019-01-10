@@ -8,7 +8,7 @@ using namespace std;
 #define dump(...)
 #endif
 
-//#define int long long
+#define int long long
 #define ll long long
 #define ll1 1ll
 #define ONE 1ll
@@ -109,23 +109,49 @@ signed main(signed argc, char *argv[]) {
   ios::sync_with_stdio(false);
   cout << fixed << setprecision(12);
 
-  int N, c;
-  cin >> N >> c;
+  int N;
+  cin >> N;
   vector<int> a(N);
   rep(i, 0, N) { cin >> a[i]; }
-  map<int, int> cnt, mi;
-  int ans = 0;
-  rep(i, 0, N) {
-    if (a[i] == c)
-      cnt[a[i]]++;
-    else {
-      chmin(mi[a[i]], cnt[a[i]] - cnt[c]);
-      int r = ++cnt[a[i]] - cnt[c];
-      int l = mi[a[i]];
-      chmax(ans, r - l);
+  vector<int> b(N);
+  rep(i, 0, N) { cin >> b[i]; }
+  const int C = 51;
+
+  auto f = [&](int S) {
+    dump(bitset<C>(S));
+    vector<vector<int>> dp(C, vector<int>(C, INF));
+    rep(i, 0, C) {
+      rep(j, 1, C) {
+        if ((S >> j) & 1) {
+          dp[i][i % j] = 1;
+        }
+      }
+      dp[i][i] = 0;
     }
+    rep(k, 0, C) {
+      rep(i, 0, C) {
+        rep(j, 0, C) { chmin(dp[i][j], dp[i][k] + dp[k][j]); }
+      }
+    }
+    rep(i, 0, N) {
+      if (dp[a[i]][b[i]] == INF)
+        return false;
+    }
+    return true;
+  };
+
+  int s = 0;
+  rrep(k, 1, C) {
+    if (not f(s | ((1ll << k) - 1))) {
+      s |= 1ll << (k);
+    }
+    dump(bitset<C>(s));
   }
-  cout << ans + count(all(a), c) << endl;
+  if (f(s)) {
+    cout << s << endl;
+  } else {
+    cout << -1 << endl;
+  }
 
   return 0;
 }

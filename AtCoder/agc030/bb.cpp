@@ -8,7 +8,7 @@ using namespace std;
 #define dump(...)
 #endif
 
-//#define int long long
+#define int long long
 #define ll long long
 #define ll1 1ll
 #define ONE 1ll
@@ -109,23 +109,35 @@ signed main(signed argc, char *argv[]) {
   ios::sync_with_stdio(false);
   cout << fixed << setprecision(12);
 
-  int N, c;
-  cin >> N >> c;
-  vector<int> a(N);
-  rep(i, 0, N) { cin >> a[i]; }
-  map<int, int> cnt, mi;
-  int ans = 0;
+  int L, N;
+  cin >> L >> N;
+  vector<int> X(N);
+  deque<int> d;
   rep(i, 0, N) {
-    if (a[i] == c)
-      cnt[a[i]]++;
-    else {
-      chmin(mi[a[i]], cnt[a[i]] - cnt[c]);
-      int r = ++cnt[a[i]] - cnt[c];
-      int l = mi[a[i]];
-      chmax(ans, r - l);
-    }
+    cin >> X[i];
+    d.pb(X[i]);
   }
-  cout << ans + count(all(a), c) << endl;
+
+  auto f = [&](int left) {
+    deque<int> dd(d);
+    int x = (left == 0 ? X[0] : L - X[N - 1]);
+    dump(x);
+    while (dd.size()) {
+      dump(dd);
+      if (left) {
+        x += L - (dd.back() - dd.front());
+        dd.pop_back();
+        left = 0;
+      } else {
+        x += L - (dd.back() - dd.front());
+        dd.pop_front();
+        left = 1;
+      }
+      dump(x);
+    }
+    return x;
+  };
+  cout << max(f(0), f(1)) << endl;
 
   return 0;
 }

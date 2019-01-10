@@ -8,7 +8,7 @@ using namespace std;
 #define dump(...)
 #endif
 
-//#define int long long
+#define int long long
 #define ll long long
 #define ll1 1ll
 #define ONE 1ll
@@ -103,29 +103,45 @@ template <class T> bool chmin(T &a, const T &b) {
   }
   return false;
 }
+pii n[55];
+int dfs(int N, int X) {
+  dump(N, X, n[N].fi);
+  if (X <= 0)
+    return 0;
+  if (N == 0) {
+    return n[0].se;
+  }
 
+  int m = n[N - 1].fi + 2;
+  dump(m, X);
+  if (m > X) {
+    return dfs(N - 1, X - 1);
+  } else {
+    return dfs(N - 1, X - m) + n[N - 1].se + 1;
+  }
+}
 signed main(signed argc, char *argv[]) {
   cin.tie(0);
   ios::sync_with_stdio(false);
   cout << fixed << setprecision(12);
 
-  int N, c;
-  cin >> N >> c;
-  vector<int> a(N);
-  rep(i, 0, N) { cin >> a[i]; }
-  map<int, int> cnt, mi;
-  int ans = 0;
-  rep(i, 0, N) {
-    if (a[i] == c)
-      cnt[a[i]]++;
-    else {
-      chmin(mi[a[i]], cnt[a[i]] - cnt[c]);
-      int r = ++cnt[a[i]] - cnt[c];
-      int l = mi[a[i]];
-      chmax(ans, r - l);
-    }
+  int N;
+  cin >> N;
+  int X;
+  cin >> X;
+  /*
+  vector<string> b;
+  b.eb("P");
+  rep(i, 1, N + 1) {
+    b.eb("B" + b.back() + "P" + b.back() + "B");
+    dump(i, b.back().size(), b.back());
   }
-  cout << ans + count(all(a), c) << endl;
+  */
+
+  n[0] = pii(1, 1);
+  rep(i, 1, N + 1) { n[i] = pii(n[i - 1].fi * 2 + 3, n[i - 1].se * 2 + 1); }
+  dump(n);
+  cout << dfs(N, X) << endl;
 
   return 0;
 }

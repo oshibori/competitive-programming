@@ -104,28 +104,47 @@ template <class T> bool chmin(T &a, const T &b) {
   return false;
 }
 
+class Solution {
+public:
+  vector<int> prisonAfterNDays(vector<int> &cells, int N) {
+    int n = cells.size();
+    vector<vector<int>> doubling(32, vector<int>(1 << n));
+    rep(i, 0, 1 << n) {
+      int x = 0;
+      rep(j, 1, n - 1) {
+        if ((i >> (j - 1) & 1) ^ (i >> (j + 1) & 1) == 0)
+          x |= (1 << j);
+      }
+      doubling[0][i] = x;
+    }
+    rep(i, 1, 32) {
+      rep(j, 0, 1 << n) {
+        doubling[i][j] = doubling[i - 1][doubling[i - 1][j]];
+      }
+    }
+    int c = 0;
+    rep(i, 0, n) {
+      if (cells[i])
+        c |= (1 << i);
+    }
+    rep(i, 0, 32) {
+      if ((N >> i) & 1)
+        c = doubling[i][c];
+    }
+    rep(i, 0, n) { cells[i] = (c >> i) & 1; }
+    dump(cells);
+    return cells;
+  }
+};
 signed main(signed argc, char *argv[]) {
   cin.tie(0);
   ios::sync_with_stdio(false);
   cout << fixed << setprecision(12);
 
-  int N, c;
-  cin >> N >> c;
-  vector<int> a(N);
-  rep(i, 0, N) { cin >> a[i]; }
-  map<int, int> cnt, mi;
-  int ans = 0;
-  rep(i, 0, N) {
-    if (a[i] == c)
-      cnt[a[i]]++;
-    else {
-      chmin(mi[a[i]], cnt[a[i]] - cnt[c]);
-      int r = ++cnt[a[i]] - cnt[c];
-      int l = mi[a[i]];
-      chmax(ans, r - l);
-    }
-  }
-  cout << ans + count(all(a), c) << endl;
+  int n = 7;
+  vector<int> input = {0, 1, 0, 1, 1, 0, 0, 1};
+  auto hoge = Solution();
+  (hoge.prisonAfterNDays(input, n));
 
   return 0;
 }

@@ -103,29 +103,43 @@ template <class T> bool chmin(T &a, const T &b) {
   }
   return false;
 }
-
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+  int numofnode(TreeNode *root) {
+    if (root == NULL)
+      return 0;
+    else
+      return 1 + numofnode(root->left) + numofnode(root->right);
+  }
+  bool isCompleteTree(TreeNode *root) {
+    vector<TreeNode *> v(150, NULL);
+    v[1] = root;
+    int cnt = 0;
+    rep(i, 1, 150) {
+      TreeNode *p = v[i];
+      if (p == NULL) {
+        break;
+      }
+      cnt++;
+      v[i * 2] = p->left;
+      v[i * 2 + 1] = p->right;
+    }
+    return cnt == numofnode(root);
+  }
+};
 signed main(signed argc, char *argv[]) {
   cin.tie(0);
   ios::sync_with_stdio(false);
   cout << fixed << setprecision(12);
-
-  int N, c;
-  cin >> N >> c;
-  vector<int> a(N);
-  rep(i, 0, N) { cin >> a[i]; }
-  map<int, int> cnt, mi;
-  int ans = 0;
-  rep(i, 0, N) {
-    if (a[i] == c)
-      cnt[a[i]]++;
-    else {
-      chmin(mi[a[i]], cnt[a[i]] - cnt[c]);
-      int r = ++cnt[a[i]] - cnt[c];
-      int l = mi[a[i]];
-      chmax(ans, r - l);
-    }
-  }
-  cout << ans + count(all(a), c) << endl;
 
   return 0;
 }

@@ -8,7 +8,7 @@ using namespace std;
 #define dump(...)
 #endif
 
-//#define int long long
+#define int long long
 #define ll long long
 #define ll1 1ll
 #define ONE 1ll
@@ -109,23 +109,39 @@ signed main(signed argc, char *argv[]) {
   ios::sync_with_stdio(false);
   cout << fixed << setprecision(12);
 
-  int N, c;
-  cin >> N >> c;
-  vector<int> a(N);
-  rep(i, 0, N) { cin >> a[i]; }
-  map<int, int> cnt, mi;
-  int ans = 0;
+  int N;
+  cin >> N;
+  map<int, int> mp;
+  vector<int> D(N);
   rep(i, 0, N) {
-    if (a[i] == c)
-      cnt[a[i]]++;
-    else {
-      chmin(mi[a[i]], cnt[a[i]] - cnt[c]);
-      int r = ++cnt[a[i]] - cnt[c];
-      int l = mi[a[i]];
-      chmax(ans, r - l);
+    cin >> D[i];
+    mp[D[i]] = i;
+  }
+  vector<int> size(N, 1);
+  vector<pii> ans;
+  vector<int> dd(N);
+  for (auto it = mp.rbegin(); *it != *mp.begin(); it++) {
+    int d, i;
+    tie(d, i) = *it;
+    dump(d, i, size);
+    int nd = d + 2 * size[i] - N;
+    dump(nd);
+    if (not mp.count(nd) or mp[nd] == i) {
+      cout << -1 << endl;
+      return 0;
+    }
+    int parent = mp[nd];
+    ans.eb(i, parent);
+    size[parent] += size[i];
+    dd[parent] += dd[i] + size[i];
+  }
+  if (dd[mp.begin()->second] != D[mp.begin()->second]) {
+    cout << -1 << endl;
+  } else {
+    for (auto p : ans) {
+      cout << p.fi + 1 << " " << p.se + 1 << endl;
     }
   }
-  cout << ans + count(all(a), c) << endl;
 
   return 0;
 }

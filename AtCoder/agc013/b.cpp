@@ -8,7 +8,7 @@ using namespace std;
 #define dump(...)
 #endif
 
-//#define int long long
+#define int long long
 #define ll long long
 #define ll1 1ll
 #define ONE 1ll
@@ -109,23 +109,48 @@ signed main(signed argc, char *argv[]) {
   ios::sync_with_stdio(false);
   cout << fixed << setprecision(12);
 
-  int N, c;
-  cin >> N >> c;
-  vector<int> a(N);
-  rep(i, 0, N) { cin >> a[i]; }
-  map<int, int> cnt, mi;
-  int ans = 0;
-  rep(i, 0, N) {
-    if (a[i] == c)
-      cnt[a[i]]++;
-    else {
-      chmin(mi[a[i]], cnt[a[i]] - cnt[c]);
-      int r = ++cnt[a[i]] - cnt[c];
-      int l = mi[a[i]];
-      chmax(ans, r - l);
-    }
+  int N, M;
+  cin >> N >> M;
+  vector<int> A(M), B(M);
+  vector<vector<int>> G(N);
+  rep(i, 0, M) {
+    cin >> A[i] >> B[i];
+    A[i]--;
+    B[i]--;
+    G[A[i]].eb(B[i]);
+    G[B[i]].eb(A[i]);
   }
-  cout << ans + count(all(a), c) << endl;
+  vector<int> visited(N);
+  deque<int> ans;
+  ans.pb(A[0]);
+  ans.pb(B[0]);
+  visited[A[0]] = 1;
+  visited[B[0]] = 1;
+  while (1) {
+    int x = ans[0];
+    int i = 0;
+    while (i < G[x].size() and visited[G[x][i]])
+      i++;
+    if (i == G[x].size())
+      break;
+    ans.push_front(G[x][i]);
+    visited[G[x][i]] = 1;
+  }
+  while (1) {
+    int x = ans.back();
+    int i = 0;
+    while (i < G[x].size() and visited[G[x][i]])
+      i++;
+    if (i == G[x].size())
+      break;
+    ans.push_back(G[x][i]);
+    visited[G[x][i]] = 1;
+  }
+
+  cout << ans.size() << endl;
+  rep(i, 0, ans.size()) {
+    cout << ans[i]+1 << (i == ans.size() - 1 ? '\n' : ' ');
+  }
 
   return 0;
 }

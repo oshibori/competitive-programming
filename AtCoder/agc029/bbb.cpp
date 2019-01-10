@@ -8,7 +8,7 @@ using namespace std;
 #define dump(...)
 #endif
 
-//#define int long long
+#define int long long
 #define ll long long
 #define ll1 1ll
 #define ONE 1ll
@@ -103,29 +103,99 @@ template <class T> bool chmin(T &a, const T &b) {
   }
   return false;
 }
-
+bool f(int x) {
+  rep(j, 0, 31) {
+    if (x == (1ll << j))
+      return 1;
+  }
+  return 0;
+}
+struct Edge {
+  int from, to, cost, rev;
+  Edge(int from, int to, int cost, int rev)
+      : from(from), to(to), cost(cost), rev(rev) {}
+};
+struct Graph {
+  int V;
+  vector<vector<Edge>> G;
+  vector<int> used;
+  Graph(int V) : V(V) {
+    used = vector<int>(V, 0);
+    G = vector<vector<Edge>>(V);
+  }
+  void add_arc(int from, int to, int cost = 1) {
+    G[from].push_back(Edge(from, to, cost, G[to].size()));
+    G[to].push_back(Edge(to, from, 0, G[from].size() - 1));
+  }
+  int augment_path(int s, int t, int f) {
+    if (s == t)
+      return f;
+    used[s] = true;
+    rep(i, 0, G[s].size()) {
+      Edge &e = G[s][i];
+      if (!used[e.to] && e.cost > 0) {
+        int d = augment_path(e.to, t, min(f, e.cost));
+        if (d > 0) {
+          e.cost -= d;
+          G[e.to][e.rev].cost += d;
+          return d;
+        }
+      }
+    }
+    return 0;
+  }
+  int max_flow(int s, int t) {
+    int flow = 0;
+    while (1) {
+      used = vector<int>(V, 0);
+      int f = augment_path(s, t, INF);
+      if (f == 0)
+        break;
+      flow += f;
+    }
+    return flow;
+  }
+};
+void dfs(vector<vector<int>> &g, vector<int> &left, int v, int c) {
+  if (left[v] != -1)
+    continue;
+  left[v] = c;
+  for (auto u : g[v]) {
+    dfs(g, left, u, !c);
+  }
+}
 signed main(signed argc, char *argv[]) {
   cin.tie(0);
   ios::sync_with_stdio(false);
   cout << fixed << setprecision(12);
 
-  int N, c;
-  cin >> N >> c;
-  vector<int> a(N);
-  rep(i, 0, N) { cin >> a[i]; }
-  map<int, int> cnt, mi;
-  int ans = 0;
+  int N;
+  cin >> N;
+  vector<int> A(N);
+  map<int, int> mp;
   rep(i, 0, N) {
-    if (a[i] == c)
-      cnt[a[i]]++;
-    else {
-      chmin(mi[a[i]], cnt[a[i]] - cnt[c]);
-      int r = ++cnt[a[i]] - cnt[c];
-      int l = mi[a[i]];
-      chmax(ans, r - l);
+    cin >> A[i];
+    mp[A[i]]++;
+  }
+  sort(all(A));
+  A.erase(unique(all(A)), A.end());
+
+  map<int, int> idx;
+  rep(i, 0, A.size()) { idx[A[i]] = i; }
+  vector<vector<int>> g(A.size());
+  rep(i, 0, A.size()) {
+    rep(j, 1, 31) {
+      int x = (1ll << j) - A[i];
+      if (x == A[i])
+        continue;
+      if (idx.count(x)) {
+        g[i].eb(idx[x]);
+      }
     }
   }
-  cout << ans + count(all(a), c) << endl;
+  vector<int> left(A.size(), -1);
+  rep(i, 0, A.size()) { dfs(g, left, i, 1); }
+
 
   return 0;
 }

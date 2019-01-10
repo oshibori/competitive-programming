@@ -8,7 +8,7 @@ using namespace std;
 #define dump(...)
 #endif
 
-//#define int long long
+#define int long long
 #define ll long long
 #define ll1 1ll
 #define ONE 1ll
@@ -109,23 +109,51 @@ signed main(signed argc, char *argv[]) {
   ios::sync_with_stdio(false);
   cout << fixed << setprecision(12);
 
-  int N, c;
-  cin >> N >> c;
-  vector<int> a(N);
-  rep(i, 0, N) { cin >> a[i]; }
-  map<int, int> cnt, mi;
-  int ans = 0;
-  rep(i, 0, N) {
-    if (a[i] == c)
-      cnt[a[i]]++;
-    else {
-      chmin(mi[a[i]], cnt[a[i]] - cnt[c]);
-      int r = ++cnt[a[i]] - cnt[c];
-      int l = mi[a[i]];
-      chmax(ans, r - l);
+  int R, C;
+  cin >> R >> C;
+  vector<vector<int>> v(R, vector<int>(C));
+  pii s, t;
+  rep(i, 0, R) rep(j, 0, C) {
+    char c;
+    cin >> c;
+    if (c == 's') {
+      s = pii(i, j);
+    } else if (c == 't') {
+      t = pii(i, j);
+    } else {
+      v[i][j] = c - '0';
     }
   }
-  cout << ans + count(all(a), c) << endl;
+  using State = tuple<int, int, int>;
+  priority_queue<State, vector<State>, greater<State>> pq;
+  pq.push(State(0, s.fi, s.se));
+  map<pii, int> mp;
+  mp[s] = 0;
+  int dx[] = {0, 1, 1, 0, -1, -1},
+      dy[][6] = {{1, 0, -1, -1, -1, 0}, {1, 1, 0, -1, 0, 1}};
+  auto inrange = [&](int x, int y) {
+    return 0 <= x and x < R and 0 <= y and y < C;
+  };
+  while (pq.size()) {
+    int cost, x, y;
+    tie(cost, x, y) = pq.top();
+    pq.pop();
+    if (cost > mp[pii(x, y)])
+      continue;
+
+    rep(i, 0, 6) {
+      int a = x + dx[i], b = y + dy[x % 2][i];
+      if (inrange(a, b)) {
+        if (not mp.count(pii(a, b))) {
+          mp[pii(a, b)] = INF;
+        }
+        if (chmin(mp[pii(a, b)], cost + v[a][b])) {
+          pq.push(State(mp[pii(a, b)], a, b));
+        }
+      }
+    }
+  }
+  cout << mp[t] << endl;
 
   return 0;
 }

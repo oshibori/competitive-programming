@@ -64,7 +64,7 @@ struct SCC {
     }
     SC.resize(k);
     rep(i, 0, V) { SC[cmp[i]].emplace_back(i); }
-    rep(i, 0, V) { sort(all(SC[i])); }
+    rep(i, 0, SC.size()) { sort(all(SC[i])); }
     return k;
   }
 };

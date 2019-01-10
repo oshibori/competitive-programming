@@ -8,7 +8,7 @@ using namespace std;
 #define dump(...)
 #endif
 
-//#define int long long
+#define int long long
 #define ll long long
 #define ll1 1ll
 #define ONE 1ll
@@ -109,23 +109,46 @@ signed main(signed argc, char *argv[]) {
   ios::sync_with_stdio(false);
   cout << fixed << setprecision(12);
 
-  int N, c;
-  cin >> N >> c;
-  vector<int> a(N);
-  rep(i, 0, N) { cin >> a[i]; }
-  map<int, int> cnt, mi;
-  int ans = 0;
+  int N, C;
+  cin >> N >> C;
+  vector<vector<int>> v(C + 1);
   rep(i, 0, N) {
-    if (a[i] == c)
-      cnt[a[i]]++;
-    else {
-      chmin(mi[a[i]], cnt[a[i]] - cnt[c]);
-      int r = ++cnt[a[i]] - cnt[c];
-      int l = mi[a[i]];
-      chmax(ans, r - l);
-    }
+    int x;
+    cin >> x;
+    v[x].eb(i + 1);
   }
-  cout << ans + count(all(a), c) << endl;
+  rep(i, 0, C + 1) {
+    if (v[i].size() == 0)
+      continue;
+
+    v[i].eb(0);
+    v[i].eb(N + 1);
+    sort(all(v[i]));
+    dump(v[i]);
+    int ans = (N + 1) * N / 2;
+    rep(j, 1, v[i].size()) {
+      int n = v[i][j] - v[i][j - 1];
+      ans -= n * (n - 1) / 2;
+    }
+    cout << ans << endl;
+    /*
+    int x = v[i].size();
+    int ans = 0;
+    int sum = 0;
+    rep(j, 0, v[i].size() - 1) {
+      int n = v[i][j + 1] - v[i][j];
+      ans += 2 * (j + 1) * (2 * v[i][j] + n - 1) * n / 2;
+      sum += (j + 1) * n;
+      dump(n, ans, sum);
+    }
+    int n = N + 1 - v[i].back();
+    ans += 2 * v[i].size() * (2 * v[i].back() + n - 1) * n / 2;
+    sum += v[i].size() * n;
+    dump(sum);
+    ans -= sum * N;
+    cout << ans << endl;
+    */
+  }
 
   return 0;
 }

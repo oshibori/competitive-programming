@@ -8,7 +8,7 @@ using namespace std;
 #define dump(...)
 #endif
 
-//#define int long long
+#define int long long
 #define ll long long
 #define ll1 1ll
 #define ONE 1ll
@@ -103,29 +103,50 @@ template <class T> bool chmin(T &a, const T &b) {
   }
   return false;
 }
+class Solution {
+public:
+  bool canReorderDoubled(vector<int> &A) {
+    vector<int> v, w;
+    map<int, int> mp;
+    for (auto x : A) {
+      mp[x]++;
+      if (x >= 0)
+        v.eb(x);
+      else
+        w.eb(x);
+    }
+    sort(all(v));
+    v.erase(unique(all(v)), v.end());
+    bool f = true;
+    rep(i, 0, v.size()) {
+      if (mp[v[i]] == 0)
+        continue;
+      mp[v[i] * 2] -= mp[v[i]];
+      if (mp[v[i] * 2] < 0) {
+        f = false;
+        break;
+      }
+    }
+    sort(all(w));
+    w.erase(unique(all(w)),w.end());
+    reverse(all(w));
+    rep(i, 0, w.size()) {
+      if (mp[w[i]] == 0)
+        continue;
+      mp[w[i] * 2] -= mp[w[i]];
+      if (mp[w[i] * 2] < 0) {
+        f = false;
+        break;
+      }
+    }
+    return f;
 
+  }
+};
 signed main(signed argc, char *argv[]) {
   cin.tie(0);
   ios::sync_with_stdio(false);
   cout << fixed << setprecision(12);
-
-  int N, c;
-  cin >> N >> c;
-  vector<int> a(N);
-  rep(i, 0, N) { cin >> a[i]; }
-  map<int, int> cnt, mi;
-  int ans = 0;
-  rep(i, 0, N) {
-    if (a[i] == c)
-      cnt[a[i]]++;
-    else {
-      chmin(mi[a[i]], cnt[a[i]] - cnt[c]);
-      int r = ++cnt[a[i]] - cnt[c];
-      int l = mi[a[i]];
-      chmax(ans, r - l);
-    }
-  }
-  cout << ans + count(all(a), c) << endl;
 
   return 0;
 }
