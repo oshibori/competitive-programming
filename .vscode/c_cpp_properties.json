@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+            ],
+            "includePath": ["C:\\MinGW\\lib\\gcc\\mingw32\\8.2.0\\include"]
+    }
+    ],
+    "version": 4
+}

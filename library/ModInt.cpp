@@ -65,7 +65,7 @@ template <int MOD> istream &operator>>(istream &is, ModInt<MOD> &m) {
   m = ModInt<MOD>(s);
   return is;
 };
-// pow(mint(2), 1000) ‚Ì‚æ‚¤‚É
+// pow(mint(2), 1000) ã®ã‚ˆã†ã«
 template <int MOD> ModInt<MOD> pow(ModInt<MOD> a, unsigned long long k) {
   ModInt<MOD> r = 1;
   while (k) {
@@ -77,12 +77,12 @@ template <int MOD> ModInt<MOD> pow(ModInt<MOD> a, unsigned long long k) {
   return r;
 }
 
-//#define int long long ‚ğg‚Á‚Ä‚à‘åä•v
+//#define int long long ã‚’ä½¿ã£ã¦ã‚‚å¤§ä¸ˆå¤«
 using mint = ModInt<1000000007>;
 
-// nCr‚Å—p‚¢‚é
+// nCrã§ç”¨ã„ã‚‹
 vector<mint> fact, factinv;
-// nCr‚Å—p‚¢‚é —\‚ßŒvZ‚µ‚Ä‚¨‚­
+// nCrã§ç”¨ã„ã‚‹ äºˆã‚è¨ˆç®—ã—ã¦ãŠã
 void nCr_compute_factinv(int N) {
   N = min(N, mint::Mod - 1);
   fact.resize(N + 1);
@@ -102,7 +102,7 @@ mint nCr(int n, int r) {
 
 mint nHr(int n, int r) { return r == 0 ? 1 : nCr(n + r - 1, r); }
 
-// ŠO‚ÅMOD‚ğŒˆ‚ß‚éiMOD‚ª•Ï”)----------------------------------------------
+// å¤–ã§MODã‚’æ±ºã‚ã‚‹ï¼ˆMODãŒå¤‰æ•°)----------------------------------------------
 int MOD;
 struct ModInt {
   unsigned x;
@@ -165,7 +165,7 @@ istream &operator>>(istream &is, ModInt &m) {
   m = ModInt(s);
   return is;
 };
-// pow(mint(2), 1000) ‚Ì‚æ‚¤‚É
+// pow(mint(2), 1000) ã®ã‚ˆã†ã«
 ModInt pow(ModInt a, unsigned long long k) {
   ModInt r = 1;
   while (k) {
@@ -178,9 +178,9 @@ ModInt pow(ModInt a, unsigned long long k) {
 }
 //---------------------------------------------------------------------
 
-//# !Div2By1.cpp‚ğg‚¦‚ÎæZ‚ª‘¬‚­‚È‚é‚©‚àH
-//Vver.
-//Ú‚µ‚­‚ÍŒŸØ‚³‚ê‚Ä‚¢‚È‚¢I“Á‚Éinverse,Š„‚èZ‚ÍMOD‚ª‘å‚«‚¢‚Æ‚½‚Ô‚ñƒI[ƒo[ƒtƒ[‚·‚éII
+//# !Div2By1.cppã‚’ä½¿ãˆã°ä¹—ç®—ãŒé€Ÿããªã‚‹ã‹ã‚‚ï¼Ÿ
+//æ–°ver.
+//è©³ã—ãã¯æ¤œè¨¼ã•ã‚Œã¦ã„ãªã„ï¼ç‰¹ã«inverse,å‰²ã‚Šç®—ã¯MODãŒå¤§ãã„ã¨ãŸã¶ã‚“ã‚ªãƒ¼ãƒãƒ¼ãƒ•ãƒ­ãƒ¼ã™ã‚‹ï¼ï¼
 // MOD * 2 <= 2^32
 template <int MOD> struct ModInt {
   static const int Mod = MOD;
@@ -232,7 +232,7 @@ template <int MOD> struct ModInt {
   }
 };
 
-//‰‰Zq‚Ì—Dæ‡ˆÊ‚ªŒ´ˆö‚ÅƒoƒO‚ğ¶‚Ş‚Ì‚Åg‚í‚È‚¢
+//æ¼”ç®—å­ã®å„ªå…ˆé †ä½ãŒåŸå› ã§ãƒã‚°ã‚’ç”Ÿã‚€ã®ã§ä½¿ã‚ãªã„
 template <int MOD> ModInt<MOD> operator^(ModInt<MOD> a, unsigned long long k) {
   ModInt<MOD> r = 1;
   while (k) {
@@ -244,7 +244,7 @@ template <int MOD> ModInt<MOD> operator^(ModInt<MOD> a, unsigned long long k) {
   return r;
 }
 
-//‹Œver.
+//æ—§ver.
 // MOD * 2 <= 2^31
 template <int MOD> struct ModInt {
   static const int Mod = MOD;

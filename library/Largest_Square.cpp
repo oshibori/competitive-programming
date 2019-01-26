@@ -16,8 +16,8 @@ template<class T> bool chmax(T &a, const T &b) { if (a < b) { a = b; return true
 template<class T> bool chmin(T &a, const T &b) { if (a > b) { a = b; return true; } return false; }
 int Largest_Square(const vector<vector<int>> &field) {
 	int H = field.size(), W = field[0].size();
-	vector<vector<int>>dp(H, vector<int>(W)); // dp[i][j]=ƒ^ƒCƒ‹(i,j)‚©‚ç¶ã‚ÉŒü‚©‚Á‚Ä‚Å‚«‚éÅ‘å‚Ì³•ûŒ`‚Ì•Ó‚Ì’·‚³
-	rep(i, 0, H)rep(j, 0, W) dp[i][j] = (field[i][j] + 1) % 2; // g‚¦‚È‚¢ƒ}ƒX‚Í‚OAg‚¦‚éƒ}ƒX‚Í‚P
+	vector<vector<int>>dp(H, vector<int>(W)); // dp[i][j]=ã‚¿ã‚¤ãƒ«(i,j)ã‹ã‚‰å·¦ä¸Šã«å‘ã‹ã£ã¦ã§ãã‚‹æœ€å¤§ã®æ­£æ–¹å½¢ã®è¾ºã®é•·ã•
+	rep(i, 0, H)rep(j, 0, W) dp[i][j] = (field[i][j] + 1) % 2; // ä½¿ãˆãªã„ãƒã‚¹ã¯ï¼ã€ä½¿ãˆã‚‹ãƒã‚¹ã¯ï¼‘
 	int ret(0);
 	rep(i, 0, H)chmax(ret, dp[i][0]); rep(i, 0, W)chmax(ret, dp[0][i]);
 	rep(i, 1, H)rep(j, 1, W)
@@ -26,7 +26,7 @@ int Largest_Square(const vector<vector<int>> &field) {
 		cout << endl;
 		rep(i, 0, H)rep(j, 0, W)cout << dp[i][j] << (j == W - 1 ? '\n' : ' ');
 	}
-	return ret*ret;// •Ô‚è’l‚Í–ÊÏ‚ÌÅ‘å’l
+	return ret*ret;// è¿”ã‚Šå€¤ã¯é¢ç©ã®æœ€å¤§å€¤
 }
 signed main() {
 	cin.tie(0);

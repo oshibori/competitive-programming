@@ -44,7 +44,7 @@ using namespace std;
 #endif
 
 //#define int long long
-typedef __int128_t Int;
+//typedef __int128_t Int;
 #define DBG 1
 #define rep(i, a, b) for (int i = (a); i < (b); i++)
 #define rrep(i, a, b) for (int i = (b)-1; i >= (a); i--)
