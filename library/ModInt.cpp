@@ -80,6 +80,35 @@ template <int MOD> ModInt<MOD> pow(ModInt<MOD> a, unsigned long long k) {
 //#define int long long を使っても大丈夫
 using mint = ModInt<1000000007>;
 
+// 5は1e9+7の原始根
+// return g^x=a mod p
+int modlog(int g, int a) {
+	// g is a primitive root modulo mint::Mod
+	// let x = i*n + j , n = sqrt(Mod)
+	// g^j = a*inv(g^(i*n)) = a*(inv(g^n))^i
+	//https://en.wikipedia.org/wiki/Baby-step_giant-step
+	//http://sonickun.hatenablog.com/entry/2016/11/20/192743
+	//https://cp-algorithms.com/algebra/discrete-log.html
+	unordered_map<int, int> M;
+	int n = sqrt(mint::Mod);
+	ll cur = 1;
+	for (int i = 0; i < n; i++, (cur *= g) %= mint::Mod) {
+		M[cur] = i;
+	}
+	ll gn = cur;
+	ll gn_inv = mint(gn).inverse().get();
+	cur = 1;
+	ll num = 0;
+	while (1) {
+		ll x = a * cur % mint::Mod;
+		if (M.count(x)) return num + M[x];
+		cur = cur * gn_inv%mint::Mod;
+		num += n;
+	}
+}
+int modlog(int g, mint a) { return modlog(g, a.get()); }
+
+
 // nCrで用いる
 vector<mint> fact, factinv;
 // nCrで用いる 予め計算しておく

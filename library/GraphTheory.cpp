@@ -23,7 +23,7 @@ void addEdge(Graph &g, int a, int b, Weight w = 1) {
 }
 
 
-//‘S’Tõ
+//å…¨æ¢ç´¢
 
 void dfs(const Graph &g, int root) {
 	int n = g.size();
@@ -33,10 +33,10 @@ void dfs(const Graph &g, int root) {
 		int u = st.top(); st.pop();
 		if (vis[u])continue;
 		vis[u] = true;
-		/* ˆ— */
+		/* å‡¦ç† */
 		for (auto &e : g[u]) {
 			if (vis[e.d])continue;
-			/* ˆ— */
+			/* å‡¦ç† */
 			st.emplace(e.d);
 		}
 	}
@@ -50,10 +50,10 @@ void bfs(const Graph &g, int root) {
 		int u = q.front(); q.pop();
 		if (vis[u])continue;
 		vis[u] = true;
-		/* ˆ— */
+		/* å‡¦ç† */
 		for (auto &e : g[u]) {
 			if (vis[e.d])continue;
-			/* ˆ— */
+			/* å‡¦ç† */
 			q.emplace(e.d);
 		}
 	}
@@ -66,10 +66,10 @@ void solve() {
 	function<void(int)> dfs = [&](int u) {
 		if (vis[u])return;
 		vis[u] = true;
-		/* ˆ— */
+		/* å‡¦ç† */
 		for (auto &e : g[u]) {
 			if (vis[e.d])continue;
-			/* ˆ— */
+			/* å‡¦ç† */
 			dfs(e.d);
 		}
 	};
@@ -80,10 +80,10 @@ void solve() {
 			int u = q.front(); q.pop();
 			if (vis[u])continue;
 			vis[u] = true;
-			/* ˆ— */
+			/* å‡¦ç† */
 			for (auto &e : g[u]) {
 				if (vis[e.d])continue;
-				/* ˆ— */
+				/* å‡¦ç† */
 				q.emplace(e.d);
 			}
 		}
@@ -107,12 +107,12 @@ void solve() {
 }
 
 
-//Å’ZŒo˜H–â‘è
+//æœ€çŸ­çµŒè·¯å•é¡Œ
 
-//’Pˆên“_Å’ZŒo˜H(•‰•Â˜H‚È‚µ)
+//å˜ä¸€å§‹ç‚¹æœ€çŸ­çµŒè·¯(è² é–‰è·¯ãªã—)
 //Dijkstra O((|E|+|V|)log|V|)
-//dist: n“_‚©‚çŠe’¸“_‚Ü‚Å‚ÌÅ’Z‹——£
-//–ß‚è’l: Å’ZŒo˜H–Ø‚Ìe’¸“_(ª‚Í-1)
+//dist: å§‹ç‚¹ã‹ã‚‰å„é ‚ç‚¹ã¾ã§ã®æœ€çŸ­è·é›¢
+//æˆ»ã‚Šå€¤: æœ€çŸ­çµŒè·¯æœ¨ã®è¦ªé ‚ç‚¹(æ ¹ã¯-1)
 vector<int> dijkstra(const Graph &g, int s, Array &dist) {
 	int n = g.size();
 	assert(s < n);
@@ -120,7 +120,7 @@ vector<int> dijkstra(const Graph &g, int s, Array &dist) {
 	vector<int> color(n, WHITE); color[s] = GRAY;
 	vector<int> prev(n, -1);
 	dist.assign(n, INF); dist[s] = 0;
-	using State = tuple<Weight, int, int>; //n“_‚©‚ç‚ÌÅ’Z‹——£ q e
+	using State = tuple<Weight, int, int>; //å§‹ç‚¹ã‹ã‚‰ã®æœ€çŸ­è·é›¢ å­ è¦ª
 	priority_queue<State, vector<State>, greater<State>> pq; pq.emplace(0, s, -1);
 	while (pq.size()) {
 		Weight d; int v, u; tie(d, v, u) = pq.top(); pq.pop();
@@ -138,10 +138,10 @@ vector<int> dijkstra(const Graph &g, int s, Array &dist) {
 	return prev;
 }
 
-//’Pˆên“_Å’ZŒo˜H(•‰•Â˜H‚ ‚è)
+//å˜ä¸€å§‹ç‚¹æœ€çŸ­çµŒè·¯(è² é–‰è·¯ã‚ã‚Š)
 //Bellman-Ford O(|V||E|)
-//dist: n“_‚©‚çŠe’¸“_‚Ü‚Å‚ÌÅ’Z‹——£
-//–ß‚è’l: Å’ZŒo˜H–Ø‚Ìe’¸“_, •‰•Â˜H‚È‚µ:true ‚ ‚è:false
+//dist: å§‹ç‚¹ã‹ã‚‰å„é ‚ç‚¹ã¾ã§ã®æœ€çŸ­è·é›¢
+//æˆ»ã‚Šå€¤: æœ€çŸ­çµŒè·¯æœ¨ã®è¦ªé ‚ç‚¹, è² é–‰è·¯ãªã—:true ã‚ã‚Š:false
 pair<vector<int>, bool> bellmanFord(const Graph &g, int s, Array &dist) {
 	int n = g.size();
 	vector<int> prev(n, -1);
@@ -163,10 +163,10 @@ pair<vector<int>, bool> bellmanFord(const Graph &g, int s, Array &dist) {
 	return make_pair(prev, !negative_cycle);
 }
 
-//Œo˜H•œŒ³
-//n“_‚©‚çI“_‚Ü‚Å‚ÌŒo˜H‚ğæ“¾
-//I“_‚©‚çe‚ğÄ‹A“I‚É’H‚èn“_‚É’…‚­‚Ü‚Å‚ÌŒo˜H‚ğ”½“]‚µ‚Ä‚¢‚é
-//‘¶İ‚µ‚È‚¢ê‡‚Ì–ß‚è’l: vector<int>()
+//çµŒè·¯å¾©å…ƒ
+//å§‹ç‚¹ã‹ã‚‰çµ‚ç‚¹ã¾ã§ã®çµŒè·¯ã‚’å–å¾—
+//çµ‚ç‚¹ã‹ã‚‰è¦ªã‚’å†å¸°çš„ã«è¾¿ã‚Šå§‹ç‚¹ã«ç€ãã¾ã§ã®çµŒè·¯ã‚’åè»¢ã—ã¦ã„ã‚‹
+//å­˜åœ¨ã—ãªã„å ´åˆã®æˆ»ã‚Šå€¤: vector<int>()
 vector<int> getPath(int s, int g, vector<int> prev) {
 	vector<int> path;
 	path.emplace_back(g);
@@ -179,8 +179,8 @@ vector<int> getPath(int s, int g, vector<int> prev) {
 	return path;
 }
 
-////Œo˜H•œŒ³(Warshall-Floyd)
-////‘¶İ‚µ‚È‚¢ê‡‚Ì–ß‚è’l: ?
+////çµŒè·¯å¾©å…ƒ(Warshall-Floyd)
+////å­˜åœ¨ã—ãªã„å ´åˆã®æˆ»ã‚Šå€¤: ?
 //vector<int> getPath(int s, int g, vector<vector<int>> next) {
 //	vector<int> path;
 //	for (int i = s; i != g; i = next[i][g])
@@ -189,11 +189,11 @@ vector<int> getPath(int s, int g, vector<int> prev) {
 //	return path;
 //}
 //
-////‘S“_‘ÎŠÔÅ’ZŒo˜H All Pairs Shortest Path ƒoƒO‚ ‚è
+////å…¨ç‚¹å¯¾é–“æœ€çŸ­çµŒè·¯ All Pairs Shortest Path ãƒã‚°ã‚ã‚Š
 ////Warshall Floyd O(V^3)
-////–ß‚è’l:
-////next[i][j]: i‚©‚çj‚Ö‚ÌÅ’ZŒo˜H‚É‚¨‚¯‚éi‚Ì1‚ÂŒã‚Ì“_ «‘‡Å¬
-////•‰•Â˜H‚È‚µ:true ‚ ‚è:false
+////æˆ»ã‚Šå€¤:
+////next[i][j]: iã‹ã‚‰jã¸ã®æœ€çŸ­çµŒè·¯ã«ãŠã‘ã‚‹iã®1ã¤å¾Œã®ç‚¹ è¾æ›¸é †æœ€å°
+////è² é–‰è·¯ãªã—:true ã‚ã‚Š:false
 //pair<vector<vector<int>>, bool> warshall_floyd(const Graph &g, Matrix &dist) {
 //	int n = g.size();
 //	dist.assign(n, Array(n, INF));
@@ -212,7 +212,7 @@ vector<int> getPath(int s, int g, vector<int> prev) {
 //					next[i][j] = next[i][k];
 //				}
 //				else if (k != i && dist[i][k] + dist[k][j] == dist[i][j])
-//					next[i][j] = min(next[i][j], next[i][k]); //«‘‡Å¬
+//					next[i][j] = min(next[i][j], next[i][k]); //è¾æ›¸é †æœ€å°
 //			}
 //	bool negative_cycle = false;
 //	for (int i = 0; i < n; i++)
@@ -221,9 +221,9 @@ vector<int> getPath(int s, int g, vector<int> prev) {
 //	return make_pair(next, !negative_cycle);
 //}
 
-//‘S“_‘ÎŠÔÅ’ZŒo˜H 
+//å…¨ç‚¹å¯¾é–“æœ€çŸ­çµŒè·¯ 
 //Warshall-Floyd O(|V|^3)
-//–ß‚è’l: •‰•Â˜H‚È‚µ:true ‚ ‚è:false
+//æˆ»ã‚Šå€¤: è² é–‰è·¯ãªã—:true ã‚ã‚Š:false
 bool warshallFloyd(const Graph &g, Matrix &dist) {
 	int n = g.size();
 	dist.assign(n, Array(n, INF));
@@ -244,9 +244,9 @@ bool warshallFloyd(const Graph &g, Matrix &dist) {
 	return !negative_cycle;
 }
 
-//‘S“_‘ÎŠÔÅ’ZŒo˜H
+//å…¨ç‚¹å¯¾é–“æœ€çŸ­çµŒè·¯
 //Warshall-Floyd O(|V|^3)
-//ƒCƒ“ƒ‰ƒCƒ“”Å
+//ã‚¤ãƒ³ãƒ©ã‚¤ãƒ³ç‰ˆ
 void warshallFloyd() {
 	static const int N = 100;
 	static int wf[N][N];
@@ -267,16 +267,16 @@ void warshallFloyd() {
 
 	int i, j;
 
-	//i‚ğ’Ê‚é•‰•Â˜H‚ª‚ ‚é‚©
+	//iã‚’é€šã‚‹è² é–‰è·¯ãŒã‚ã‚‹ã‹
 	wf[i][i] < 0;
 
-	//i‚©‚çj‚ÖŒü‚©‚¤“¹‚Å‚ ‚è•‰•Â˜H‚ğ’Ê‚é‚à‚Ì‚ª‚ ‚é‚©
+	//iã‹ã‚‰jã¸å‘ã‹ã†é“ã§ã‚ã‚Šè² é–‰è·¯ã‚’é€šã‚‹ã‚‚ã®ãŒã‚ã‚‹ã‹
 	rep(k, 0, n)
 		if (wf[i][k] != INF&&wf[k][j] != INF&&wf[k][k] < 0);
 }
 //http://judge.u-aizu.ac.jp/onlinejudge/review.jsp?rid=2243165
 
-//‘S“_‘ÎŠÔÅ’ZŒo˜H 
+//å…¨ç‚¹å¯¾é–“æœ€çŸ­çµŒè·¯ 
 void allPairsShortestPathsByDijkstra(const Graph &g, Matrix &dists) {
 	int n = g.size();
 	dists.resize(n);
@@ -284,8 +284,8 @@ void allPairsShortestPathsByDijkstra(const Graph &g, Matrix &dists) {
 		dijkstra(g, i, dists[i]);
 }
 
-//Å’ZŒo˜HDAG‚ğ\’z
-//‚Ç‚Ì‚æ‚¤‚ÈŒo˜H‚ğ’Ê‚Á‚Ä‚àÅ’ZŒo˜H‚É‚È‚é
+//æœ€çŸ­çµŒè·¯DAGã‚’æ§‹ç¯‰
+//ã©ã®ã‚ˆã†ãªçµŒè·¯ã‚’é€šã£ã¦ã‚‚æœ€çŸ­çµŒè·¯ã«ãªã‚‹
 Graph buildDag(const Graph &g, int s) {
 	Graph dag(g.size());
 	Array dist; dijkstra(g, s, dist);
@@ -295,11 +295,11 @@ Graph buildDag(const Graph &g, int s) {
 	return dag;
 }
 
-//ƒgƒ|ƒƒWƒJƒ‹ƒ\[ƒg O(|E|+|V|)
-//“üŸ”‚ª0‚Ì“_‚Æ•Ó‚ğæ‚èœ‚«‚È‚ª‚çret‚É“Ë‚Á‚Ş
+//ãƒˆãƒãƒ­ã‚¸ã‚«ãƒ«ã‚½ãƒ¼ãƒˆ O(|E|+|V|)
+//å…¥æ¬¡æ•°ãŒ0ã®ç‚¹ã¨è¾ºã‚’å–ã‚Šé™¤ããªãŒã‚‰retã«çªã£è¾¼ã‚€
 vector<int> topologicalSort(const Graph &g) {
 	int n = g.size(), k = 0;
-	vector<int> ord(n), indeg(n); //“üŸ”
+	vector<int> ord(n), indeg(n); //å…¥æ¬¡æ•°
 	for (auto &es : g) for (auto &e : es) indeg[e.d]++;
 	queue<int> q;
 	for (int i = 0; i < n; i++) if (indeg[i] == 0) q.push(i);
@@ -311,7 +311,7 @@ vector<int> topologicalSort(const Graph &g) {
 }
 
 #include "UnionFind.cpp"
-//–³ŒüƒOƒ‰ƒt‚ª˜AŒ‹ƒOƒ‰ƒt‚©”»’è O(|E|ƒ¿(|E|))
+//ç„¡å‘ã‚°ãƒ©ãƒ•ãŒé€£çµã‚°ãƒ©ãƒ•ã‹åˆ¤å®š O(|E|Î±(|E|))
 bool isConnectedGraph(const Graph &udg) {
 	int n = udg.size();
 	UnionFind uf(n);
@@ -319,7 +319,7 @@ bool isConnectedGraph(const Graph &udg) {
 	return uf.size == 1;
 }
 
-//–³ŒüƒOƒ‰ƒt‚ªƒIƒCƒ‰[ƒOƒ‰ƒt‚©”»’èiƒIƒCƒ‰[•Â˜H‚ğ‚Âj
+//ç„¡å‘ã‚°ãƒ©ãƒ•ãŒã‚ªã‚¤ãƒ©ãƒ¼ã‚°ãƒ©ãƒ•ã‹åˆ¤å®šï¼ˆã‚ªã‚¤ãƒ©ãƒ¼é–‰è·¯ã‚’æŒã¤ï¼‰
 bool isEulerianGraph(const Graph &udg) {
 	if (!isConnectedGraph(udg))return false;
 	int n = udg.size();
@@ -330,7 +330,7 @@ bool isEulerianGraph(const Graph &udg) {
 	return true;
 }
 
-//–³ŒüƒOƒ‰ƒt‚ª€ƒIƒCƒ‰[ƒOƒ‰ƒt‚©”»’èi•Â˜H‚Å‚È‚¢ƒIƒCƒ‰[˜H‚ğ‚Âj
+//ç„¡å‘ã‚°ãƒ©ãƒ•ãŒæº–ã‚ªã‚¤ãƒ©ãƒ¼ã‚°ãƒ©ãƒ•ã‹åˆ¤å®šï¼ˆé–‰è·¯ã§ãªã„ã‚ªã‚¤ãƒ©ãƒ¼è·¯ã‚’æŒã¤ï¼‰
 bool isSemiEulerianGraph(const Graph &udg) {
 	if (!isConnectedGraph(udg))return false;
 	int n = udg.size();
@@ -345,7 +345,7 @@ bool isSemiEulerianGraph(const Graph &udg) {
 	return odd == 2;
 }
 
-//“ñŸŒ³”z—ñ‚©‚çGraph‚ğ¶¬
+//äºŒæ¬¡å…ƒé…åˆ—ã‹ã‚‰äºŒéƒ¨Graphã‚’ç”Ÿæˆ
 Graph build(const vector<vector<char>> &v) {
 	const int H = v.size(), W = v[0].size();
 	static const int di[4] = { 1,0,-1,0 }, dj[4] = { 0,1,0,-1 };
@@ -363,7 +363,7 @@ Graph build(const vector<vector<char>> &v) {
 	return g;
 }
 
-//“ñŸŒ³”z—ñ‚©‚çGraph‚ğ¶¬
+//äºŒæ¬¡å…ƒé…åˆ—ã‹ã‚‰Graphã‚’ç”Ÿæˆ
 Graph build(const vector<vector<char>> &v, int w) {
 	const int H = v.size(), W = v[0].size();
 	static const int di[4] = { 1,0,-1,0 }, dj[4] = { 0,1,0,-1 };
@@ -382,10 +382,38 @@ Graph build(const vector<vector<char>> &v, int w) {
 	return g;
 }
 
-//s <= d ‚©‚Â s1 <= s2 ‚©‚Â d1 <= d2 ‚ğ–‚½‚·‚æ‚¤‚Éƒ\[ƒg
+//s <= d ã‹ã¤ s1 <= s2 ã‹ã¤ d1 <= d2 ã‚’æº€ãŸã™ã‚ˆã†ã«ã‚½ãƒ¼ãƒˆ
 void sort(Edges &es) {
 	for (auto &e : es)
 		if (e.s > e.d)
 			swap(e.s, e.d);
 	sort(es.begin(), es.end(), [](const Edge &e1, const Edge &e2) {return e1.s == e2.s ? e1.d < e2.d : e1.s < e2.s; });
+}
+
+// grid[x][y]:= 1(ok) or 0(block)
+void grid_search(vector<vector<int>>&grid, pii s){
+	int H=grid.size();
+	int W=grid[0].size();
+	enum{BLOCK,OK};
+	assert(0<H and 0<W);
+	auto inrange=[&](int x,int y){return 0<=x and x<H and 0<=y and y<W;};
+	int dx[]={1,0,-1,0},dy[]={0,1,0,-1};
+	assert(grid[s.first][s.second]==OK);
+	vector<vector<int>>visited(H,vector<int>(W));
+	queue<pii>q;
+	q.push(s);
+	visited[s.first][s.second]=true;
+	while(q.size()){
+		pii v=q.front();
+		q.pop();
+		for(int k=0;k<4;k++){
+			pii u(v.first+dx[k],v.second+dy[k]);
+			if(not inrange(u.first,u.second))continue;
+			if(visited[u.first][u.second])continue;
+			if(/* condition */){
+				visited[u.first][u.second]=true;
+				q.push(u);
+			}
+		}
+	}
 }

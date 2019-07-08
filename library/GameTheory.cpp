@@ -15,7 +15,7 @@ bool nim(vector<int>a){
 int grundy(int x){
     set<int>s;
     for(;;){
-        //s.inesrt(grundy(next_state));
+        //s.insert(grundy(next_state));
     }
     int g=0;
     while(s.count(g))g++;

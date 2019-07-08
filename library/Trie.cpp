@@ -1,12 +1,13 @@
 #include<vector>
 #include<functional>
 using namespace std;
+//https://ei1333.github.io/luzhiled/snippets/structure/trie.html
 template< int char_size >
 struct TrieNode {
   int nxt[char_size + 1];
 
-  int exist;
-  vector< int > accept;
+  int exist;// 子ども以下に存在する文字列の数の合計
+  vector< int > accept;//ノードにマッチする全ての追加された文字列の番号が格納される。
 
   TrieNode() : exist(0) {
     memset(nxt, -1, sizeof(nxt));
@@ -78,7 +79,7 @@ struct Trie {
   }
 };
 
-
+// simpler ver
 /*
 struct Trie {
   Trie *node[26];

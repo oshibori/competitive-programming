@@ -1,4 +1,15 @@
-﻿#include "bits/stdc++.h"
+﻿// 長さnの順列の転倒数の総和は n!/2 * n*(n-1)/2
+// https://www.kupc.jp/static/media/E.267336ab.pdf
+// n>=2 の場合、各順列とそれを左右反転させた順
+// 列とでペアを作ると n!/2 個の独立なペアができ、
+// 各ペアの転倒数の和は n*(n-1)/2 になるので総
+// 和は上記の式に一致
+// ● n=1 の場合は 0 で上記の式に一致
+
+// 順列Pより辞書順で小さいか等しい全てについて転倒数を求め、その和を計算
+// KUPC2018-E https://atcoder.jp/contests/kupc2018/submissions/5034326
+
+#include "bits/stdc++.h"
 using namespace std;
 #ifdef _DEBUG
 #include "dump.hpp"

@@ -1,3 +1,4 @@
+// http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_3_C&lang=jp
 #include "bits/stdc++.h"
 using namespace std;
 #ifdef _DEBUG

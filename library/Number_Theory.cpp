@@ -1,4 +1,22 @@
-//–ñ”‚ğ‹‚ß‚é –¢ƒ\[ƒg
+#include "bits/stdc++.h"
+using namespace std; 
+//https://www.geeksforgeeks.org/calculate-xor-1-n/
+// Function to calculate xor from 1 to n
+long computeXOR(const int n) 
+{ 
+    // Modulus operator are expensive on most of the  
+    // computers. n & 3 will be equivalent to n % 4.    
+  
+    switch(n & 3) // n % 4  
+    { 
+    case 0: return n;     // if n is multiple of 4 
+    case 1: return 1;     // If n % 4 gives remainder 1   
+    case 2: return n + 1; // If n % 4 gives remainder 2     
+    case 3: return 0;     // If n % 4 gives remainder 3   
+    } 
+} 
+
+//ç´„æ•°ã‚’æ±‚ã‚ã‚‹ æœªã‚½ãƒ¼ãƒˆ
 vector<int> divisor(int x) {
   vector<int> ret;
   int i;
@@ -13,18 +31,18 @@ vector<int> divisor(int x) {
   return ret;
 }
 
-//Å‘åŒö–ñ”
+//æœ€å¤§å…¬ç´„æ•°
 int gcd(int x, int y) { return y ? gcd(y, x % y) : x; }
-//Å¬Œö”{”
+//æœ€å°å…¬å€æ•°
 int lcm(int x, int y) { return x / gcd(x, y) * y; }
-//Å‘åŒö–ñ” •¡”ŒÂ
+//æœ€å¤§å…¬ç´„æ•° è¤‡æ•°å€‹
 int gcd(const vector<int> &v) {
   int ret = v[0];
   for (int i = 1; i < v.size(); i++)
     ret = gcd(ret, v[i]);
   return ret;
 }
-//Å¬Œö”{” •¡”ŒÂ
+//æœ€å°å…¬å€æ•° è¤‡æ•°å€‹
 int lcm(const vector<int> &v) {
   int ret = v[0];
   for (int i = 1; i < v.size(); i++)
@@ -32,9 +50,9 @@ int lcm(const vector<int> &v) {
   return ret;
 }
 
-//Šg’£ƒ†[ƒNƒŠƒbƒh‚ÌŒİœ–@
-// ax+by=gcd(a,b) ‚ğ–‚½‚· x, y ‚ğ‹‚ß‚é
-// http://mathtrain.jp/euclid (ˆêŸ•s’è•û’ö®‚Ö‚Ì‰—p)
+//æ‹¡å¼µãƒ¦ãƒ¼ã‚¯ãƒªãƒƒãƒ‰ã®äº’é™¤æ³•
+// ax+by=gcd(a,b) ã‚’æº€ãŸã™ x, y ã‚’æ±‚ã‚ã‚‹
+// http://mathtrain.jp/euclid (ä¸€æ¬¡ä¸å®šæ–¹ç¨‹å¼ã¸ã®å¿œç”¨)
 long long extgcd(long long a, long long b, long long &x, long long &y) {
   long long g = a;
   x = 1;
@@ -45,10 +63,10 @@ long long extgcd(long long a, long long b, long long &x, long long &y) {
   }
   return g;
 }
-// ’†‘è—]’è— (CRT)
+// ä¸­å›½å‰°ä½™å®šç† (CRT)
 // https://qiita.com/drken/items/ae02240cd1f8edfc86fd
-// “š‚¦‚ğ x ß r (mod. M) ‚Æ‚µ‚ÄA{r, M} ‚ğƒŠƒ^[ƒ“, ‘¶İ‚µ‚È‚¢ê‡‚Í {0, -1}
-// ‚ğƒŠƒ^[ƒ“
+// ç­”ãˆã‚’ x â‰¡ r (mod. M) ã¨ã—ã¦ã€{r, M} ã‚’ãƒªã‚¿ãƒ¼ãƒ³, å­˜åœ¨ã—ãªã„å ´åˆã¯ {0, -1}
+// ã‚’ãƒªã‚¿ãƒ¼ãƒ³
 // b[i]:= x%m[i]
 inline long long mod(long long a, long long m) { return (a % m + m) % m; }
 pair<long long, long long> ChineseRem(const vector<long long> &b,
@@ -75,13 +93,13 @@ double modulo(double x, double mod) {
   return x;
 }
 
-//Å¬”ñ•‰è—](c/c++‚Íâ‘Î’lÅ¬è—])
+//æœ€å°éè² å‰°ä½™(c/c++ã¯çµ¶å¯¾å€¤æœ€å°å‰°ä½™)
 int modulo(int x, int mod) {
   return (x % mod < 0) ? x % mod + abs(mod) : x % mod;
 }
 
-//‚‘¬—İæ ŒJ‚è•Ô‚µ©æ–@
-//ƒI[ƒo[ƒtƒ[‚·‚é‰Â”\«‚ª‚ ‚ê‚ÎŠ|‚¯Z‚Émodmul()‚ğg‚¤
+//é«˜é€Ÿç´¯ä¹— ç¹°ã‚Šè¿”ã—è‡ªä¹—æ³•
+//ã‚ªãƒ¼ãƒãƒ¼ãƒ•ãƒ­ãƒ¼ã™ã‚‹å¯èƒ½æ€§ãŒã‚ã‚Œã°æ›ã‘ç®—ã«modmul()ã‚’ä½¿ã†
 long long modpow(long long base, long long exponent, long long mod) {
   long long res = 1;
   while (exponent > 0) {
@@ -103,7 +121,7 @@ long long modmul(long long a, long long b, long long mod) {
   }
   return x % mod;
 }
-//‘f””»’èiMiller-Rabin primality testj2^24’ö“x‚©‚ç
+//ç´ æ•°åˆ¤å®šï¼ˆMiller-Rabin primality testï¼‰2^24ç¨‹åº¦ã‹ã‚‰
 // miller_rabin_primality_test(n, 5)
 bool miller_rabin_primality_test(long long x, int iteration) {
   if (x < 2)
@@ -126,16 +144,16 @@ bool miller_rabin_primality_test(long long x, int iteration) {
   return true;
 }
 
-//‹tŒ³
-// xy%m=1, y<m ‚Æ‚È‚éy‚ğ‹‚ß‚é
-// x‚Æm‚ÍŒİ‚¢‚É‘f
+//é€†å…ƒ
+// xy%m=1, y<m ã¨ãªã‚‹yã‚’æ±‚ã‚ã‚‹
+// xã¨mã¯äº’ã„ã«ç´ 
 long long modinv(long long x, long long m) {
   long long s, t;
   extgcd(x, m, s, t);
   return (s + m) % m;
 }
 
-//‘f””»’è
+//ç´ æ•°åˆ¤å®š
 bool is_prime(int x) {
   if (x <= 1)
     return false;
@@ -149,8 +167,8 @@ bool is_prime(int x) {
   return true;
 }
 
-//‹Œ ƒGƒ‰ƒgƒXƒeƒlƒX‚Ìâ¿
-// nˆÈ‰º‚Ì³®”‚ğ‘f”‚©‡¬”‚©”»’è‚µ‚Äis_prime[]‚ÉŠi”[
+//æ—§ ã‚¨ãƒ©ãƒˆã‚¹ãƒ†ãƒã‚¹ã®ç¯©
+// nä»¥ä¸‹ã®æ­£æ•´æ•°ã‚’ç´ æ•°ã‹åˆæˆæ•°ã‹åˆ¤å®šã—ã¦is_prime[]ã«æ ¼ç´
 void eratos(int n, bool is_prime[]) {
   fill(is_prime, is_prime + n + 1, true);
   is_prime[0] = is_prime[1] = false;
@@ -164,7 +182,7 @@ void eratos(int n, bool is_prime[]) {
     }
 }
 
-//ƒGƒ‰ƒgƒXƒeƒlƒX‚Ìâ¿
+//ã‚¨ãƒ©ãƒˆã‚¹ãƒ†ãƒã‚¹ã®ç¯©
 vector<char> eratos(int n) {
   vector<char> is_prime(n + 1, true);
   is_prime[0] = is_prime[1] = false;
@@ -178,7 +196,7 @@ vector<char> eratos(int n) {
     }
   return is_prime;
 }
-//–ß‚è’l: nˆÈ‰º‚Ì‘f”
+//æˆ»ã‚Šå€¤: nä»¥ä¸‹ã®ç´ æ•°
 vector<int> get_primes(int n) {
   vector<char> is_prime = eratos(n);
   vector<int> primes;
@@ -187,12 +205,12 @@ vector<int> get_primes(int n) {
       primes.emplace_back(i);
   return primes;
 }
-//‘fˆö”•ª‰ğ
+//ç´ å› æ•°åˆ†è§£
 vector<int> prime_factorization(int x) {
-  vector<int> primes = get_primes(sqrt(x)); //ãxˆÈ‰º‚Ì‘f”‚É‚Â‚¢‚Ä’²‚×‚ê‚Î—Ç‚¢
+  vector<int> primes = get_primes(sqrt(x)); //âˆšxä»¥ä¸‹ã®ç´ æ•°ã«ã¤ã„ã¦èª¿ã¹ã‚Œã°è‰¯ã„
   vector<int> factors;
-  // x‚Ü‚Å‚Ìeratos‚Æ“¯‚¶B‚˜‚Ígiven ‚˜‚Ü‚Å‚ÌÅ‘å‚Ì‘f”B
-  // ‚¾‚ñ‚¾‚ñ¶‚É‚æ‚Á‚Ä‚­‚éB‚¾‚©‚çsqrt(x)‚Ü‚Å‚Å‚¢‚¢
+  // xã¾ã§ã®eratosã¨åŒã˜ã€‚ï½˜ã¯given ï½˜ã¾ã§ã®æœ€å¤§ã®ç´ æ•°ã€‚
+  // ã ã‚“ã ã‚“å·¦ã«ã‚ˆã£ã¦ãã‚‹ã€‚ã ã‹ã‚‰sqrt(x)ã¾ã§ã§ã„ã„
   for (auto &p : primes) {
     while (x % p == 0) {
       x /= p;
@@ -204,7 +222,7 @@ vector<int> prime_factorization(int x) {
   return factors;
 }
 
-//‘fˆö”•ª‰ğ faster
+//ç´ å› æ•°åˆ†è§£ faster
 // http://www.osak.jp/diary/diary_201310.html#20131017
 vector<int> prime_factorization(int x) {
   vector<int> min_fact(x + 1);
@@ -226,8 +244,8 @@ vector<int> prime_factorization(int x) {
   return fact;
 }
 
-//ƒIƒCƒ‰[‚ÌƒÓŠÖ”iEuler's totient functionj
-// n‚ÆŒİ‚¢‚É‘f‚È”[1,n]‚ÌŒÂ”
+//ã‚ªã‚¤ãƒ©ãƒ¼ã®Ï†é–¢æ•°ï¼ˆEuler's totient functionï¼‰
+// nã¨äº’ã„ã«ç´ ãªæ•°[1,n]ã®å€‹æ•°
 // http://mathtrain.jp/phi
 int euler_totient(int n) {
   int ret = n;
@@ -243,8 +261,8 @@ int euler_totient(int n) {
   return ret;
 }
 
-// nCr”z—ñ‚ğƒpƒXƒJƒ‹‚ÌOŠpŒ`‚©‚ç¶¬
-// double ‚È‚ç 10^308 ‚­‚ç‚¢‚Ü‚ÅOK
+// nCré…åˆ—ã‚’ãƒ‘ã‚¹ã‚«ãƒ«ã®ä¸‰è§’å½¢ã‹ã‚‰ç”Ÿæˆ
+// double ãªã‚‰ 10^308 ãã‚‰ã„ã¾ã§OK
 using Num = double;
 vector<vector<Num>> nCr;
 void compute_nCr(int n) {
@@ -260,8 +278,8 @@ void compute_nCr(int n) {
     nCr.emplace_back(b);
   }
 }
-//Šm—¦”Å
-// i’i–Ú‚Ì˜a‚Í•K‚¸1.0
+//ç¢ºç‡ç‰ˆ
+// iæ®µç›®ã®å’Œã¯å¿…ãš1.0
 void compute_nCr_probability(int n) {
   vector<Num> a(1, 1.0), b(2, 1.0 / 2.0);
   nCr = {a, b};
@@ -276,7 +294,7 @@ void compute_nCr_probability(int n) {
   }
 }
 
-// ni–@
+// né€²æ³•
 // Radix r("0123456789abcdef");
 // http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=0208
 class Radix {
@@ -289,7 +307,7 @@ public:
     for (int i = 0; s[i]; i++)
       a[(int)s[i]] = i;
   }
-  // 10i®” ¨ ni–@•¶š—ñ
+  // 10é€²æ•´æ•° â†’ né€²æ³•æ–‡å­—åˆ—
   string format(long long x, int n) {
     if (!x)
       return "0";
@@ -301,11 +319,11 @@ public:
     }
     return string(t + i + 1);
   }
-  // mi–@•¶š—ñ ¨ ni–@•¶š—ñ
+  // mé€²æ³•æ–‡å­—åˆ— â†’ né€²æ³•æ–‡å­—åˆ—
   string format(const string &t, int m, int n) {
     return format(format(t, m), n);
   }
-  // mi–@•¶š—ñ ¨ 10i®”
+  // mé€²æ³•æ–‡å­—åˆ— â†’ 10é€²æ•´æ•°
   long long format(const string &t, int m) {
     long long sm = a[(int)t[0]];
     for (int i = 1; i < (int)t.length(); i++)
@@ -314,8 +332,8 @@ public:
   }
 };
 
-// partition function(•ªŠ„”)
-// dp[i][j]=j‚Ìi•ªŠ„‚Ì‘”
+// partition function(åˆ†å‰²æ•°)
+// dp[i][j]=jã®iåˆ†å‰²ã®ç·æ•°
 vector<vector<int>> partition_function(int M, int N) {
   vector<vector<int>> dp(M + 1, vector<int>(N + 1, 0));
   dp[0][0] = 1;

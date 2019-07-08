@@ -29,8 +29,8 @@ template <class T> bool chmin(T &a, const T &b) {
 }
 
 struct DisjointSet {
-  // ‚Q‚Â‚ÌƒOƒ‹[ƒv‚ğ‚P‚Â‚É‚Ü‚Æ‚ß‚é@‚Æ@2‚Â‚Ì—v‘f‚ª“¯‚¶ƒOƒ‹[ƒv‚ÉŠ‘®‚µ‚Ä‚¢‚é‚©‚Ç‚¤‚©‚ğ”»’è‚·‚é
-  vector<int> rank, p, S; // p->parent  S[findSet(v)] ->˜AŒ‹¬•ª‚Ì‘å‚«‚³
+  // ï¼’ã¤ã®ã‚°ãƒ«ãƒ¼ãƒ—ã‚’ï¼‘ã¤ã«ã¾ã¨ã‚ã‚‹ã€€ã¨ã€€2ã¤ã®è¦ç´ ãŒåŒã˜ã‚°ãƒ«ãƒ¼ãƒ—ã«æ‰€å±ã—ã¦ã„ã‚‹ã‹ã©ã†ã‹ã‚’åˆ¤å®šã™ã‚‹
+  vector<int> rank, p, S; // p->parent  S[findSet(v)] ->é€£çµæˆåˆ†ã®å¤§ãã•
   DisjointSet() {}
   DisjointSet(int size) {
     S.resize(size, 1);
@@ -42,10 +42,10 @@ struct DisjointSet {
     p[x] = x;
     rank[x] = 0;
   }
-  bool same(int x, int y) { // ”»’è‚·‚é
+  bool same(int x, int y) { // åˆ¤å®šã™ã‚‹
     return findSet(x) == findSet(y);
   }
-  void unite(int x, int y) { // ˜AŒ‹‚·‚é‚Æ‚«‚É‚Í‚±‚ê‚ğg‚¤
+  void unite(int x, int y) { // é€£çµã™ã‚‹ã¨ãã«ã¯ã“ã‚Œã‚’ä½¿ã†
     if (same(x, y))
       return;
     link(findSet(x), findSet(y));

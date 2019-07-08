@@ -1,5 +1,5 @@
 //#define double long double
-const double EPS = 1e-8; //–â‘è‚²‚Æ‚É•ÏX
+const double EPS = 1e-8; //å•é¡Œã”ã¨ã«å¤‰æ›´
 const double PI = acos(-1);
 #define equals(a,b) (fabs((a)-(b)) < EPS)
 #define next(P,i) P[(i+1)%P.size()]
@@ -15,8 +15,8 @@ struct Point {
 	Point operator*(double a)const { return Point(a * x, a * y); }
 	Point operator/(double a)const { return Point(x / a, y / a); }
 	bool operator<(const Point &p)const {
-		//return y != p.y ? y < p.y : x < p.x; //y¸‡ -> x¸‡
-		return x != p.x ? x < p.x : y < p.y; //x¸‡ -> y¸‡
+		//return y != p.y ? y < p.y : x < p.x; //yæ˜‡é † -> xæ˜‡é †
+		return x != p.x ? x < p.x : y < p.y; //xæ˜‡é † -> yæ˜‡é †
 	}
 	bool operator==(const Point &p)const { return equals(x, p.x) && equals(y, p.y); }
 
@@ -34,9 +34,9 @@ struct Vector :public Point {
 	Vector unit() { return *this / abs(); }
 };
 
-//“àÏ dot product
+//å†…ç© dot product
 double dot(Vector a, Vector b) { return a.x*b.x + a.y*b.y; }
-//ŠOÏ cross product ‚Ì‘å‚«‚³i³•‰‚ ‚èj
+//å¤–ç© cross product ã®å¤§ãã•ï¼ˆæ­£è² ã‚ã‚Šï¼‰
 double cross(Vector a, Vector b) { return a.x*b.y - a.y*b.x; }
 
 struct Line {
@@ -64,16 +64,18 @@ using Polygon = vector<Point>;
 double rad(double deg) { return PI*deg / 180; }
 //radian to degree
 double deg(double rad) { return rad / PI * 180; }
-//•ÎŠp argument
+//åè§’ argument
 double arg(Vector p) { return atan2(p.y, p.x); }
-//‹ÉŒ`® polar form
+//æ¥µå½¢å¼ polar form
 Vector polar(double r, double a) { return Point(cos(a)*r, sin(a)*r); }
-//2‚Â‚ÌƒxƒNƒgƒ‹‚ÌŠp“x
+//2ã¤ã®ãƒ™ã‚¯ãƒˆãƒ«ã®è§’åº¦
 double angle(Vector a, Vector b) {
 	double lena = a.abs(), lenb = b.abs();
-	if (lena == 0 || lenb == 0)return 0; //‰ğ‚È‚µ
+	if (lena == 0 || lenb == 0)return 0; //è§£ãªã—
 	double costheta = dot(a, b) / (lena*lenb);
-	if (equals(costheta, 1))costheta = 1; //Œë·‘Îô
+	if (equals(costheta, 1))costheta = 1; //èª¤å·®å¯¾ç­–
+	if (equals(costheta, -1))costheta = -1;
+
 	return acos(costheta);
 }
 
@@ -81,24 +83,24 @@ bool inrange(Point p, double x1, double y1, double x2, double y2) {
 	return x1 <= p.x&&p.x <= x2&&y1 <= p.y&&p.y <= y2;
 }
 
-//’¼Œğ”»’è
+//ç›´äº¤åˆ¤å®š
 bool is_orthogonal(Vector a, Vector b) { return equals(dot(a, b), 0.0); }
 bool is_orthogonal(Segment s1, Segment s2) { return equals(dot(s1.p2 - s1.p1, s2.p2 - s2.p1), 0.0); }
 
-//•½s”»’è
+//å¹³è¡Œåˆ¤å®š
 bool is_parallel(Vector a, Vector b) { return equals(cross(a, b), 0.0); }
 bool is_parallel(Segment s1, Segment s2) { return equals(cross(s1.p2 - s1.p1, s2.p2 - s2.p1), 0.0); }
 
-//Ë‰e
+//å°„å½±
 Point project(Segment s, Point p) {
 	Vector base = s.p2 - s.p1;
 	double r = dot(p - s.p1, base) / base.norm();
 	return s.p1 + base*r;
 }
-//”½Ë
+//åå°„
 Point reflect(Segment s, Point p) { return p + (project(s, p) - p)*2.0; }
 
-//ü•ª(p0,p1)‚É‘Î‚·‚ép2‚ÌˆÊ’uŠÖŒW
+//ç·šåˆ†(p0,p1)ã«å¯¾ã™ã‚‹p2ã®ä½ç½®é–¢ä¿‚
 enum { ONLINE_FRONT = -2, CLOCKWISE, ON_SEGMENT, COUNTER_CLOCKWISE, ONLINE_BACK };
 int ccw(Point p0, Point p1, Point p2) {
 	Vector a = p1 - p0, b = p2 - p0;
@@ -116,25 +118,25 @@ int ccw(Vector a, Vector b) {
 	return ON_SEGMENT;
 }
 
-//’¼ü‚Æ’¼ü‚ÌŒğ·”»’è
+//ç›´ç·šã¨ç›´ç·šã®äº¤å·®åˆ¤å®š
 bool intersect(Segment a, Segment b) {
 	Point p1 = a.p1, p2 = a.p2, p3 = b.p1, p4 = b.p2;
 	return (ccw(p1, p2, p3)*ccw(p1, p2, p4) <= 0 &&
 		ccw(p3, p4, p1)*ccw(p3, p4, p2) <= 0);
 }
-//(Œğ·”»’è‘±‚­)
+//(äº¤å·®åˆ¤å®šç¶šã)
 
-//2“_ŠÔ‚Ì‹——£
+//2ç‚¹é–“ã®è·é›¢
 double get_distance(Point a, Point b) { return (a - b).abs(); }
-//’¼ü‚Æ“_‚Ì‹——£
+//ç›´ç·šã¨ç‚¹ã®è·é›¢
 double get_distance(Line l, Point p) { return abs(cross(l.p2 - l.p1, p - l.p1) / (l.p2 - l.p1).abs()); }
-//ü•ª‚Æ“_‚Ì‹——£
+//ç·šåˆ†ã¨ç‚¹ã®è·é›¢
 double get_distance(Segment s, Point p) {
 	if (dot(s.p2 - s.p1, p - s.p1) < 0.0)return (p - s.p1).abs();
 	if (dot(s.p1 - s.p2, p - s.p2) < 0.0)return (p - s.p2).abs();
 	return get_distance(Line(s), p);
 }
-//ü•ª‚Æü•ª‚Ì‹——£
+//ç·šåˆ†ã¨ç·šåˆ†ã®è·é›¢
 double get_distance(Segment s1, Segment s2) {
 	if (intersect(s1, s2))return 0.0;
 	return	min(
@@ -143,9 +145,9 @@ double get_distance(Segment s1, Segment s2) {
 	);
 }
 
-//‰~‚Æ’¼ü‚ÌŒğ·”»’è
+//å††ã¨ç›´ç·šã®äº¤å·®åˆ¤å®š
 bool intersect(Circle c, Line l) { return get_distance(l, c.c) <= c.r + EPS; }
-//‰~‚Æ‰~‚ÌŒğ·”»’è ‹¤’ÊÚü‚Ì”
+//å††ã¨å††ã®äº¤å·®åˆ¤å®š å…±é€šæ¥ç·šã®æ•°
 int intersect(Circle c1, Circle c2) {
 	double d = get_distance(c1.c, c2.c);
 	if (d > c1.r + c2.r)return 4;
@@ -155,7 +157,7 @@ int intersect(Circle c1, Circle c2) {
 	return 2;
 }
 
-//ü•ª‚Æü•ª‚ÌŒğ“_
+//ç·šåˆ†ã¨ç·šåˆ†ã®äº¤ç‚¹
 Point get_cross_point(Segment a, Segment b) {
 	assert(intersect(a, b));
 	Vector base = b.p2 - b.p1;
@@ -165,7 +167,7 @@ Point get_cross_point(Segment a, Segment b) {
 	return a.p1 + (a.p2 - a.p1)*t;
 }
 
-//‰~‚Æ’¼ü‚ÌŒğ“_
+//å††ã¨ç›´ç·šã®äº¤ç‚¹
 pair<Point, Point> get_cross_points(Circle c, Line l) {
 	assert(intersect(c, l));
 	Vector pr = project(l, c.c);
@@ -173,7 +175,7 @@ pair<Point, Point> get_cross_points(Circle c, Line l) {
 	double base = sqrt(c.r*c.r - (pr - c.c).norm());
 	return make_pair(pr + e*base, pr - e*base);
 }
-//‰~‚Æ‰~‚ÌŒğ“_
+//å††ã¨å††ã®äº¤ç‚¹
 pair<Point, Point> get_cross_points(Circle c1, Circle c2) {
 	int m = intersect(c1, c2);
 	assert(m != 4 && m != 0);
@@ -183,7 +185,7 @@ pair<Point, Point> get_cross_points(Circle c1, Circle c2) {
 	return make_pair(c1.c + polar(c1.r, t + a), c1.c + polar(c1.r, t - a));
 }
 
-//“_‚Ì“à•ï
+//ç‚¹ã®å†…åŒ…
 enum { OUT = 0, ON, IN };
 int contains(const Polygon &pl, Point p) {
 	int n = pl.size();
@@ -204,7 +206,7 @@ int contains(Circle c, Point p) {
 	return OUT;
 }
 
-//‘½ŠpŒ`‚Ì–ÊÏ
+//å¤šè§’å½¢ã®é¢ç©
 double area(const Polygon &p) {
 	double a = 0;
 	for (size_t i = 0; i < p.size(); i++)
@@ -212,7 +214,7 @@ double area(const Polygon &p) {
 	return fabs(a / 2.0);
 }
 
-//“Ê«”»’èi”½Œv‰ñ‚èj
+//å‡¸æ€§åˆ¤å®šï¼ˆåæ™‚è¨ˆå›ã‚Šï¼‰
 bool is_convex(Polygon g) {
 	for (size_t i = 0; i < g.size(); i++)
 		if (ccw(g[i], g[(i + 1) % g.size()], g[(i + 2) % g.size()]) == CLOCKWISE)
@@ -220,9 +222,9 @@ bool is_convex(Polygon g) {
 	return true;
 }
 
-//“Ê•ï
+//å‡¸åŒ…
 //Graham scan https://en.wikipedia.org/wiki/Graham_scan
-//•Óã‚Ì“_‚ğŠÜ‚ß‚È‚¢
+//è¾ºä¸Šã®ç‚¹ã‚’å«ã‚ãªã„
 Polygon convex_hull(Polygon P) {
 	sort(P.begin(), P.end());
 	Polygon up;
@@ -235,14 +237,14 @@ Polygon convex_hull(Polygon P) {
 		while (down.size() > 1 && ccw(down[down.size() - 2], down[down.size() - 1], p) != COUNTER_CLOCKWISE)down.pop_back();
 		down.emplace_back(p);
 	}
-	reverse(up.begin(), up.end()); //”½Œv‰ñ‚è‚É
+	reverse(up.begin(), up.end()); //åæ™‚è¨ˆå›ã‚Šã«
 	down.insert(down.end(), up.begin() + 1, up.end() - 1);
 	return down;
 }
 
-//“Ê•ï
+//å‡¸åŒ…
 //Graham scan https://en.wikipedia.org/wiki/Graham_scan
-//•Óã‚Ì“_‚ğŠÜ‚Ş
+//è¾ºä¸Šã®ç‚¹ã‚’å«ã‚€
 Polygon convex_hull_with_points_online(Polygon P) {
 	sort(P.begin(), P.end());
 	Polygon up;
@@ -259,12 +261,12 @@ Polygon convex_hull_with_points_online(Polygon P) {
 			down.pop_back();
 		down.emplace_back(p);
 	}
-	reverse(up.begin(), up.end()); //”½Œv‰ñ‚è‚É
+	reverse(up.begin(), up.end()); //åæ™‚è¨ˆå›ã‚Šã«
 	down.insert(down.end(), up.begin() + 1, up.end() - 1);
 	return down;
 }
 
-//“Ê‘½ŠpŒ`‚ÌÅ‰“’¸“_‘ÎŠÔ‹——£
+//å‡¸å¤šè§’å½¢ã®æœ€é é ‚ç‚¹å¯¾é–“è·é›¢
 //calipers https://en.wikipedia.org/wiki/Rotating_calipers
 double diameter(Polygon P) {
 	P = convex_hull(P);
@@ -289,7 +291,7 @@ double diameter(Polygon P) {
 	return maxd;
 }
 
-//‘½ŠpŒ`‚ğ(0,0)‚ğ’†S‚Æ‚µ‚Ä‰ñ“]
+//å¤šè§’å½¢ã‚’(0,0)ã‚’ä¸­å¿ƒã¨ã—ã¦å›è»¢
 Polygon rotate(const Polygon &P, double rad) {
 	Polygon ret;
 	for (auto &p : P)
@@ -303,7 +305,7 @@ double area(double a, double b, double c) {
 	return sqrt(s*(s - a)*(s - b)*(s - c));
 }
 
-//‘½ŠpŒ`‚ÌdS
+//å¤šè§’å½¢ã®é‡å¿ƒ
 Point center(const Polygon &P) {
 	Point ret(0, 0);
 	for (auto &p : P)ret = ret + p;

@@ -1,6 +1,8 @@
 ﻿#include "bits/stdc++.h"
 using namespace std;
 
+//https://atcoder.jp/contests/cf17-tournament-round1-open/submissions/2859012
+
 //https://ei1333.github.io/luzhiled/snippets/structure/segment-tree.html
 template< typename Monoid >
 struct SegmentTree {
@@ -45,7 +47,10 @@ struct SegmentTree {
     return f(L, R);
   }
   // k:=[0,sz)
-  Monoid operator[](const int &k) const {
+  const Monoid &operator[](const int &k) const {
+    return seg[k + sz];
+  }
+	Monoid &operator[](const int &k){
     return seg[k + sz];
   }
 };

@@ -53,10 +53,40 @@ struct SuffixArray {
     }
     return S.compare(sa[r], t.length(), t) == 0;
   }
+  int lower_bound(string t) {
+		int l = 0, r = S.length();
+		while (r - l > 1) {
+			int m = (l + r) / 2;
+			if (S.compare(sa[m], t.length(), t) < 0)
+				l = m;
+			else
+				r = m;
+		}
+		return r;
+	}
+	int upper_bound(string t) {
+		int l = 0, r = S.length() + 1;
+		while (r - l > 1) {
+			int m = (l + r) / 2;
+			if (S.compare(sa[m], t.length(), t) <= 0)
+				l = m;
+			else
+				r = m;
+		}
+		return r;
+	}
   int operator[](int k) { return sa[k]; }
   int operator[](int k) const { return sa[k]; }
   // |S|+1
   size_t size() const { return sa.size(); }
+  void output() {
+		cerr << "S = " << S << ", |S| = " << S.length() << endl;
+		cerr << "rank(=i) : SA, S[i..]" << endl;
+		for (int i = 0; i < size(); i++) {
+			cerr << setw(3) << i << " : " << setw(3) << sa[i] << " " << setw(3)
+				<< " " << S.substr(sa[i]) << endl;
+		}
+	}
 };
 struct LongestCommonPrefixArray {
   const SuffixArray &SA;

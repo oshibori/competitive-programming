@@ -67,9 +67,9 @@ template <class Abel> struct UnionFind {
   Abel diff(int x, int y) { return weight(y) - weight(x); }
 };
 
-struct UnionFind {
-  // https://beta.atcoder.jp/contests/arc099/submissions/2926148
-  // written by ei1333
+// https://beta.atcoder.jp/contests/arc099/submissions/2926148
+// written by ei1333
+struct UnionFind { 
   vector<int> data;
 
   UnionFind(int sz) { data.assign(sz, -1); }

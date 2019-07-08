@@ -1,7 +1,7 @@
 // Treap
-// •ªŠ„‚µ‚½–Ø‚É‘Î‚µ‚Ä‘€ì‚·‚é•K—v‚ª‚ ‚é‚È‚ç Node* ‚ğ•Ô‚·
-// —”‚Í rand() ‚Å\•ª‚È‚Í‚¸
-// ’x‰„•]‰¿”Å‚àì‚é
+// åˆ†å‰²ã—ãŸæœ¨ã«å¯¾ã—ã¦æ“ä½œã™ã‚‹å¿…è¦ãŒã‚ã‚‹ãªã‚‰ Node* ã‚’è¿”ã™
+// ä¹±æ•°ã¯ rand() ã§ååˆ†ãªã¯ãš
+// é…å»¶è©•ä¾¡ç‰ˆã‚‚ä½œã‚‹
 // http://judge.u-aizu.ac.jp/onlinejudge/review.jsp?rid=2299004#1
 // http://arc033.contest.atcoder.jp/submissions/1261629
 
@@ -39,7 +39,7 @@ template <class Val> struct Treap {
   }
   Node *setroot(Node *rrr) { return root = rrr; }
 
-  // q‚ª•Ï‚í‚Á‚½‚Æ‚«‚É•K‚¸ŒÄ‚Ô
+  // å­ãŒå¤‰ã‚ã£ãŸã¨ãã«å¿…ãšå‘¼ã¶
   Node *update(Node *t) {
     if (!t)
       return t;
@@ -109,11 +109,11 @@ template <class Val> struct Treap {
   int lowerbound(Val v) { return lowerbound(root, v); }
   int upperbound(Node *t, Val v) {
     if (!t)
-      return 0;
-    if (v <= val(t))
-      return size(t->left) + 1 + upperbound(t->right, v);
-    else
-      return upperbound(t->left, v);
+			return 0;
+		if (v < val(t))
+			return upperbound(t->left, v);
+		else
+			return size(t->left) + 1 + upperbound(t->right, v);
   }
   int upperbound(Val v) { return upperbound(root, v); }
   int count(Val v) { return upperbound(v) - lowerbound(v); }
@@ -130,6 +130,7 @@ template <class Val> struct Treap {
   Node *eraseAt(Node *t, int k) {
     auto s1 = split(t, k);
     auto s2 = split(s1.second, 1);
+ 		delete s2.first;
     return root = update(merge(s1.first, s2.second));
   }
   Node *eraseAt(int k) { return eraseAt(root, k); }
